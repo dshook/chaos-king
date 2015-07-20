@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -19,8 +20,8 @@ public class PlayerMovement : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		var h = Input.GetAxisRaw ("Horizontal");
-		var v = Input.GetAxisRaw ("Vertical");
+		var h = CrossPlatformInputManager.GetAxisRaw ("Horizontal");
+		var v = CrossPlatformInputManager.GetAxisRaw ("Vertical");
 
 		Move (h, v);
 		Turning ();

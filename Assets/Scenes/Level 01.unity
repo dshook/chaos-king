@@ -6146,6 +6146,7 @@ GameObject:
   - 92: {fileID: 967073971}
   - 124: {fileID: 967073970}
   - 81: {fileID: 967073969}
+  - 114: {fileID: 967073975}
   - 114: {fileID: 967073974}
   m_Layer: 0
   m_Name: Main Camera
@@ -6228,11 +6229,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 967073968}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd6816f806e8cda4ab4855eb6c02579f, type: 3}
+  m_Script: {fileID: 11500000, guid: f730874af63b127449b88e0bc6c3a336, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 967100677}
   smoothing: 5
+--- !u!114 &967073975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 967073968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27f203a29d13eb344978c14fc64d9fda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoomSpeed: 10
+  minDistance: 2.5
+  maxDistance: 6
 --- !u!1001 &967100670
 Prefab:
   m_ObjectHideFlags: 0
