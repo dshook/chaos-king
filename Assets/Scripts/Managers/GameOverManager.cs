@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Player;
 
 public class GameOverManager : MonoBehaviour
 {

@@ -2,84 +2,87 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class PlayerHealth : MonoBehaviour
+namespace Player
 {
-    public int startingHealth = 100;
-    public int currentHealth;
-    public Slider healthSlider;
-    public Image damageImage;
-    public AudioClip deathClip;
-    public float flashSpeed = 5f;
-    public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
-
-
-    Animator anim;
-    AudioSource playerAudio;
-    PlayerMovement playerMovement;
-    PlayerShooting playerShooting;
-    bool isDead;
-    bool damaged;
-
-
-    void Awake ()
+    public class PlayerHealth : MonoBehaviour
     {
-        anim = GetComponent <Animator> ();
-        playerAudio = GetComponent <AudioSource> ();
-        playerMovement = GetComponent <PlayerMovement> ();
-        playerShooting = GetComponentInChildren <PlayerShooting> ();
-        currentHealth = startingHealth;
-    }
+        public int startingHealth = 100;
+        public int currentHealth;
+        public Slider healthSlider;
+        public Image damageImage;
+        public AudioClip deathClip;
+        public float flashSpeed = 5f;
+        public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
 
 
-    void Update ()
-    {
-        if(damaged)
+        Animator anim;
+        AudioSource playerAudio;
+        PlayerMovement playerMovement;
+        PlayerShooting playerShooting;
+        bool isDead;
+        bool damaged;
+
+
+        void Awake ()
         {
-            damageImage.color = flashColour;
+            anim = GetComponent <Animator> ();
+            playerAudio = GetComponent <AudioSource> ();
+            playerMovement = GetComponent <PlayerMovement> ();
+            playerShooting = GetComponentInChildren <PlayerShooting> ();
+            currentHealth = startingHealth;
         }
-        else
+
+
+        void Update ()
         {
-            damageImage.color = Color.Lerp (damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
+            if(damaged)
+            {
+                damageImage.color = flashColour;
+            }
+            else
+            {
+                damageImage.color = Color.Lerp (damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
+            }
+            damaged = false;
         }
-        damaged = false;
-    }
 
 
-    public void TakeDamage (int amount)
-    {
-        damaged = true;
-
-        currentHealth -= amount;
-
-        healthSlider.value = currentHealth;
-
-        playerAudio.Play ();
-
-        if(currentHealth <= 0 && !isDead)
+        public void TakeDamage (int amount)
         {
-            Death ();
+            damaged = true;
+
+            currentHealth -= amount;
+
+            healthSlider.value = currentHealth;
+
+            playerAudio.Play ();
+
+            if(currentHealth <= 0 && !isDead)
+            {
+                Death ();
+            }
         }
-    }
 
 
-    void Death ()
-    {
-        isDead = true;
+        void Death ()
+        {
+            isDead = true;
 
-        playerShooting.DisableEffects ();
+            playerShooting.DisableEffects ();
 
-        anim.SetTrigger ("Die");
+            anim.SetTrigger ("Die");
 
-        playerAudio.clip = deathClip;
-        playerAudio.Play ();
+            playerAudio.clip = deathClip;
+            playerAudio.Play ();
 
-        playerMovement.enabled = false;
-        playerShooting.enabled = false;
-    }
+            playerMovement.enabled = false;
+            playerShooting.enabled = false;
+        }
 
 
-    public void RestartLevel ()
-    {
-        Application.LoadLevel (Application.loadedLevel);
+        public void RestartLevel ()
+        {
+            Application.LoadLevel (Application.loadedLevel);
+        }
     }
 }

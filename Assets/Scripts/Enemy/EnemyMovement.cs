@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using Player;
 
 public class EnemyMovement : MonoBehaviour
 {

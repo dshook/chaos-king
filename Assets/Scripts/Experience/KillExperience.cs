@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Player;
 
 public class KillExperience : MonoBehaviour {
 
