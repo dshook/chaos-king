@@ -659,7 +659,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   availablePerks: 0
-  perkChoices: 1
+  perkChoices: 3
   perkChoiceUI: {fileID: 104738, guid: 43a2729372fb7684c82c4bc65d4f2ae7, type: 2}
   HUDTransform: {fileID: 1261003185}
 --- !u!1 &87329248

@@ -21,7 +21,6 @@ namespace Player
         int shootableMask;
         ParticleSystem gunParticles;
         PlayerLevel playerLevel;
-        LineRenderer gunLine;
         AudioSource gunAudio;
         Light gunLight;
         float effectsDisplayTime = 0.2f;

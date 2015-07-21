@@ -9,7 +9,7 @@ using UnityStandardAssets.CrossPlatformInput;
 namespace Player {
     public class PlayerPerks : MonoBehaviour {
         public int availablePerks = 0;
-        public int perkChoices = 1;
+        public int perkChoices = 3;
         public GameObject perkChoiceUI;
         public Transform HUDTransform;
 
@@ -17,13 +17,13 @@ namespace Player {
         List<IPerk> perksApplied;
         List<Type> allPerks;
         PerkChoiceContainer[] perkChoiceArray;
-        bool keyReset = true;
 
         void Start () {
             playerObject = transform.gameObject;
             perkChoiceArray = new PerkChoiceContainer[perkChoices];
             for (var c = 0; c < perkChoices; c++) {
                 perkChoiceArray[c] = new PerkChoiceContainer();
+                perkChoiceArray[c].choiceUI = CreatePerkUI(c, perkChoices);
             }
             perksApplied = new List<IPerk>();
 
@@ -37,31 +37,24 @@ namespace Player {
             if(availablePerks > 0) {
                 //check this first to allow at least one update loop to happen after perks are assigned
                 //to prevent player holding down a perk button and never seeing the choices
-                if (perkChoiceArray[0].Perk != null && keyReset)
+                if (perkChoiceArray[0].Perk != null)
                 {
-                    if (CrossPlatformInputManager.GetButton("Skill1"))
+                    if (CrossPlatformInputManager.GetButtonDown("Skill1"))
                     {
                         AssignPerk(0);
                     }
-                    if (CrossPlatformInputManager.GetButton("Skill2"))
+                    if (CrossPlatformInputManager.GetButtonDown("Skill2"))
                     {
-                        AssignPerk(0);
+                        AssignPerk(1);
                     }
-                    if (CrossPlatformInputManager.GetButton("Skill3"))
+                    if (CrossPlatformInputManager.GetButtonDown("Skill3"))
                     {
-                        AssignPerk(0);
+                        AssignPerk(2);
                     }
                 }
                 else
                 {
                     CreateAvailablePerks();
-                }
-
-                if (CrossPlatformInputManager.GetButtonUp("Skill1") ||
-                   CrossPlatformInputManager.GetButtonUp("Skill2") ||
-                   CrossPlatformInputManager.GetButtonUp("Skill3"))
-                {
-                    keyReset = true;
                 }
             }
 
@@ -82,36 +75,63 @@ namespace Player {
 
         void CreateAvailablePerks()
         {
-            //set up available perks
-            var newPerk = (IPerk)Activator.CreateInstance(allPerks.First(), new object[] { playerObject });
+            for (int i = 0; i < perkChoices; i++)
+            {
+                //Create new perk to save in the collection of perks later on
+                var newPerk = (IPerk)Activator.CreateInstance(allPerks.First(), new object[] { playerObject });
+                var choiceUI = perkChoiceArray[i].choiceUI;
 
-            var newChoiceUi = Instantiate(perkChoiceUI);
-            newChoiceUi.transform.SetParent(HUDTransform);
-            newChoiceUi.transform.position = new Vector3(-2, 2, 0);
-            var rectTransform = newChoiceUi.GetComponent<RectTransform>();
-            rectTransform.anchoredPosition = new Vector2(1, 0);
-            var image = newChoiceUi.transform.Find("Icon").GetComponent<Image>();
-            image.sprite = newPerk.icon;
+                var image = choiceUI.transform.Find("Icon").GetComponent<Image>();
+                image.sprite = newPerk.icon;
 
-            var descripText = newChoiceUi.transform.Find("DescriptionText").GetComponent<Text>();
-            descripText.text = newPerk.GetDescription(NextPerkLevel(newPerk));
+                var descripText = choiceUI.transform.Find("DescriptionText").GetComponent<Text>();
+                descripText.text = newPerk.GetDescription(NextPerkLevel(newPerk));
 
-            perkChoiceArray[0].Perk = newPerk;
-            perkChoiceArray[0].choiceUI = newChoiceUi;
+                perkChoiceArray[i].Perk = newPerk;
+                choiceUI.SetActive(true);
+            }
+        }
+
+        GameObject CreatePerkUI(int index, int total)
+        {
+            var newChoiceUI = Instantiate(perkChoiceUI);
+            var rectTransform = newChoiceUI.GetComponent<RectTransform>();
+            var width = (int)rectTransform.rect.width;
+            int padding = (int)(width * 0.05f);
+            int xPosition = 2 + ((padding + width) * (total - index - 1));
+
+            rectTransform.SetParent(HUDTransform);
+            rectTransform.anchoredPosition = new Vector2(-xPosition, 2);
+
+            var buttonText = newChoiceUI.transform.Find("ButtonText").GetComponent<Text>();
+            //super hacky since there doesn't seem to be an easy way to get what button goes with what control
+            switch (index) {
+                case 0:
+                    buttonText.text = "Z";
+                    break;
+                case 1:
+                    buttonText.text = "X";
+                    break;
+                case 2:
+                    buttonText.text = "C";
+                    break;
+            }
+
+            newChoiceUI.SetActive(false);
+
+            return newChoiceUI;
         }
 
         void AssignPerk(int choice) {
-            keyReset = false;
             var perkChoice = perkChoiceArray[choice];
 
             perksApplied.Add(perkChoice.Perk.ApplyPerk(NextPerkLevel(perkChoice.Perk)));
 
+            //disable ui and cleanup
             foreach (var perkContainer in perkChoiceArray)
             {
                 perkContainer.choiceUI.SetActive(false);
-                Destroy(perkContainer.choiceUI);
                 perkContainer.Perk = null;
-                perkContainer.choiceUI = null;
             }
 
             availablePerks--;
