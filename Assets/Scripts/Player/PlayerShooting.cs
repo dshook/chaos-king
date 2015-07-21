@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
+using System.Collections.Generic;
 
 public class PlayerShooting : MonoBehaviour
 {
@@ -7,6 +8,9 @@ public class PlayerShooting : MonoBehaviour
     public float timeBetweenBullets = 0.15f;
     public float range = 100f;
 	public int enemiesPierced = 5;
+	public int shotFired = 5;
+
+    public Material gunLineMaterial;
 
 
     float timer;
@@ -20,15 +24,17 @@ public class PlayerShooting : MonoBehaviour
     Light gunLight;
     float effectsDisplayTime = 0.2f;
 
+	List<GameObject> gunLineList;
+
 
     void Awake ()
     {
         shootableMask = LayerMask.GetMask ("Shootable");
         gunParticles = GetComponent<ParticleSystem> ();
-        gunLine = GetComponent <LineRenderer> ();
         gunAudio = GetComponent<AudioSource> ();
         gunLight = GetComponent<Light> ();
         playerLevel = GetComponentInParent<PlayerLevel>();
+        gunLineList = new List<GameObject>();
     }
 
 
@@ -38,7 +44,9 @@ public class PlayerShooting : MonoBehaviour
 
 		if(CrossPlatformInputManager.GetButton ("Fire1") && timer >= timeBetweenBullets && Time.timeScale != 0)
         {
-            Shoot ();
+			for(var p = 0; p < shotFired; p++){
+            	Shoot (Random.Range(-30,30));
+			}
         }
 
         if(timer >= timeBetweenBullets * effectsDisplayTime)
@@ -50,12 +58,16 @@ public class PlayerShooting : MonoBehaviour
 
     public void DisableEffects ()
     {
-        gunLine.enabled = false;
         gunLight.enabled = false;
+
+        foreach(var line in gunLineList) {
+            Destroy(line, 0.1f);
+        }
+        gunLineList.Clear();
     }
 
 
-    void Shoot ()
+    void Shoot (int angle)
     {
         timer = 0f;
 
@@ -66,11 +78,12 @@ public class PlayerShooting : MonoBehaviour
         gunParticles.Stop ();
         gunParticles.Play ();
 
-        gunLine.enabled = true;
-        gunLine.SetPosition (0, transform.position);
+        var gunLineObject = createLine();
+        var gunLine = gunLineObject.GetComponent<LineRenderer>();
+        gunLineList.Add(gunLineObject);
 
         shootRay.origin = transform.position;
-        shootRay.direction = transform.forward;
+		shootRay.direction = Quaternion.Euler(0,angle,0) * transform.forward;
 
 		for(var p = 0; p < enemiesPierced; p++){
 
@@ -90,5 +103,22 @@ public class PlayerShooting : MonoBehaviour
 				break;
         	}
 		}
+    }
+
+    GameObject createLine() {
+        var emptyObject = new GameObject();
+        emptyObject.transform.parent = this.transform;
+        var gunLine = emptyObject.AddComponent<LineRenderer>();
+        gunLine.enabled = true;
+        gunLine.SetPosition (0, transform.position);
+        gunLine.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
+        gunLine.receiveShadows = false;
+        gunLine.material = gunLineMaterial;
+        gunLine.useLightProbes = true;
+        gunLine.reflectionProbeUsage = UnityEngine.Rendering.ReflectionProbeUsage.BlendProbes;
+        gunLine.SetWidth(0.05f, 0.05f);
+        gunLine.useWorldSpace = true;
+
+        return emptyObject;
     }
 }
