@@ -10,6 +10,8 @@ public class PlayerShooting : MonoBehaviour
 	public int enemiesPierced = 5;
 	public int shotFired = 5;
 
+    public Material gunLineMaterial;
+
 
     float timer;
     Ray shootRay;
@@ -22,17 +24,17 @@ public class PlayerShooting : MonoBehaviour
     Light gunLight;
     float effectsDisplayTime = 0.2f;
 
-	List<LineRenderer> gunLineList;
+	List<GameObject> gunLineList;
 
 
     void Awake ()
     {
         shootableMask = LayerMask.GetMask ("Shootable");
         gunParticles = GetComponent<ParticleSystem> ();
-        gunLine = GetComponent <LineRenderer> ();
         gunAudio = GetComponent<AudioSource> ();
         gunLight = GetComponent<Light> ();
         playerLevel = GetComponentInParent<PlayerLevel>();
+        gunLineList = new List<GameObject>();
     }
 
 
@@ -56,8 +58,12 @@ public class PlayerShooting : MonoBehaviour
 
     public void DisableEffects ()
     {
-        gunLine.enabled = false;
         gunLight.enabled = false;
+
+        foreach(var line in gunLineList) {
+            Destroy(line, 0.1f);
+        }
+        gunLineList.Clear();
     }
 
 
@@ -72,9 +78,9 @@ public class PlayerShooting : MonoBehaviour
         gunParticles.Stop ();
         gunParticles.Play ();
 
-		//gunLine = AddComponentMenu (LineRenderer);
-        gunLine.enabled = true;
-        gunLine.SetPosition (0, transform.position);
+        var gunLineObject = createLine();
+        var gunLine = gunLineObject.GetComponent<LineRenderer>();
+        gunLineList.Add(gunLineObject);
 
         shootRay.origin = transform.position;
 		shootRay.direction = Quaternion.Euler(0,angle,0) * transform.forward;
@@ -97,5 +103,22 @@ public class PlayerShooting : MonoBehaviour
 				break;
         	}
 		}
+    }
+
+    GameObject createLine() {
+        var emptyObject = new GameObject();
+        emptyObject.transform.parent = this.transform;
+        var gunLine = emptyObject.AddComponent<LineRenderer>();
+        gunLine.enabled = true;
+        gunLine.SetPosition (0, transform.position);
+        gunLine.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
+        gunLine.receiveShadows = false;
+        gunLine.material = gunLineMaterial;
+        gunLine.useLightProbes = true;
+        gunLine.reflectionProbeUsage = UnityEngine.Rendering.ReflectionProbeUsage.BlendProbes;
+        gunLine.SetWidth(0.05f, 0.05f);
+        gunLine.useWorldSpace = true;
+
+        return emptyObject;
     }
 }

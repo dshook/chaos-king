@@ -6425,7 +6425,12 @@ Prefab:
       propertyPath: damageImage
       value: 
       objectReference: {fileID: 1987413956}
-    m_RemovedComponents: []
+    - target: {fileID: 11461762, guid: 14a4acc8babab324b9f99c13dc1624db, type: 2}
+      propertyPath: gunLineMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 007cd3dce0e6539409edcc484011c877, type: 2}
+    m_RemovedComponents:
+    - {fileID: 12029988, guid: 14a4acc8babab324b9f99c13dc1624db, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 14a4acc8babab324b9f99c13dc1624db, type: 2}
   m_IsPrefabParent: 0
 --- !u!114 &967100672 stripped
