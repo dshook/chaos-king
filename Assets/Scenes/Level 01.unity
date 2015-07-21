@@ -3412,6 +3412,33 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.37337637, y: 1.4543643, z: 4.14552355}
   m_Center: {x: -1.59066772, y: .673518419, z: .408407182}
+--- !u!1 &512437062
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 512437063}
+  m_Layer: 0
+  m_Name: HellephantSpawn (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &512437063
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 512437062}
+  m_LocalRotation: {x: 0, y: .906307638, z: 0, w: -.422618538}
+  m_LocalPosition: {x: 5.32000017, y: 0, z: -97.3099976}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 869500795}
+  m_RootOrder: 10
 --- !u!1 &515548242
 GameObject:
   m_ObjectHideFlags: 0
@@ -4567,6 +4594,7 @@ MonoBehaviour:
   spawnTime: 3
   spawnPoints:
   - {fileID: 70411346}
+  - {fileID: 512437063}
 --- !u!4 &670115111
 Transform:
   m_ObjectHideFlags: 0
@@ -5891,6 +5919,9 @@ Transform:
   - {fileID: 2047412407}
   - {fileID: 864676494}
   - {fileID: 1919789211}
+  - {fileID: 512437063}
+  - {fileID: 1483469735}
+  - {fileID: 2005947792}
   m_Father: {fileID: 0}
   m_RootOrder: 7
 --- !u!1 &887174030
@@ -9855,6 +9886,33 @@ CapsuleCollider:
   m_Height: 4.17000008
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1483469734
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1483469735}
+  m_Layer: 0
+  m_Name: ZombunnySpawn (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1483469735
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1483469734}
+  m_LocalRotation: {x: 0, y: .906307876, z: 0, w: .422618181}
+  m_LocalPosition: {x: 26.7399998, y: 0, z: -75.7799988}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 869500795}
+  m_RootOrder: 11
 --- !u!1 &1486478010
 GameObject:
   m_ObjectHideFlags: 0
@@ -12598,6 +12656,33 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: .475382268, y: 1.74889231, z: .455459952}
   m_Center: {x: .694255829, y: .00261179125, z: -.00728529133}
+--- !u!1 &2005947791
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 2005947792}
+  m_Layer: 0
+  m_Name: ZombunnySpawn (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2005947792
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2005947791}
+  m_LocalRotation: {x: 0, y: .906307876, z: 0, w: .422618181}
+  m_LocalPosition: {x: -41.2099991, y: 0, z: -61.6500015}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 869500795}
+  m_RootOrder: 12
 --- !u!1 &2043827708
 GameObject:
   m_ObjectHideFlags: 0
@@ -12805,6 +12890,8 @@ MonoBehaviour:
   spawnTime: 1.5
   spawnPoints:
   - {fileID: 1781215557}
+  - {fileID: 1483469735}
+  - {fileID: 2005947792}
 --- !u!4 &2089165593
 Transform:
   m_ObjectHideFlags: 0
