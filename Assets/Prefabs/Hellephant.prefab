@@ -349,7 +349,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 104722}
   m_Enabled: 1
   m_Radius: 1.20000005
-  m_Speed: 2
+  m_Speed: 4
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -2541,6 +2541,10 @@ Prefab:
       value: 
       objectReference: {fileID: 22100000, guid: 4b9e5a845fe711a479c6ac969ab908dc,
         type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_Speed
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 104722}
