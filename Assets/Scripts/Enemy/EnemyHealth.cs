@@ -68,7 +68,6 @@ public class EnemyHealth : MonoBehaviour
         enemyAudio.clip = deathClip;
         enemyAudio.Play ();
         killExperience.GiveExperience(player);
-		ScoreManager.score += scoreValue;
     }
 
 
