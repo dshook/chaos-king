@@ -12,7 +12,6 @@ GameObject:
   - 114: {fileID: 11461762}
   - 82: {fileID: 8258232}
   - 108: {fileID: 10820328}
-  - 120: {fileID: 12029988}
   - 198: {fileID: 19806326}
   - 199: {fileID: 19934524}
   m_Layer: 0
@@ -446,6 +445,8 @@ MonoBehaviour:
   timeBetweenBullets: .159999996
   range: 100
   enemiesPierced: 5
+  shotFired: 5
+  gunLineMaterial: {fileID: 2100000, guid: 007cd3dce0e6539409edcc484011c877, type: 2}
 --- !u!114 &11493734
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -458,43 +459,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
---- !u!120 &12029988
-LineRenderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 135816}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_Materials:
-  - {fileID: 2100000, guid: 007cd3dce0e6539409edcc484011c877, type: 2}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 1
-  m_ReflectionProbeUsage: 1
-  m_ProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_Positions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
-  m_Parameters:
-    startWidth: .0500000007
-    endWidth: .0500000007
-    m_StartColor:
-      serializedVersion: 2
-      rgba: 4294967295
-    m_EndColor:
-      serializedVersion: 2
-      rgba: 4294967295
-  m_UseWorldSpace: 1
 --- !u!136 &13600726
 CapsuleCollider:
   m_ObjectHideFlags: 1
