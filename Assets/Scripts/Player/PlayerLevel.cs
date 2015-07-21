@@ -24,13 +24,15 @@ public class PlayerLevel : MonoBehaviour {
 
     public void GetExperience(int amount) {
         experience += amount;
-        if(experience > level) {
+        if(experience >= level) {
             LevelUp();
         }
     }
 
     void LevelUp() {
-        level++;
-        experience -= level;
+        while(experience >= level) {
+            level++;
+            experience -= level;
+        }
     }
 }
