@@ -11,9 +11,11 @@ namespace Player
         public Text text;
         public Slider slider;
 
+        public PlayerPerks perks;
+
         // Use this for initialization
         void Start () {
-        
+            perks = GetComponent<PlayerPerks>();
         }
         
         // Update is called once per frame
@@ -34,6 +36,7 @@ namespace Player
             while(experience >= level) {
                 level++;
                 experience -= level;
+                perks.GrantPerk();
             }
         }
     }

@@ -1,11 +1,14 @@
-﻿using System;
+﻿using UnityEngine;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Player
 {
-    interface IPerk
+    public interface IPerk
     {
+        Sprite icon { get; }
+        int level { get; set; }
+        decimal amount { get; set; }
+        string GetDescription(int level);
+        IPerk ApplyPerk(int level);
     }
 }
