@@ -9,6 +9,7 @@ public class PlayerShooting : MonoBehaviour
     public float range = 100f;
 	public int enemiesPierced = 5;
 	public int shotFired = 5;
+    public int spreadAngle = 20;
 
     public Material gunLineMaterial;
 
@@ -24,7 +25,7 @@ public class PlayerShooting : MonoBehaviour
     Light gunLight;
     float effectsDisplayTime = 0.2f;
 
-	List<GameObject> gunLineList;
+    GameObject[] gunLines;
 
 
     void Awake ()
@@ -34,7 +35,10 @@ public class PlayerShooting : MonoBehaviour
         gunAudio = GetComponent<AudioSource> ();
         gunLight = GetComponent<Light> ();
         playerLevel = GetComponentInParent<PlayerLevel>();
-        gunLineList = new List<GameObject>();
+        gunLines = new GameObject[shotFired];
+        for(int i = 0; i < shotFired; i++) {
+            gunLines[i] = createLine();
+        }
     }
 
 
@@ -45,7 +49,7 @@ public class PlayerShooting : MonoBehaviour
 		if(CrossPlatformInputManager.GetButton ("Fire1") && timer >= timeBetweenBullets && Time.timeScale != 0)
         {
 			for(var p = 0; p < shotFired; p++){
-            	Shoot (Random.Range(-30,30));
+            	Shoot (Random.Range(-spreadAngle,spreadAngle), p);
 			}
         }
 
@@ -60,14 +64,14 @@ public class PlayerShooting : MonoBehaviour
     {
         gunLight.enabled = false;
 
-        foreach(var line in gunLineList) {
-            Destroy(line, 0.1f);
+        foreach(var line in gunLines) {
+            var lineRenderer = line.GetComponent<LineRenderer>();
+            lineRenderer.enabled = false;
         }
-        gunLineList.Clear();
     }
 
 
-    void Shoot (int angle)
+    void Shoot (int angle, int shotIndex)
     {
         timer = 0f;
 
@@ -78,9 +82,10 @@ public class PlayerShooting : MonoBehaviour
         gunParticles.Stop ();
         gunParticles.Play ();
 
-        var gunLineObject = createLine();
+        var gunLineObject = gunLines[shotIndex];
         var gunLine = gunLineObject.GetComponent<LineRenderer>();
-        gunLineList.Add(gunLineObject);
+        gunLine.SetPosition (0, transform.position);
+        gunLine.enabled = true;
 
         shootRay.origin = transform.position;
 		shootRay.direction = Quaternion.Euler(0,angle,0) * transform.forward;
@@ -110,7 +115,6 @@ public class PlayerShooting : MonoBehaviour
         emptyObject.transform.parent = this.transform;
         var gunLine = emptyObject.AddComponent<LineRenderer>();
         gunLine.enabled = true;
-        gunLine.SetPosition (0, transform.position);
         gunLine.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
         gunLine.receiveShadows = false;
         gunLine.material = gunLineMaterial;
