@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
+using System.Collections.Generic;
 
 public class PlayerShooting : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class PlayerShooting : MonoBehaviour
     public float timeBetweenBullets = 0.15f;
     public float range = 100f;
 	public int enemiesPierced = 5;
+	public int shotFired = 5;
 
 
     float timer;
@@ -19,6 +21,8 @@ public class PlayerShooting : MonoBehaviour
     AudioSource gunAudio;
     Light gunLight;
     float effectsDisplayTime = 0.2f;
+
+	List<LineRenderer> gunLineList;
 
 
     void Awake ()
@@ -38,7 +42,9 @@ public class PlayerShooting : MonoBehaviour
 
 		if(CrossPlatformInputManager.GetButton ("Fire1") && timer >= timeBetweenBullets && Time.timeScale != 0)
         {
-            Shoot ();
+			for(var p = 0; p < shotFired; p++){
+            	Shoot (Random.Range(-30,30));
+			}
         }
 
         if(timer >= timeBetweenBullets * effectsDisplayTime)
@@ -55,7 +61,7 @@ public class PlayerShooting : MonoBehaviour
     }
 
 
-    void Shoot ()
+    void Shoot (int angle)
     {
         timer = 0f;
 
@@ -66,11 +72,12 @@ public class PlayerShooting : MonoBehaviour
         gunParticles.Stop ();
         gunParticles.Play ();
 
+		//gunLine = AddComponentMenu (LineRenderer);
         gunLine.enabled = true;
         gunLine.SetPosition (0, transform.position);
 
         shootRay.origin = transform.position;
-        shootRay.direction = transform.forward;
+		shootRay.direction = Quaternion.Euler(0,angle,0) * transform.forward;
 
 		for(var p = 0; p < enemiesPierced; p++){
 
