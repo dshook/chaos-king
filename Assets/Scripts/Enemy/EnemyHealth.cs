@@ -13,6 +13,7 @@ public class EnemyHealth : MonoBehaviour
     AudioSource enemyAudio;
     ParticleSystem hitParticles;
     CapsuleCollider capsuleCollider;
+    KillExperience killExperience;
     bool isDead;
     bool isSinking;
 
@@ -23,6 +24,7 @@ public class EnemyHealth : MonoBehaviour
         enemyAudio = GetComponent <AudioSource> ();
         hitParticles = GetComponentInChildren <ParticleSystem> ();
         capsuleCollider = GetComponent <CapsuleCollider> ();
+        killExperience = GetComponent <KillExperience> ();
 
         currentHealth = startingHealth;
     }
@@ -37,7 +39,7 @@ public class EnemyHealth : MonoBehaviour
     }
 
 
-    public void TakeDamage (int amount, Vector3 hitPoint)
+    public void TakeDamage (int amount, Vector3 hitPoint, PlayerLevel player)
     {
         if(isDead)
             return;
@@ -51,12 +53,12 @@ public class EnemyHealth : MonoBehaviour
 
         if(currentHealth <= 0)
         {
-            Death ();
+            Death (player);
         }
     }
 
 
-    void Death ()
+    void Death (PlayerLevel player)
     {
         isDead = true;
 
@@ -65,6 +67,7 @@ public class EnemyHealth : MonoBehaviour
         anim.SetTrigger ("Dead");
         enemyAudio.clip = deathClip;
         enemyAudio.Play ();
+        killExperience.GiveExperience(player);
 		ScoreManager.score += scoreValue;
     }
 

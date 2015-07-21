@@ -34,6 +34,7 @@ GameObject:
   - 114: {fileID: 11492370}
   - 114: {fileID: 11470714}
   - 114: {fileID: 11474866}
+  - 114: {fileID: 11482064}
   m_Layer: 9
   m_Name: Hellephant
   m_TagString: Untagged
@@ -256,6 +257,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeBetweenAttacks: .5
   attackDamage: 30
+--- !u!114 &11482064
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 104722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eb45101034911c4b996c7c8f742515a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  experience: 10
 --- !u!114 &11492370
 MonoBehaviour:
   m_ObjectHideFlags: 1

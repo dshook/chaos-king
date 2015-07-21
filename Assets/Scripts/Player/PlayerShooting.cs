@@ -14,6 +14,7 @@ public class PlayerShooting : MonoBehaviour
     RaycastHit shootHit;
     int shootableMask;
     ParticleSystem gunParticles;
+    PlayerLevel playerLevel;
     LineRenderer gunLine;
     AudioSource gunAudio;
     Light gunLight;
@@ -27,6 +28,7 @@ public class PlayerShooting : MonoBehaviour
         gunLine = GetComponent <LineRenderer> ();
         gunAudio = GetComponent<AudioSource> ();
         gunLight = GetComponent<Light> ();
+        playerLevel = GetComponentInParent<PlayerLevel>();
     }
 
 
@@ -77,7 +79,7 @@ public class PlayerShooting : MonoBehaviour
             	EnemyHealth enemyHealth = shootHit.collider.GetComponent <EnemyHealth> ();
             	if(enemyHealth != null)
             	{
-            	    enemyHealth.TakeDamage (damagePerShot, shootHit.point);
+            	    enemyHealth.TakeDamage (damagePerShot, shootHit.point, playerLevel);
             	}
             	gunLine.SetPosition (1, shootHit.point);
 				shootRay.origin = shootHit.point;

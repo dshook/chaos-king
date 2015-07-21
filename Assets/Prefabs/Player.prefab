@@ -15,7 +15,6 @@ GameObject:
   - 120: {fileID: 12029988}
   - 198: {fileID: 19806326}
   - 199: {fileID: 19934524}
-  - 114: {fileID: 11453614}
   m_Layer: 0
   m_Name: GunBarrelEnd
   m_TagString: Untagged
@@ -37,6 +36,7 @@ GameObject:
   - 136: {fileID: 13600726}
   - 114: {fileID: 11493734}
   - 114: {fileID: 11460526}
+  - 114: {fileID: 11414878}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -398,20 +398,21 @@ Light:
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
---- !u!114 &11453614
+--- !u!114 &11414878
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 135816}
+  m_GameObject: {fileID: 162382}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27c63be2a8918c741863160b9d9da122, type: 3}
+  m_Script: {fileID: 11500000, guid: 16b0074a4ef661f488dcd6286974998c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damagePerShot: 8
-  timeBetweenBullets: .439999998
-  range: 100
+  level: 1
+  experience: 0
+  text: {fileID: 0}
+  slider: {fileID: 0}
 --- !u!114 &11460526
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -441,9 +442,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27c63be2a8918c741863160b9d9da122, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damagePerShot: 8
-  timeBetweenBullets: .699999988
+  damagePerShot: 19
+  timeBetweenBullets: .159999996
   range: 100
+  enemiesPierced: 5
 --- !u!114 &11493734
 MonoBehaviour:
   m_ObjectHideFlags: 1
