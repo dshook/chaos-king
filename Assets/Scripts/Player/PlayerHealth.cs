@@ -30,6 +30,8 @@ namespace Player
             playerMovement = GetComponent <PlayerMovement> ();
             playerShooting = GetComponentInChildren <PlayerShooting> ();
             currentHealth = maxHealth;
+            
+            UpdateHealthSlider();
         }
 
 
@@ -53,8 +55,7 @@ namespace Player
 
             currentHealth -= amount;
 
-            healthSlider.value = currentHealth;
-            healthSlider.maxValue = maxHealth;
+            UpdateHealthSlider();
 
             playerAudio.Play ();
 
@@ -62,6 +63,19 @@ namespace Player
             {
                 Death ();
             }
+        }
+
+        public void IncreaseHealth(int amount)
+        {
+            maxHealth += amount;
+            currentHealth += amount;
+            UpdateHealthSlider();
+        }
+
+        void UpdateHealthSlider()
+        {
+            healthSlider.maxValue = maxHealth;
+            healthSlider.value = currentHealth;
         }
 
 

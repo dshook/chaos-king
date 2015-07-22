@@ -33,10 +33,7 @@ namespace Player
 
         public IPerk ApplyPerk(int level) {
             this.level = level;
-            amount = NextAmount(level);
-
-            health.maxHealth += (int)amount;
-            health.currentHealth += (int)amount;
+            health.IncreaseHealth((int)NextAmount(level));
 
             return this;
         }

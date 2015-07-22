@@ -6424,6 +6424,10 @@ Prefab:
       propertyPath: startingHealth
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 11460526, guid: 14a4acc8babab324b9f99c13dc1624db, type: 2}
+      propertyPath: currentHealth
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 14a4acc8babab324b9f99c13dc1624db, type: 2}
   m_IsPrefabParent: 0
