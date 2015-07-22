@@ -3,46 +3,45 @@ using System;
 
 namespace Player
 {
-    public class HpPerk : IPerk
+    public class MoveSpeedPerk : IPerk
     {
-        PlayerHealth health;
+        PlayerMovement movement;
 
         public int level { get; set; }
         public decimal amount { get; set; }
         public Sprite icon {
             get
             {
-                return Resources.Load<Sprite>("health-increase");
+                return Resources.Load<Sprite>("run");
             }
         }
         public Color iconColor
         {
             get
             {
-                return new Color(255, 22, 50);
+                return new Color(61, 23, 3);
             }
         }
 
-        public HpPerk(GameObject player) {
-            health = player.GetComponent<PlayerHealth>();
+        public MoveSpeedPerk(GameObject player) {
+            movement = player.GetComponentInChildren<PlayerMovement>();
         }
 
         public string GetDescription(int level) {
-            return string.Format("{0} +{1} HP", level, NextAmount(level) );
+            return string.Format("{0} +{1}% Move Speed", level, NextAmount(level) );
         }
 
         public IPerk ApplyPerk(int level) {
             this.level = level;
             amount = NextAmount(level);
 
-            health.maxHealth += (int)amount;
-            health.currentHealth += (int)amount;
+            movement.speed += movement.speed * ((float)amount / 100f);
 
             return this;
         }
 
         decimal NextAmount(int level) {
-            return Math.Round((level + 10) / 2m, 0, MidpointRounding.AwayFromZero);
+            return 5m;
         }
     }
 }

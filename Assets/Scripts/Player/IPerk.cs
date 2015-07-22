@@ -6,6 +6,7 @@ namespace Player
     public interface IPerk
     {
         Sprite icon { get; }
+        Color iconColor { get; }
         int level { get; set; }
         decimal amount { get; set; }
         string GetDescription(int level);

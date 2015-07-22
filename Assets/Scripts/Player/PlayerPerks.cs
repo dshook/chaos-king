@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityStandardAssets.CrossPlatformInput;
+using Assets.Utils;
 
 namespace Player {
     public class PlayerPerks : MonoBehaviour {
@@ -75,14 +76,19 @@ namespace Player {
 
         void CreateAvailablePerks()
         {
+            var shuffledPerks = allPerks.Shuffle().Take(perkChoices).ToArray();
+
             for (int i = 0; i < perkChoices; i++)
             {
+                var randomPerk = shuffledPerks[i];
                 //Create new perk to save in the collection of perks later on
-                var newPerk = (IPerk)Activator.CreateInstance(allPerks.First(), new object[] { playerObject });
+                var newPerk = (IPerk)Activator.CreateInstance(randomPerk, new object[] { playerObject });
                 var choiceUI = perkChoiceArray[i].choiceUI;
 
                 var image = choiceUI.transform.Find("Icon").GetComponent<Image>();
                 image.sprite = newPerk.icon;
+                //TODO: figure out why this isn't working
+                image.color = newPerk.iconColor;
 
                 var descripText = choiceUI.transform.Find("DescriptionText").GetComponent<Text>();
                 descripText.text = newPerk.GetDescription(NextPerkLevel(newPerk));

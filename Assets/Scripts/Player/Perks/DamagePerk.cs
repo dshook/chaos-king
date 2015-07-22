@@ -3,46 +3,45 @@ using System;
 
 namespace Player
 {
-    public class HpPerk : IPerk
+    public class DamagePerk : IPerk
     {
-        PlayerHealth health;
+        PlayerShooting shooting;
 
         public int level { get; set; }
         public decimal amount { get; set; }
         public Sprite icon {
             get
             {
-                return Resources.Load<Sprite>("health-increase");
+                return Resources.Load<Sprite>("gunshot");
             }
         }
         public Color iconColor
         {
             get
             {
-                return new Color(255, 22, 50);
+                return new Color(61, 23, 3);
             }
         }
 
-        public HpPerk(GameObject player) {
-            health = player.GetComponent<PlayerHealth>();
+        public DamagePerk(GameObject player) {
+            shooting = player.GetComponentInChildren<PlayerShooting>();
         }
 
         public string GetDescription(int level) {
-            return string.Format("{0} +{1} HP", level, NextAmount(level) );
+            return string.Format("{0} +{1}% Damage", level, NextAmount(level) );
         }
 
         public IPerk ApplyPerk(int level) {
             this.level = level;
             amount = NextAmount(level);
 
-            health.maxHealth += (int)amount;
-            health.currentHealth += (int)amount;
+            shooting.damagePerShot *= (int)Math.Round(1 + (amount / 100m), 0, MidpointRounding.AwayFromZero);
 
             return this;
         }
 
         decimal NextAmount(int level) {
-            return Math.Round((level + 10) / 2m, 0, MidpointRounding.AwayFromZero);
+            return level;
         }
     }
 }
