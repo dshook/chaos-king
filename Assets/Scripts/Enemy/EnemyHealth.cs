@@ -15,6 +15,7 @@ public class EnemyHealth : MonoBehaviour
     ParticleSystem hitParticles;
     CapsuleCollider capsuleCollider;
     KillExperience killExperience;
+	DropManager dropManager;
     bool isDead;
     bool isSinking;
 
@@ -26,6 +27,7 @@ public class EnemyHealth : MonoBehaviour
         hitParticles = GetComponentInChildren <ParticleSystem> ();
         capsuleCollider = GetComponent <CapsuleCollider> ();
         killExperience = GetComponent <KillExperience> ();
+		dropManager = GameObject.FindObjectOfType<DropManager> ();
 
         currentHealth = startingHealth;
     }
@@ -69,6 +71,7 @@ public class EnemyHealth : MonoBehaviour
         enemyAudio.clip = deathClip;
         enemyAudio.Play ();
         killExperience.GiveExperience(player);
+		dropManager.SpawnDrop (this.transform);
     }
 
 

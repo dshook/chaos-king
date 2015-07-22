@@ -3,7 +3,7 @@ using UnityStandardAssets.CrossPlatformInput;
 
 namespace Player
 {
-    public class PlayerShooting : MonoBehaviour
+    public class ShotgunShooting : MonoBehaviour
     {
         public int damagePerShot = 20;
         public float timeBetweenBullets = 0.15f;
@@ -30,16 +30,19 @@ namespace Player
 
         void Awake ()
         {
-            shootableMask = LayerMask.GetMask ("Shootable");
-            gunParticles = GetComponent<ParticleSystem> ();
-            gunAudio = GetComponent<AudioSource> ();
-            gunLight = GetComponent<Light> ();
-            playerLevel = GetComponentInParent<PlayerLevel>();
-            gunLines = new GameObject[shotFired];
-            for(int i = 0; i < shotFired; i++) {
-                gunLines[i] = createLine();
-            }
         }
+		
+		void Start(){
+			shootableMask = LayerMask.GetMask ("Shootable");
+			gunLines = new GameObject[shotFired];
+			gunParticles = GetComponent<ParticleSystem> ();
+			gunAudio = GetComponent<AudioSource> ();
+			gunLight = GetComponent<Light> ();
+			playerLevel = GetComponentInParent<PlayerLevel>();
+			for(int i = 0; i < shotFired; i++) {
+				gunLines[i] = createLine();
+			}
+		}
 
 
         void Update ()

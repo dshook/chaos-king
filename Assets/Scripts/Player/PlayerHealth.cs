@@ -18,7 +18,7 @@ namespace Player
         Animator anim;
         AudioSource playerAudio;
         PlayerMovement playerMovement;
-        PlayerShooting playerShooting;
+        GameObject playerWeapon;
         bool isDead;
         bool damaged;
 
@@ -28,7 +28,7 @@ namespace Player
             anim = GetComponent <Animator> ();
             playerAudio = GetComponent <AudioSource> ();
             playerMovement = GetComponent <PlayerMovement> ();
-            playerShooting = GetComponentInChildren <PlayerShooting> ();
+			playerWeapon = transform.FindChild("Weapon").gameObject;
             currentHealth = maxHealth;
         }
 
@@ -69,7 +69,7 @@ namespace Player
         {
             isDead = true;
 
-            playerShooting.DisableEffects ();
+            //playerShooting.DisableEffects ();
 
             anim.SetTrigger ("Die");
 
@@ -77,7 +77,7 @@ namespace Player
             playerAudio.Play ();
 
             playerMovement.enabled = false;
-            playerShooting.enabled = false;
+			playerWeapon.SetActive (false);
         }
 
 
