@@ -103,7 +103,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 189704}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.89199996, y: 0, z: 3.35500002}
+  m_LocalPosition: {x: 4.84899998, y: 0, z: 4.34600019}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 499712}
@@ -337,6 +337,9 @@ MonoBehaviour:
   enemiesPierced: 10
   shotFired: 1
   spreadAngle: 0
+  maxAmmo: 40
+  currentAmmo: 0
+  reloadSpeed: .800000012
   gunLineMaterial: {fileID: 0}
 --- !u!114 &11429376
 MonoBehaviour:
