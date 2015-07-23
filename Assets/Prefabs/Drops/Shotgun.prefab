@@ -79,7 +79,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 183094}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.80200005, y: -.0480000004, z: -2.77399993}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 423564}
@@ -91,7 +91,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 104556}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.57999992, y: -.0379999988, z: 1.37}
+  m_LocalPosition: {x: 10.7480001, y: -.0379999988, z: 1.37}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 471922}
@@ -105,7 +105,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 193082}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.32000017, y: .279000014, z: -5.86899996}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 480066}
@@ -118,7 +118,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 198268}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.53999996, y: -.273999989, z: 3.0710001}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 471922}
@@ -148,8 +148,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .200000003, y: .5, z: 1.60000002}
-  m_Center: {x: -3.5, y: .300000012, z: -2.4000001}
+  m_Size: {x: .460000008, y: .819999993, z: 2.01999998}
+  m_Center: {x: .189999998, y: .360000014, z: .239999995}
 --- !u!82 &8225688
 AudioSource:
   m_ObjectHideFlags: 1
@@ -331,7 +331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d4683f0264b0ce4a8870219619b54c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 6
+  rotationSpeed: 14.5200005
   bounceSpeed: 6
 --- !u!114 &11443896
 MonoBehaviour:
@@ -350,7 +350,10 @@ MonoBehaviour:
   enemiesPierced: 5
   shotFired: 5
   spreadAngle: 20
-  gunLineMaterial: {fileID: 0}
+  maxAmmo: 8
+  currentAmmo: 0
+  reloadSpeed: .5
+  gunLineMaterial: {fileID: 2100000, guid: 007cd3dce0e6539409edcc484011c877, type: 2}
 --- !u!114 &11487604
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -429,8 +432,8 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 0}
   m_AABB:
-    m_Center: {x: -.217404515, y: -4.28408384e-08, z: .106329583}
-    m_Extent: {x: .709815741, y: .044386521, z: .323496759}
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
   m_DirtyAABB: 0
 --- !u!198 &19859254
 ParticleSystem:

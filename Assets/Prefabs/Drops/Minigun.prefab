@@ -78,9 +78,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 109842}
-  m_LocalRotation: {x: .499999911, y: -.500000179, z: .499999821, w: -.50000006}
-  m_LocalPosition: {x: .270000011, y: .375999987, z: 1.14699996}
-  m_LocalScale: {x: .150000006, y: .150000006, z: .150000006}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: .109999999, y: .109999999, z: .109999999}
   m_Children: []
   m_Father: {fileID: 498160}
   m_RootOrder: 1
@@ -90,9 +90,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 133136}
-  m_LocalRotation: {x: -.500000119, y: .5, z: -.5, w: .49999994}
-  m_LocalPosition: {x: 3.73443198, y: .0320000015, z: 3.76399994}
-  m_LocalScale: {x: .150000006, y: .150000006, z: .150000006}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 499712}
   m_RootOrder: 0
@@ -102,8 +102,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 189704}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.84899998, y: 0, z: 4.34600019}
+  m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106709}
+  m_LocalPosition: {x: 4.84899998, y: .379999995, z: 4.34600019}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 499712}
@@ -117,7 +117,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 145174}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.46943188, y: .309769213, z: -2.60885048}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 485590}
@@ -148,8 +148,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .200000003, y: .5, z: 1.60000002}
-  m_Center: {x: .300000012, y: .300000012, z: .349999994}
+  m_Size: {x: .379999995, y: 1.30999994, z: .25999999}
+  m_Center: {x: -0, y: .579999983, z: .109999999}
 --- !u!82 &8218054
 AudioSource:
   m_ObjectHideFlags: 1
@@ -340,7 +340,7 @@ MonoBehaviour:
   maxAmmo: 40
   currentAmmo: 0
   reloadSpeed: .800000012
-  gunLineMaterial: {fileID: 0}
+  gunLineMaterial: {fileID: 2100000, guid: 007cd3dce0e6539409edcc484011c877, type: 2}
 --- !u!114 &11429376
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -397,8 +397,8 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 0}
   m_AABB:
-    m_Center: {x: -.217404515, y: -4.28408384e-08, z: .106329583}
-    m_Extent: {x: .709815741, y: .044386521, z: .323496759}
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
   m_DirtyAABB: 0
 --- !u!137 &13766274
 SkinnedMeshRenderer:
