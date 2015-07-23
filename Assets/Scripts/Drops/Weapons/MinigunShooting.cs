@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using UnityStandardAssets.CrossPlatformInput;
 
 namespace Player
@@ -11,6 +12,11 @@ namespace Player
 		public int enemiesPierced = 10;
 		public int shotFired = 1;
 		public int spreadAngle = 0;
+		public int maxAmmo = 8;
+		public int currentAmmo = 0;
+		Slider ammoSlider;
+		public float reloadSpeed = 0.5f;
+		bool reloading = false;
 		
 		public Material gunLineMaterial;
 		
@@ -42,6 +48,10 @@ namespace Player
 			for(int i = 0; i < shotFired; i++) {
 				gunLines[i] = createLine();
 			}
+			ammoSlider = GameObject.FindGameObjectWithTag ("UI").transform.FindChild ("AmmoUI").gameObject.GetComponentInChildren<Slider> ();
+			currentAmmo = maxAmmo;
+			ammoSlider.maxValue = maxAmmo;
+			ammoSlider.value = currentAmmo;
 		}
 		
 		
@@ -49,10 +59,24 @@ namespace Player
 		{
 			timer += Time.deltaTime;
 			
+			if (reloading == true && timer >= reloadSpeed) {
+				currentAmmo = maxAmmo;
+				ammoSlider.maxValue = maxAmmo;
+				ammoSlider.value = currentAmmo;
+				reloading = false;
+			}
 			if(CrossPlatformInputManager.GetButton ("Fire1") && timer >= timeBetweenBullets && Time.timeScale != 0)
 			{
-				for(var p = 0; p < shotFired; p++){
-					Shoot (Random.Range(-spreadAngle,spreadAngle), p);
+				if(currentAmmo > 0){
+					for(var p = 0; p < shotFired; p++){
+						Shoot (Random.Range(-spreadAngle,spreadAngle), p);
+					}
+					currentAmmo--;
+					ammoSlider.maxValue = maxAmmo;
+					ammoSlider.value = currentAmmo;
+				}
+				else{
+					reloading = true;
 				}
 			}
 			
