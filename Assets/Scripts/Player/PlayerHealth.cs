@@ -90,7 +90,8 @@ namespace Player
             playerAudio.clip = deathClip;
             playerAudio.Play ();
 
-            playerMovement.enabled = false;
+			playerMovement.enabled = false;
+			playerWeapon = transform.FindChild("Weapon").gameObject;
 			playerWeapon.SetActive (false);
         }
 
