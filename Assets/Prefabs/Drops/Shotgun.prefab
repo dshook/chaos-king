@@ -29,7 +29,7 @@ GameObject:
   - 4: {fileID: 411152}
   - 137: {fileID: 13730166}
   m_Layer: 0
-  m_Name: Gun
+  m_Name: GunMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66,7 +66,7 @@ GameObject:
   - 4: {fileID: 480066}
   - 137: {fileID: 13727092}
   m_Layer: 9
-  m_Name: Gun
+  m_Name: GunMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -91,7 +91,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 104556}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.7480001, y: -.0379999988, z: 1.37}
+  m_LocalPosition: {x: 2.75200009, y: .545000017, z: -.620999992}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 471922}
@@ -397,8 +397,8 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 0}
   m_AABB:
-    m_Center: {x: -.2174045, y: -4.28408384e-08, z: .106329598}
-    m_Extent: {x: .709815681, y: .044386521, z: .323496789}
+    m_Center: {x: .300000012, y: .349999994, z: .300000012}
+    m_Extent: {x: .0799999982, y: .25, z: .74000001}
   m_DirtyAABB: 0
 --- !u!137 &13730166
 SkinnedMeshRenderer:
@@ -432,8 +432,8 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 0}
   m_AABB:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
+    m_Center: {x: .300000012, y: .349999994, z: .300000012}
+    m_Extent: {x: .0799999982, y: .25, z: .74000001}
   m_DirtyAABB: 0
 --- !u!198 &19859254
 ParticleSystem:

@@ -17,15 +17,21 @@ public class WeaponPickup : MonoBehaviour {
 		{
             var playerWeapon = player.transform.FindChild("Weapon");
 			Vector3 gunPosition = playerWeapon.position;
-			Vector3 gunMeshPosition = playerWeapon.FindChild("Gun").position;
-            var gunRotation = playerWeapon.FindChild("Gun").rotation;
+			//Vector3 gunMeshPosition = playerWeapon.FindChild("Gun").position;
+            //var gunRotation = playerWeapon.FindChild("Gun").rotation;
+
+			//Vector3 gunPosition = player.transform.position;
+			Vector3 gunMeshPosition = playerWeapon.FindChild("GunMesh").position;
+			var gunMeshRotation = playerWeapon.FindChild("GunMesh").rotation;
+			var gunRotation = player.transform.rotation;
 
 			Destroy(playerWeapon.gameObject);
 
 			weapon.transform.parent = player.transform;
 			weapon.transform.position = gunPosition;
-			weapon.transform.FindChild("Gun").position = gunMeshPosition;
-            weapon.transform.FindChild("Gun").rotation = gunRotation;
+			weapon.transform.rotation = gunRotation;
+			//weapon.transform.FindChild("Gun").position = gunMeshPosition;
+            weapon.transform.FindChild("GunMesh").rotation = gunMeshRotation;
 			weapon.SetActive(true);
 
 			Destroy (gameObject, 0.1f);

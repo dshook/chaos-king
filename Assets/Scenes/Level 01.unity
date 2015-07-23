@@ -3756,7 +3756,7 @@ Transform:
   - {fileID: 1744564633}
   - {fileID: 1549346168}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 11
 --- !u!1 &525875588
 GameObject:
   m_ObjectHideFlags: 0
@@ -7392,7 +7392,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
 --- !u!114 &853156384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8077,7 +8077,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 82081262}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: .105999999, y: 0, z: -3.16000009}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1536384429}
@@ -8176,15 +8176,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 423564, guid: 54594f5b413d1c243a1857d5c00deb10, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 10.7480001
+      value: 2.75200009
       objectReference: {fileID: 0}
     - target: {fileID: 423564, guid: 54594f5b413d1c243a1857d5c00deb10, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -.0379999988
+      value: .545000017
       objectReference: {fileID: 0}
     - target: {fileID: 423564, guid: 54594f5b413d1c243a1857d5c00deb10, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 1.37
+      value: -.620999992
       objectReference: {fileID: 0}
     - target: {fileID: 423564, guid: 54594f5b413d1c243a1857d5c00deb10, type: 2}
       propertyPath: m_LocalRotation.x
@@ -8204,7 +8204,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 423564, guid: 54594f5b413d1c243a1857d5c00deb10, type: 2}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 54594f5b413d1c243a1857d5c00deb10, type: 2}
@@ -12589,7 +12589,7 @@ GameObject:
   - 4: {fileID: 1655219145}
   - 137: {fileID: 1655219146}
   m_Layer: 0
-  m_Name: Gun
+  m_Name: GunMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12601,7 +12601,7 @@ Transform:
   m_PrefabParentObject: {fileID: 444060, guid: 14a4acc8babab324b9f99c13dc1624db, type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1655219144}
-  m_LocalRotation: {x: .426630914, y: .426630974, z: -.563902617, w: .563902497}
+  m_LocalRotation: {x: .448297828, y: .448297888, z: -.546835482, w: .546835423}
   m_LocalPosition: {x: 0, y: -.0377060175, z: -.923055649}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -15007,19 +15007,19 @@ Prefab:
     m_Modifications:
     - target: {fileID: 498160, guid: 2b583d02e48091a4ba753f5a97ee6dac, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 4.84899998
+      value: 1.53499997
       objectReference: {fileID: 0}
     - target: {fileID: 498160, guid: 2b583d02e48091a4ba753f5a97ee6dac, type: 2}
       propertyPath: m_LocalPosition.y
-      value: .379999995
+      value: .187000006
       objectReference: {fileID: 0}
     - target: {fileID: 498160, guid: 2b583d02e48091a4ba753f5a97ee6dac, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 4.34600019
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 498160, guid: 2b583d02e48091a4ba753f5a97ee6dac, type: 2}
       propertyPath: m_LocalRotation.x
-      value: -.707106829
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 498160, guid: 2b583d02e48091a4ba753f5a97ee6dac, type: 2}
       propertyPath: m_LocalRotation.y
@@ -15031,11 +15031,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 498160, guid: 2b583d02e48091a4ba753f5a97ee6dac, type: 2}
       propertyPath: m_LocalRotation.w
-      value: .707106709
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 498160, guid: 2b583d02e48091a4ba753f5a97ee6dac, type: 2}
       propertyPath: m_RootOrder
-      value: 11
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2b583d02e48091a4ba753f5a97ee6dac, type: 2}
