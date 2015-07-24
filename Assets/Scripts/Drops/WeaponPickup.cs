@@ -17,8 +17,9 @@ public class WeaponPickup : MonoBehaviour
     {
         if (other.gameObject == player)
         {
+            //store various weapon positions and rotations
             var playerWeapon = player.transform.FindChild("Weapon");
-            Vector3 gunPosition = playerWeapon.transform.position;
+            Vector3 playerGunPosition = playerWeapon.transform.position;
             //Vector3 gunMeshPosition = playerWeapon.FindChild("Gun").position;
             //var gunRotation = playerWeapon.FindChild("Gun").rotation;
 
@@ -27,14 +28,17 @@ public class WeaponPickup : MonoBehaviour
             var gunMeshRotation = playerWeapon.FindChild("GunMesh").rotation;
             var gunRotation = player.transform.rotation;
 
+            //destroy players current weapon and grab pickups weapon
             Destroy(playerWeapon.gameObject);
-
             weapon.transform.parent = player.transform;
-            weapon.transform.position = gunPosition;
-            //weapon.transform.rotation = gunRotation;
-            //weapon.transform.FindChild("Gun").position = gunMeshPosition;
-            weapon.transform.FindChild("GunMesh").rotation = gunMeshRotation;
 
+            //fix new weapons posistion and rotation
+            weapon.transform.position = playerGunPosition;
+            weapon.transform.rotation = gunRotation;
+            //weapon.transform.FindChild("Gun").position = gunMeshPosition;
+            //weapon.transform.FindChild("GunMesh").rotation = gunMeshRotation;
+
+            //activate players new weapon
             var weaponShoot = weapon.GetComponent<IShoot>();
             var playerShooting = player.GetComponent<PlayerShooting>();
             weaponShoot.Enable(playerShooting);
@@ -42,6 +46,7 @@ public class WeaponPickup : MonoBehaviour
 
             weapon.SetActive(true);
 
+            //destroy pickup
             Destroy(gameObject, 0.1f);
         }
     }
