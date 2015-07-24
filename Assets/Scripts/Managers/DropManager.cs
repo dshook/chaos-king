@@ -8,7 +8,7 @@ public class DropManager : MonoBehaviour
 
 	public void SpawnDrop (Transform spawnPoint)
 	{
-		if(playerHealth.currentHealth <= 0f && dropList.Length > 0)
+		if(playerHealth.currentHealth <= 0f || dropList.Length == 0)
 		{
 			return;
 		}

@@ -18,7 +18,7 @@ public class WeaponPickup : MonoBehaviour
         if (other.gameObject == player)
         {
             var playerWeapon = player.transform.FindChild("Weapon");
-            Vector3 gunPosition = playerWeapon.position;
+            Vector3 gunPosition = playerWeapon.transform.position;
             //Vector3 gunMeshPosition = playerWeapon.FindChild("Gun").position;
             //var gunRotation = playerWeapon.FindChild("Gun").rotation;
 
@@ -31,7 +31,7 @@ public class WeaponPickup : MonoBehaviour
 
             weapon.transform.parent = player.transform;
             weapon.transform.position = gunPosition;
-            weapon.transform.rotation = gunRotation;
+            //weapon.transform.rotation = gunRotation;
             //weapon.transform.FindChild("Gun").position = gunMeshPosition;
             weapon.transform.FindChild("GunMesh").rotation = gunMeshRotation;
 
