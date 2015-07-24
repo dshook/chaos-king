@@ -5,10 +5,10 @@ namespace Player
 {
     public class DamagePerk : IPerk
     {
-        //PlayerShooting shooting;
+        PlayerShooting shooting;
 
         public int level { get; set; }
-        public decimal amount { get; set; }
+        public float amount { get; set; }
         public Sprite icon {
             get
             {
@@ -24,7 +24,7 @@ namespace Player
         }
 
         public DamagePerk(GameObject player) {
-            //shooting = player.GetComponentInChildren<PlayerShooting>();
+            shooting = player.GetComponentInChildren<PlayerShooting>();
         }
 
         public string GetDescription(int level) {
@@ -35,12 +35,12 @@ namespace Player
             this.level = level;
             amount = NextAmount(level);
 
-            //shooting.damagePerShot *= (int)Math.Round(1 + (amount / 100m), 0, MidpointRounding.AwayFromZero);
+            shooting.damageMultiplier += 0.01f * amount;
 
             return this;
         }
 
-        decimal NextAmount(int level) {
+        float NextAmount(int level) {
             return level;
         }
     }

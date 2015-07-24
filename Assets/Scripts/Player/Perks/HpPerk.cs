@@ -8,7 +8,7 @@ namespace Player
         PlayerHealth health;
 
         public int level { get; set; }
-        public decimal amount { get; set; }
+        public float amount { get; set; }
         public Sprite icon {
             get
             {
@@ -38,8 +38,8 @@ namespace Player
             return this;
         }
 
-        decimal NextAmount(int level) {
-            return Math.Round((level + 10) / 2m, 0, MidpointRounding.AwayFromZero);
+        float NextAmount(int level) {
+            return Mathf.Round((level + 10) / 2f);
         }
     }
 }

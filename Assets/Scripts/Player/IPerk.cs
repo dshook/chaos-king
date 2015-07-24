@@ -8,7 +8,7 @@ namespace Player
         Sprite icon { get; }
         Color iconColor { get; }
         int level { get; set; }
-        decimal amount { get; set; }
+        float amount { get; set; }
         string GetDescription(int level);
         IPerk ApplyPerk(int level);
     }

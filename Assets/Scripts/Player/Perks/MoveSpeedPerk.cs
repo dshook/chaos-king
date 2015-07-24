@@ -8,7 +8,7 @@ namespace Player
         PlayerMovement movement;
 
         public int level { get; set; }
-        public decimal amount { get; set; }
+        public float amount { get; set; }
         public Sprite icon {
             get
             {
@@ -40,8 +40,8 @@ namespace Player
             return this;
         }
 
-        decimal NextAmount(int level) {
-            return 5m;
+        float NextAmount(int level) {
+            return 5f;
         }
     }
 }
