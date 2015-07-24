@@ -58,7 +58,6 @@ namespace Weapons
         public void Enable(PlayerShooting ps)
         {
             playerShooting = ps;
-            playerShooting.ammoSlider.maxValue = maxAmmo;
             currentAmmo = maxAmmo;
             UpdateAmmoUI();
             enabled = true;
@@ -68,15 +67,15 @@ namespace Weapons
         {
             shootTimer += Time.deltaTime;
 
-            if (reloading == true && shootTimer >= reloadSpeed)
+            if (reloading == true && shootTimer >= (reloadSpeed * playerShooting.reloadSpeedMultiplier))
             {
-                currentAmmo = maxAmmo;
+                currentAmmo = maxAmmo + playerShooting.ammoBoost;
                 UpdateAmmoUI();
                 reloading = false;
                 shootTimer = 0f;
             }
 
-            if (shootTimer >= timeBetweenBullets * effectsDisplayTime)
+            if (shootTimer >= (timeBetweenBullets * playerShooting.attackSpeedMultiplier) * effectsDisplayTime)
             {
                 DisableEffects();
             }
@@ -84,7 +83,7 @@ namespace Weapons
 
         public void Shoot()
         {
-            if (shootTimer >= timeBetweenBullets && Time.timeScale != 0)
+            if (shootTimer >= (timeBetweenBullets * playerShooting.attackSpeedMultiplier) && Time.timeScale != 0)
             {
                 if (currentAmmo > 0)
                 {
@@ -134,21 +133,21 @@ namespace Weapons
             shootRay.origin = transform.position;
             shootRay.direction = Quaternion.Euler(0, angle, 0) * transform.forward;
 
-            for (var p = 0; p <= enemiesPierced; p++)
+            for (var p = 0; p <= (enemiesPierced + playerShooting.extraEnemiesPierced); p++)
             {
-                if (Physics.Raycast(shootRay, out shootHit, range, playerShooting.shootableMask))
+                if (Physics.Raycast(shootRay, out shootHit, range * playerShooting.rangeMultiplier, playerShooting.shootableMask))
                 {
                     EnemyHealth enemyHealth = shootHit.collider.GetComponent<EnemyHealth>();
                     if (enemyHealth != null)
                     {
-                        enemyHealth.TakeDamage(damagePerShot, shootHit.point, playerLevel);
+                        enemyHealth.TakeDamage(Mathf.RoundToInt(damagePerShot * playerShooting.damageMultiplier), shootHit.point, playerLevel);
                     }
                     gunLine.SetPosition(1, shootHit.point);
                     shootRay.origin = shootHit.point;
                 }
                 else
                 {
-                    gunLine.SetPosition(1, shootRay.origin + shootRay.direction * range);
+                    gunLine.SetPosition(1, shootRay.origin + shootRay.direction * range * playerShooting.rangeMultiplier);
                     break;
                 }
             }
@@ -156,8 +155,10 @@ namespace Weapons
 
         void UpdateAmmoUI()
         {
+            //TODO: cleanup usages into properties
+            playerShooting.ammoSlider.maxValue = maxAmmo + playerShooting.ammoBoost;
             playerShooting.ammoSlider.value = currentAmmo;
-            playerShooting.ammoText.text = string.Format("{0}/{1}", currentAmmo, maxAmmo);
+            playerShooting.ammoText.text = string.Format("{0}/{1}", currentAmmo, maxAmmo + playerShooting.ammoBoost);
         }
 
         GameObject createLine()
