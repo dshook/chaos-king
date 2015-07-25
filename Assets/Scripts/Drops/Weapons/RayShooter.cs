@@ -23,18 +23,18 @@ namespace Weapons
         public Material gunLineMaterial;
         public PlayerShooting playerShooting;
 
-        bool reloading = false;
+        public bool reloading = false;
 
-        float shootTimer;
-        Ray shootRay;
-        RaycastHit shootHit;
-        ParticleSystem gunParticles;
-        PlayerLevel playerLevel;
-        AudioSource gunAudio;
-        Light gunLight;
-        float effectsDisplayTime = 0.2f;
+        public float shootTimer;
+        public Ray shootRay;
+        public RaycastHit shootHit;
+        public ParticleSystem gunParticles;
+        public PlayerLevel playerLevel;
+        public AudioSource gunAudio;
+        public Light gunLight;
+        public float effectsDisplayTime = 0.2f;
 
-        GameObject[] gunLines;
+        public GameObject[] gunLines;
 
 
         void Awake()
@@ -63,7 +63,7 @@ namespace Weapons
             enabled = true;
         }
 
-        void Update()
+        public virtual void Update()
         {
             shootTimer += Time.deltaTime;
 
@@ -81,7 +81,7 @@ namespace Weapons
             }
         }
 
-        public void Shoot()
+        public virtual void Shoot()
         {
             if (shootTimer >= (timeBetweenBullets * playerShooting.attackSpeedMultiplier) && Time.timeScale != 0)
             {
@@ -89,7 +89,7 @@ namespace Weapons
                 {
                     for (var p = 0; p < shotFired; p++)
                     {
-                        Shoot(Random.Range(-spreadAngle, spreadAngle), p);
+                        FireWeapon(Random.Range(-spreadAngle, spreadAngle), p);
                     }
                     currentAmmo--;
                     UpdateAmmoUI();
@@ -114,7 +114,7 @@ namespace Weapons
         }
 
 
-        void Shoot(int angle, int shotIndex)
+        public virtual void FireWeapon(int angle, int shotIndex)
         {
             shootTimer = 0f;
 
@@ -153,7 +153,7 @@ namespace Weapons
             }
         }
 
-        void UpdateAmmoUI()
+        public void UpdateAmmoUI()
         {
             //TODO: cleanup usages into properties
             playerShooting.ammoSlider.maxValue = maxAmmo + playerShooting.ammoBoost;

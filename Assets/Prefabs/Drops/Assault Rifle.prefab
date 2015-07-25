@@ -324,8 +324,16 @@ MonoBehaviour:
   maxAmmo: 10
   currentAmmo: 0
   reloadSpeed: 1.5
-  gunLineMaterial: {fileID: 0}
+  gunLineMaterial: {fileID: 2100000, guid: 007cd3dce0e6539409edcc484011c877, type: 2}
   playerShooting: {fileID: 0}
+  reloading: 0
+  shootTimer: 0
+  gunParticles: {fileID: 0}
+  playerLevel: {fileID: 0}
+  gunAudio: {fileID: 0}
+  gunLight: {fileID: 0}
+  effectsDisplayTime: .200000003
+  gunLines: []
 --- !u!114 &11472090
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1485,6 +1493,10 @@ Prefab:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: gunLineMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 007cd3dce0e6539409edcc484011c877, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100842}
