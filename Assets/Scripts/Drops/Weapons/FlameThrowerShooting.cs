@@ -16,7 +16,7 @@ namespace Weapons
             enemies = new List<GameObject>();
             
             damagePerShot = 10;
-            timeBetweenBullets = 0.5f;
+            timeBetweenBullets = 0.05f;
             range = 100f;
             enemiesPierced = 0;
             shotFired = 1;
