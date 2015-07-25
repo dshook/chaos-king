@@ -11,6 +11,8 @@ Click to fire
 
 Z, X, or C to choose a perk
 
+# Organization
+https://trello.com/b/KHkLbrg9
 
 # Attribution
 
