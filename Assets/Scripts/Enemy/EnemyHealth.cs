@@ -9,7 +9,6 @@ public class EnemyHealth : MonoBehaviour
     public int scoreValue = 10;
     public AudioClip deathClip;
 
-
     Animator anim;
     AudioSource enemyAudio;
     ParticleSystem hitParticles;
@@ -47,6 +46,7 @@ public class EnemyHealth : MonoBehaviour
         if(isDead)
             return;
 
+        FloatingTextManager.Write(amount.ToString(), gameObject.transform.position);
         enemyAudio.Play ();
 
         currentHealth -= amount;

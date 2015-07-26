@@ -25,7 +25,7 @@ public class WeaponPickup : MonoBehaviour
 
             //Vector3 gunPosition = player.transform.position;
             //Vector3 gunMeshPosition = playerWeapon.FindChild("GunMesh").position;
-            var gunMeshRotation = playerWeapon.FindChild("GunMesh").rotation;
+            //var gunMeshRotation = playerWeapon.FindChild("GunMesh").rotation;
             var gunRotation = player.transform.rotation;
 
             //destroy players current weapon and grab pickups weapon
