@@ -46,6 +46,9 @@ public class WeaponPickup : MonoBehaviour
 
             weapon.SetActive(true);
 
+            var killTimer = weapon.GetComponent<KillTimer>();
+            Destroy(killTimer);
+
             //destroy pickup
             Destroy(gameObject, 0.1f);
         }
