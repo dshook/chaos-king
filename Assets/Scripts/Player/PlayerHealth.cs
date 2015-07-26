@@ -57,6 +57,8 @@ namespace Player
 
             UpdateHealthSlider();
 
+            FloatingTextManager.PlayerDamage(amount, transform.position);
+
             playerAudio.Play ();
 
             if(currentHealth <= 0 && !isDead)

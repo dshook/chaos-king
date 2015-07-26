@@ -46,7 +46,7 @@ public class EnemyHealth : MonoBehaviour
         if(isDead)
             return;
 
-        FloatingTextManager.Write(amount.ToString(), gameObject.transform.position);
+        FloatingTextManager.EnemyDamage(amount, hitPoint);
         enemyAudio.Play ();
 
         currentHealth -= amount;
