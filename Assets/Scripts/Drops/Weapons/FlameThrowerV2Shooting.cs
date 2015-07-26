@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 using Player;
 
 namespace Weapons
 {
     public class FlameThrowerV2Shooting : RayShooter, IShoot
     {
-        public override void FireWeapon(int angle, int shotIndex)
+        protected override void FireWeapon(int angle, int shotIndex)
         {
             shootTimer = 0f;
 

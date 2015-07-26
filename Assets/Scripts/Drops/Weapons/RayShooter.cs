@@ -23,18 +23,18 @@ namespace Weapons
         public Material gunLineMaterial;
         public PlayerShooting playerShooting;
 
-        public bool reloading = false;
+        bool reloading = false;
 
-        public float shootTimer;
-        public Ray shootRay;
-        public RaycastHit shootHit;
-        public ParticleSystem gunParticles;
-        public PlayerLevel playerLevel;
-        public AudioSource gunAudio;
-        public Light gunLight;
-        public float effectsDisplayTime = 0.2f;
+        protected float shootTimer;
+        Ray shootRay;
+        RaycastHit shootHit;
+        ParticleSystem gunParticles;
+        PlayerLevel playerLevel;
+        AudioSource gunAudio;
+        Light gunLight;
+        float effectsDisplayTime = 0.2f;
 
-        public GameObject[] gunLines;
+        GameObject[] gunLines;
 
 
         void Awake()
@@ -63,7 +63,7 @@ namespace Weapons
             enabled = true;
         }
 
-        public virtual void Update()
+        void Update()
         {
             shootTimer += Time.deltaTime;
 
@@ -81,7 +81,7 @@ namespace Weapons
             }
         }
 
-        public virtual void Shoot()
+        public void Shoot()
         {
             if (shootTimer >= (timeBetweenBullets * playerShooting.attackSpeedMultiplier) && Time.timeScale != 0)
             {
@@ -114,7 +114,7 @@ namespace Weapons
         }
 
 
-        public virtual void FireWeapon(int angle, int shotIndex)
+        protected virtual void FireWeapon(int angle, int shotIndex)
         {
             shootTimer = 0f;
 
@@ -153,7 +153,7 @@ namespace Weapons
             }
         }
 
-        public void UpdateAmmoUI()
+        void UpdateAmmoUI()
         {
             //TODO: cleanup usages into properties
             playerShooting.ammoSlider.maxValue = maxAmmo + playerShooting.ammoBoost;
