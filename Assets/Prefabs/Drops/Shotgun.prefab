@@ -12,6 +12,7 @@ GameObject:
   - 114: {fileID: 11461216}
   - 54: {fileID: 5460516}
   - 114: {fileID: 11435846}
+  - 114: {fileID: 11400754}
   m_Layer: 0
   m_Name: Shotgun
   m_TagString: Untagged
@@ -291,6 +292,18 @@ Light:
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
+--- !u!114 &11400754
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 157826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31994c72c55a2154f8f3c49e4560f9c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  killTime: 10
 --- !u!114 &11427780
 MonoBehaviour:
   m_ObjectHideFlags: 1

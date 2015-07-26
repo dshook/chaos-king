@@ -49,6 +49,7 @@ GameObject:
   - 114: {fileID: 11486898}
   - 54: {fileID: 5424876}
   - 114: {fileID: 11466238}
+  - 114: {fileID: 11490880}
   m_Layer: 0
   m_Name: Minigun
   m_TagString: Untagged
@@ -337,6 +338,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 6
   bounceSpeed: 6
+--- !u!114 &11490880
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 189224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31994c72c55a2154f8f3c49e4560f9c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  killTime: 10
 --- !u!137 &13724828
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

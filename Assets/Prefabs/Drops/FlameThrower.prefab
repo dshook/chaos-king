@@ -33,6 +33,7 @@ GameObject:
   - 114: {fileID: 11498234}
   - 54: {fileID: 5425828}
   - 114: {fileID: 11472860}
+  - 114: {fileID: 11496662}
   m_Layer: 0
   m_Name: FlameThrower
   m_TagString: Untagged
@@ -313,14 +314,6 @@ MonoBehaviour:
   reloadSpeed: .150000006
   gunLineMaterial: {fileID: 0}
   playerShooting: {fileID: 0}
-  reloading: 0
-  shootTimer: 0
-  gunParticles: {fileID: 0}
-  playerLevel: {fileID: 0}
-  gunAudio: {fileID: 0}
-  gunLight: {fileID: 0}
-  effectsDisplayTime: .200000003
-  gunLines: []
 --- !u!114 &11472860
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -332,6 +325,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1926343d3d27ab4d8df56bb2598ddd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11496662
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 169332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31994c72c55a2154f8f3c49e4560f9c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  killTime: 10
 --- !u!114 &11498234
 MonoBehaviour:
   m_ObjectHideFlags: 1

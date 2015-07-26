@@ -12,6 +12,7 @@ GameObject:
   - 114: {fileID: 11442206}
   - 54: {fileID: 5447726}
   - 114: {fileID: 11472090}
+  - 114: {fileID: 11463928}
   m_Layer: 0
   m_Name: Assault Rifle
   m_TagString: Untagged
@@ -75,7 +76,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100842}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1.20304108, y: 4.56869486e-07, z: -2.55499911}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 491564}
@@ -304,6 +305,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 14.5200005
   bounceSpeed: 6
+--- !u!114 &11463928
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31994c72c55a2154f8f3c49e4560f9c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  killTime: 10
 --- !u!114 &11469004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -326,14 +339,6 @@ MonoBehaviour:
   reloadSpeed: 1.5
   gunLineMaterial: {fileID: 2100000, guid: 007cd3dce0e6539409edcc484011c877, type: 2}
   playerShooting: {fileID: 0}
-  reloading: 0
-  shootTimer: 0
-  gunParticles: {fileID: 0}
-  playerLevel: {fileID: 0}
-  gunAudio: {fileID: 0}
-  gunLight: {fileID: 0}
-  effectsDisplayTime: .200000003
-  gunLines: []
 --- !u!114 &11472090
 MonoBehaviour:
   m_ObjectHideFlags: 1
