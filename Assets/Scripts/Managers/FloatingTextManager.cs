@@ -28,4 +28,9 @@ public class FloatingTextManager : MonoBehaviour
     {
         Write(damage.ToString(), position, 90, new Color(0.98f, 0.01f, 0.01f));
     }
+
+    public static void PlayerXp(int amount, Vector3 position)
+    {
+        Write(string.Format("+{0} xp",amount), position, 50, new Color(0.01f, 0.91f, 0.01f));
+    }
 }

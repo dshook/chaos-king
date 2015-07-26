@@ -5949,6 +5949,7 @@ MonoBehaviour:
   dropList:
   - {fileID: 189224, guid: 2b583d02e48091a4ba753f5a97ee6dac, type: 2}
   - {fileID: 157826, guid: 54594f5b413d1c243a1857d5c00deb10, type: 2}
+  dropChance: .200000003
 --- !u!1001 &854590395
 Prefab:
   m_ObjectHideFlags: 0

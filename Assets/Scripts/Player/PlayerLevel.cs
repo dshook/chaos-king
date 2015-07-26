@@ -27,6 +27,7 @@ namespace Player
 
         public void GetExperience(int amount) {
             experience += amount;
+            FloatingTextManager.PlayerXp(amount, transform.position);
             if(experience >= level) {
                 LevelUp();
             }
