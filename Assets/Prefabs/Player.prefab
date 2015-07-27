@@ -357,7 +357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damagePerShot: 19
-  timeBetweenBullets: .159999996
+  timeBetweenBullets: .5
   range: 100
   enemiesPierced: 5
   shotFired: 5

@@ -6,10 +6,7 @@ public class WeaponMovement : MonoBehaviour {
 	public float rotationSpeed = 6f;
 	public float bounceSpeed = 6f;
 
-	Rigidbody weaponRigidbody;
-
 	void Awake(){
-		weaponRigidbody = GetComponent<Rigidbody> ();
 	}
 	
 	void FixedUpdate(){
@@ -17,8 +14,8 @@ public class WeaponMovement : MonoBehaviour {
 	}
 	
 	void Float(){
-		float currentAngle = weaponRigidbody.rotation.eulerAngles.y;
-		weaponRigidbody.rotation = Quaternion.AngleAxis(currentAngle + (Time.deltaTime * rotationSpeed), Vector3.up);
+		float currentAngle = transform.rotation.eulerAngles.y;
+		transform.rotation = Quaternion.AngleAxis(currentAngle + (Time.deltaTime * rotationSpeed), Vector3.up);
 	}
 
 	void PickUp(){

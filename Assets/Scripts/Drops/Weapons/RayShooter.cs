@@ -32,7 +32,7 @@ namespace Weapons
         PlayerLevel playerLevel;
         AudioSource gunAudio;
         Light gunLight;
-        float effectsDisplayTime = 0.2f;
+        float effectsDisplayTime = 0.4f;
 
         GameObject[] gunLines;
 
@@ -44,9 +44,9 @@ namespace Weapons
         protected void Start()
         {
             gunLines = new GameObject[shotFired];
-            gunParticles = GetComponent<ParticleSystem>();
+            gunParticles = GetComponentInChildren<ParticleSystem>();
             gunAudio = GetComponent<AudioSource>();
-            gunLight = GetComponent<Light>();
+            gunLight = GetComponentInChildren<Light>();
             playerLevel = GetComponentInParent<PlayerLevel>();
             for (int i = 0; i < shotFired; i++)
             {
