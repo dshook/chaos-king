@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 using UnityStandardAssets.CrossPlatformInput;
 
 namespace Player
 {
-    public class PlayerMovement : MonoBehaviour
+    public class PlayerMovement : NetworkBehaviour
     {
         public float speed = 6f;
 
@@ -22,6 +23,8 @@ namespace Player
 
         void FixedUpdate()
         {
+            if (!isLocalPlayer) return;
+
             var h = CrossPlatformInputManager.GetAxisRaw ("Horizontal");
             var v = CrossPlatformInputManager.GetAxisRaw ("Vertical");
 

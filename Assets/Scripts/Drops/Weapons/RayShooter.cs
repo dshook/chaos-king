@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
-using UnityStandardAssets.CrossPlatformInput;
+using UnityEngine.Networking;
 using Player;
 
 namespace Weapons
@@ -8,7 +7,7 @@ namespace Weapons
     /// <summary>
     /// Base class for all weapons that use raycasts to shoot
     /// </summary>
-    public class RayShooter : MonoBehaviour
+    public class RayShooter : NetworkBehaviour
     {
         public int damagePerShot = 1;
         public float timeBetweenBullets = 0.5f;
@@ -89,7 +88,7 @@ namespace Weapons
                 {
                     for (var p = 0; p < shotFired; p++)
                     {
-                        FireWeapon(Random.Range(-spreadAngle, spreadAngle), p);
+                        CmdFireWeapon(Random.Range(-spreadAngle, spreadAngle), p);
                     }
                     currentAmmo--;
                     UpdateAmmoUI();
@@ -113,8 +112,8 @@ namespace Weapons
             }
         }
 
-
-        protected virtual void FireWeapon(int angle, int shotIndex)
+        [Command]
+        protected virtual void CmdFireWeapon(int angle, int shotIndex)
         {
             shootTimer = 0f;
 

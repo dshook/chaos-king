@@ -1,32 +1,64 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 using Player;
 
-public class EnemyMovement : MonoBehaviour
+public class EnemyMovement : NetworkBehaviour
 {
-    Transform player;
+    public float aggroTime = 10f;
+
+    Transform playerTransform;
     PlayerHealth playerHealth;
     EnemyHealth enemyHealth;
     NavMeshAgent nav;
 
+    GameObject[] players;
+    float playerTimer = 0f;
+
+    void OnPlayerConnected(NetworkPlayer player) {
+        players = GameObject.FindGameObjectsWithTag("Player");
+        FindClosestPlayer();
+    }
 
     void Awake ()
     {
-        player = GameObject.FindGameObjectWithTag ("Player").transform;
-        playerHealth = player.GetComponent <PlayerHealth> ();
-        enemyHealth = GetComponent <EnemyHealth> ();
-        nav = GetComponent <NavMeshAgent> ();
+        players = GameObject.FindGameObjectsWithTag("Player");
+        enemyHealth = GetComponent<EnemyHealth>();
+        nav = GetComponent<NavMeshAgent>();
     }
 
 
     void Update ()
     {
-        if(enemyHealth.currentHealth > 0 && playerHealth.currentHealth > 0)
+        if (isClient) return;
+
+        playerTimer += Time.deltaTime;
+        if (playerTransform == null || playerTimer > aggroTime)
         {
-            nav.SetDestination (player.position);
+            playerTimer = 0;
+            FindClosestPlayer();
+        }
+
+        if(enemyHealth.currentHealth > 0 && playerHealth != null && playerHealth.currentHealth > 0)
+        {
+            nav.SetDestination (playerTransform.position);
         }
         else
         {
             nav.enabled = false;
         }
+    }
+
+    void FindClosestPlayer() {
+        float minRange = float.MaxValue;
+        foreach (var p in players)
+        {
+            var dist = Vector3.Distance(p.transform.position, transform.position);
+            if (dist < minRange)
+            {
+                minRange = dist;
+                playerTransform = p.transform;
+            }
+        }
+        playerHealth = playerTransform.GetComponent<PlayerHealth>();
     }
 }

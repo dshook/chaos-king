@@ -28,6 +28,11 @@ namespace Player
         {
             shootableMask = LayerMask.GetMask("Shootable");
             gun = GetComponentInChildren<IShoot>();
+
+            var ammoUI = GameObject.Find("AmmoUI");
+            ammoSlider = ammoUI.GetComponentInChildren<Slider>();
+            ammoText = ammoUI.GetComponentInChildren<Text>();
+
             gun.Enable(this);
         }
 

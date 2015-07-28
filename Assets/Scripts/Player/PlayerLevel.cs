@@ -1,25 +1,29 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 
 namespace Player
 {
-        public class PlayerLevel : MonoBehaviour {
+        public class PlayerLevel : NetworkBehaviour {
 
         public int level = 1;
         public int experience = 0;
 
-        public Text text;
         public Slider slider;
 
         public PlayerPerks perks;
+        Text text;
 
-        // Use this for initialization
         void Start () {
             perks = GetComponent<PlayerPerks>();
+            var lvlText = GameObject.Find("LevelText");
+            text = lvlText.GetComponent<Text>();
         }
         
         // Update is called once per frame
         void Update () {
+            if (isServer) return;
+
             text.text = "Level: " + level;
             slider.maxValue = level;
             slider.value = experience;
