@@ -7,17 +7,18 @@ public class CameraFollow : NetworkBehaviour
 
     Vector3 offset;
     Transform cameraTransform;
+    Vector3 cameraOffset = new Vector3(1, 15, -22);
 
     void Start()
     {
         cameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform;
-        offset = cameraTransform.position - transform.position;
+        offset = cameraOffset - transform.position;
     }
 
     void FixedUpdate()
     {
         if (!isLocalPlayer) return;
         Vector3 targetCamPos = transform.position + offset;
-        cameraTransform.position = Vector3.Lerp(transform.position, targetCamPos, smoothing * Time.deltaTime);
+        cameraTransform.position = Vector3.Lerp(cameraTransform.position, targetCamPos, smoothing * Time.deltaTime);
     }
 }
