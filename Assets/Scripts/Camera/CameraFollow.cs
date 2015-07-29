@@ -15,7 +15,7 @@ public class CameraFollow : NetworkBehaviour
         offset = cameraOffset - transform.position;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (!isLocalPlayer) return;
         Vector3 targetCamPos = transform.position + offset;

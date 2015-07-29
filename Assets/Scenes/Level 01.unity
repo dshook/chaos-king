@@ -11516,7 +11516,7 @@ Prefab:
       objectReference: {fileID: 1438015830}
     - target: {fileID: 11429070, guid: 87732e775cc16a8449cdacbf285dbd8b, type: 2}
       propertyPath: m_LogLevel
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 11429070, guid: 87732e775cc16a8449cdacbf285dbd8b, type: 2}
       propertyPath: m_SendPeerInfo
