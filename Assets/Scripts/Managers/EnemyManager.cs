@@ -18,7 +18,9 @@ public class EnemyManager : NetworkBehaviour
     void Spawn ()
     {
         int spawnPointIndex = Random.Range (0, spawnPoints.Length);
+        var newEnemy = (GameObject)Instantiate(enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+        newEnemy.transform.parent = gameObject.transform;
 
-        NetworkServer.Spawn((GameObject)Instantiate (enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation));
+        NetworkServer.Spawn(newEnemy);
     }
 }

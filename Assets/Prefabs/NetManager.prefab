@@ -87,6 +87,7 @@ MonoBehaviour:
   matchMaker: {fileID: 0}
   matchName: default
   matchSize: 4
+  LevelUI: {fileID: 0}
 --- !u!114 &11441390
 MonoBehaviour:
   m_ObjectHideFlags: 1

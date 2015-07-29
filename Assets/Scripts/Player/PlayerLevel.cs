@@ -9,26 +9,12 @@ namespace Player
         public int level = 1;
         public int experience = 0;
 
-        public Slider slider;
-
         public PlayerPerks perks;
-        Text text;
 
         void Start () {
             perks = GetComponent<PlayerPerks>();
-            var lvlText = GameObject.Find("LevelText");
-            text = lvlText.GetComponent<Text>();
         }
         
-        // Update is called once per frame
-        void Update () {
-            if (isServer) return;
-
-            text.text = "Level: " + level;
-            slider.maxValue = level;
-            slider.value = experience;
-        }
-
         public void GetExperience(int amount) {
             experience += amount;
             FloatingTextManager.PlayerXp(amount, transform.position);
