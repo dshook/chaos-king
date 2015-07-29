@@ -1217,8 +1217,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TransformSyncMode: 3
   m_SendInterval: .0833333358
-  m_SyncRotationAxis: 7
-  m_RotationSyncCompression: 0
+  m_SyncRotationAxis: 2
+  m_RotationSyncCompression: 1
   m_SyncSpin: 0
   m_MovementTheshold: 9.99999975e-05
   m_SnapThreshold: 50
@@ -1316,6 +1316,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
+  useHistoricalInterpolation: 0
 --- !u!114 &11495698
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2540,6 +2541,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Constraints
       value: 84
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_RotationSyncCompression
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -8,6 +8,9 @@ namespace Player
     {
         public float speed = 6f;
 
+        [SyncVar]
+        private bool isMoving = false;
+
         Vector3 movement;
         Animator anim;
         Rigidbody playerRigidbody;
@@ -25,6 +28,7 @@ namespace Player
         [ClientCallback]
         void Update()
         {
+            Animating();
             if (!isLocalPlayer) return;
 
             var h = CrossPlatformInputManager.GetAxisRaw ("Horizontal");
@@ -34,8 +38,17 @@ namespace Player
             {
                 CmdMove(h, v);
             }
+            else
+            {
+                CmdStopMoving();
+            }
             Turning ();
-            Animating(h, v);
+        }
+
+        [Command]
+        void CmdStopMoving()
+        {
+            isMoving = false;
         }
 
         [Command]
@@ -43,6 +56,7 @@ namespace Player
         {
             movement.Set (h, 0f, v);
             movement = movement.normalized * speed * Time.deltaTime;
+            isMoving = true;
 
             playerRigidbody.MovePosition (transform.position + movement);
         }
@@ -71,9 +85,8 @@ namespace Player
             playerRigidbody.MoveRotation(newRotation);
         }
 
-        void Animating(float h, float v){
-            bool walking = h != 0f || v != 0f;
-            anim.SetBool ("IsWalking", walking);
+        void Animating(){
+            anim.SetBool ("IsWalking", isMoving);
         }
     }
 }
