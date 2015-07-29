@@ -14,8 +14,8 @@ namespace Player
         public int extraEnemiesPierced = 0;
         public int ammoBoost = 0;
 
-        public Slider ammoSlider;
-        public Text ammoText;
+        public int maxAmmo = 10;
+        public int currentAmmo = 0;
 
         public int shootableMask;
 
@@ -29,10 +29,6 @@ namespace Player
         {
             shootableMask = LayerMask.GetMask("Shootable");
             gun = GetComponentInChildren<IShoot>();
-
-            var ammoUI = GameObject.Find("AmmoUI");
-            ammoSlider = ammoUI.GetComponentInChildren<Slider>();
-            ammoText = ammoUI.GetComponentInChildren<Text>();
 
             gun.Enable(this);
         }

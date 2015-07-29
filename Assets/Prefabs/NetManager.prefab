@@ -44,7 +44,7 @@ MonoBehaviour:
   m_NetworkAddress: localhost
   m_DontDestroyOnLoad: 1
   m_RunInBackground: 1
-  m_SendPeerInfo: 0
+  m_SendPeerInfo: 1
   m_MaxDelay: .00999999978
   m_LogLevel: 2
   m_PlayerPrefab: {fileID: 162382, guid: 14a4acc8babab324b9f99c13dc1624db, type: 2}
@@ -88,6 +88,7 @@ MonoBehaviour:
   matchName: default
   matchSize: 4
   LevelUI: {fileID: 0}
+  AmmoUI: {fileID: 0}
 --- !u!114 &11441390
 MonoBehaviour:
   m_ObjectHideFlags: 1

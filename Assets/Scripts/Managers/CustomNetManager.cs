@@ -5,6 +5,7 @@ using UI;
 public class CustomNetManager : NetworkManager
 {
     public GameObject LevelUI;
+    public GameObject AmmoUI;
 
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
     {
@@ -13,6 +14,13 @@ public class CustomNetManager : NetworkManager
         GameObject player = (GameObject)Instantiate(base.playerPrefab, spawnPos, Quaternion.identity);
         SetupUI(player);
         NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
+    }
+
+    public override void OnServerRemovePlayer(NetworkConnection conn, PlayerController player)
+    {
+        base.OnServerRemovePlayer(conn, player);
+
+        SetupUI(null);
     }
 
     public void StartGame()
@@ -27,8 +35,16 @@ public class CustomNetManager : NetworkManager
 
     void SetupUI(GameObject player)
     {
+        if (LevelUI == null)
+        {
+            Debug.LogError("Couldn't set up UI with null objects");
+            return;
+        }
         var levelUIComponent = LevelUI.GetComponent<LevelUI>();
         levelUIComponent.player = player;
+
+        var ammoUIComponent = AmmoUI.GetComponent<AmmoUI>();
+        ammoUIComponent.player = player;
     }
 }
 

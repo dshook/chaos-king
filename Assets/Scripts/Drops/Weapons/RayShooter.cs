@@ -15,9 +15,16 @@ namespace Weapons
         public int enemiesPierced = 0;
         public int shotFired = 1;
         public int spreadAngle = 0;
-        public int maxAmmo = 10;
-        public int currentAmmo = 0;
         public float reloadSpeed = 1.5f;
+
+        public int maxAmmo {
+            get { return playerShooting.maxAmmo;  }
+            set { playerShooting.maxAmmo = value; }
+        }
+        public int currentAmmo {
+            get { return playerShooting.currentAmmo;  }
+            set { playerShooting.currentAmmo = value; }
+        }
 
         public Material gunLineMaterial;
         public PlayerShooting playerShooting;
@@ -58,7 +65,6 @@ namespace Weapons
         {
             playerShooting = ps;
             currentAmmo = maxAmmo;
-            UpdateAmmoUI();
             enabled = true;
         }
 
@@ -69,7 +75,6 @@ namespace Weapons
             if (reloading == true && shootTimer >= (reloadSpeed * playerShooting.reloadSpeedMultiplier))
             {
                 currentAmmo = maxAmmo + playerShooting.ammoBoost;
-                UpdateAmmoUI();
                 reloading = false;
                 shootTimer = 0f;
             }
@@ -91,7 +96,6 @@ namespace Weapons
                         FireWeapon(Random.Range(-spreadAngle, spreadAngle), p);
                     }
                     currentAmmo--;
-                    UpdateAmmoUI();
                 }
                 else
                 {
@@ -149,14 +153,6 @@ namespace Weapons
                     break;
                 }
             }
-        }
-
-        void UpdateAmmoUI()
-        {
-            //TODO: cleanup usages into properties
-            playerShooting.ammoSlider.maxValue = maxAmmo + playerShooting.ammoBoost;
-            playerShooting.ammoSlider.value = currentAmmo;
-            playerShooting.ammoText.text = string.Format("{0}/{1}", currentAmmo, maxAmmo + playerShooting.ammoBoost);
         }
 
         GameObject createLine()
