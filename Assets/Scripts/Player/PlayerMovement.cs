@@ -1,15 +1,17 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 using UnityStandardAssets.CrossPlatformInput;
 
 namespace Player
 {
-    public class PlayerMovement : MonoBehaviour
+    public class PlayerMovement : NetworkBehaviour
     {
         public float speed = 6f;
 
         Vector3 movement;
         Animator anim;
         Rigidbody playerRigidbody;
+        Quaternion oldRotation = Quaternion.identity;
         int floorMask;
         float camRayLength = 100f;
 
@@ -20,17 +22,24 @@ namespace Player
             playerRigidbody = GetComponent<Rigidbody> ();
         }
 
-        void FixedUpdate()
+        [ClientCallback]
+        void Update()
         {
+            if (!isLocalPlayer) return;
+
             var h = CrossPlatformInputManager.GetAxisRaw ("Horizontal");
             var v = CrossPlatformInputManager.GetAxisRaw ("Vertical");
 
-            Move (h, v);
+            if (h != 0f || v != 0f)
+            {
+                CmdMove(h, v);
+            }
             Turning ();
-            Animating (h, v);
+            Animating(h, v);
         }
 
-        void Move(float h, float v)
+        [Command]
+        void CmdMove(float h, float v)
         {
             movement.Set (h, 0f, v);
             movement = movement.normalized * speed * Time.deltaTime;
@@ -48,8 +57,18 @@ namespace Player
                 playerToMouse.y = 0f;
 
                 Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
-                playerRigidbody.MoveRotation(newRotation);
+                if (newRotation != oldRotation)
+                {
+                    CmdTurning(newRotation);
+                }
+                oldRotation = newRotation;
             }
+        }
+
+        [Command]
+        void CmdTurning(Quaternion newRotation)
+        {
+            playerRigidbody.MoveRotation(newRotation);
         }
 
         void Animating(float h, float v){

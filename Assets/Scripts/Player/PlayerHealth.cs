@@ -1,20 +1,22 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
+using UnityEngine.Networking;
 
 namespace Player
 {
-    public class PlayerHealth : MonoBehaviour
+    public class PlayerHealth : NetworkBehaviour
     {
         public int maxHealth = 10;
+
+        [SyncVar]
         public int currentHealth;
-        public Slider healthSlider;
-        public Image damageImage;
         public AudioClip deathClip;
         public float flashSpeed = 5f;
         public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
 
 
+        Slider healthSlider;
+        Image damageImage;
         Animator anim;
         AudioSource playerAudio;
         PlayerMovement playerMovement;
@@ -28,8 +30,12 @@ namespace Player
             anim = GetComponent <Animator> ();
             playerAudio = GetComponent <AudioSource> ();
             playerMovement = GetComponent <PlayerMovement> ();
-			playerWeapon = transform.FindChild("Weapon").gameObject;
+            playerWeapon = transform.FindChild("Weapon").gameObject;
             currentHealth = maxHealth;
+
+            var healthUI = GameObject.Find("HealthUI");
+            healthSlider = healthUI.GetComponentInChildren<Slider>();
+            damageImage = GameObject.Find("DamageImage").GetComponent<Image>();
             
             UpdateHealthSlider();
         }
@@ -51,6 +57,8 @@ namespace Player
 
         public void TakeDamage (int amount)
         {
+            if (!isServer) return;
+
             damaged = true;
 
             currentHealth -= amount;

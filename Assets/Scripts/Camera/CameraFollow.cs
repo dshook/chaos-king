@@ -1,20 +1,24 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.Networking;
 
-public class CameraFollow : MonoBehaviour {
-	public Transform target;
-	public float smoothing = 5f;
-	
-	Vector3 offset;
-	
-	void Start()
-	{
-		offset = transform.position - target.position;
-	}
-	
-	void FixedUpdate()
-	{
-		Vector3 targetCamPos = target.position + offset;
-		transform.position = Vector3.Lerp (transform.position, targetCamPos, smoothing * Time.deltaTime);
-	}
+public class CameraFollow : NetworkBehaviour
+{
+    public float smoothing = 5f;
+
+    Vector3 offset;
+    Transform cameraTransform;
+    Vector3 cameraOffset = new Vector3(1, 15, -22);
+
+    void Start()
+    {
+        cameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform;
+        offset = cameraOffset - transform.position;
+    }
+
+    void Update()
+    {
+        if (!isLocalPlayer) return;
+        Vector3 targetCamPos = transform.position + offset;
+        cameraTransform.position = Vector3.Lerp(cameraTransform.position, targetCamPos, smoothing * Time.deltaTime);
+    }
 }

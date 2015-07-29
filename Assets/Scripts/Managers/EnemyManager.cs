@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 using Player;
+using UnityEngine.Networking;
 
-public class EnemyManager : MonoBehaviour
+public class EnemyManager : NetworkBehaviour
 {
-    public PlayerHealth playerHealth;
     public GameObject enemy;
     public float spawnTime = 3f;
     public Transform[] spawnPoints;
 
 
-    void Start ()
+    public override void OnStartServer ()
     {
         InvokeRepeating ("Spawn", spawnTime, spawnTime);
     }
@@ -17,13 +17,10 @@ public class EnemyManager : MonoBehaviour
 
     void Spawn ()
     {
-        if(playerHealth.currentHealth <= 0f)
-        {
-            return;
-        }
-
         int spawnPointIndex = Random.Range (0, spawnPoints.Length);
+        var newEnemy = (GameObject)Instantiate(enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+        newEnemy.transform.parent = gameObject.transform;
 
-        Instantiate (enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+        NetworkServer.Spawn(newEnemy);
     }
 }
