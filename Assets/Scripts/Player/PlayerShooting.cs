@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 using UnityStandardAssets.CrossPlatformInput;
 
 namespace Player
 {
-    public class PlayerShooting : MonoBehaviour
+    public class PlayerShooting : NetworkBehaviour
     {
         public float damageMultiplier = 1;
         public float attackSpeedMultiplier = 1;
@@ -39,6 +40,8 @@ namespace Player
 
         void Update()
         {
+            if (!isLocalPlayer) return;
+
             if (CrossPlatformInputManager.GetButton("Fire1"))
             {
                 if (gun != null)

@@ -88,7 +88,7 @@ namespace Weapons
                 {
                     for (var p = 0; p < shotFired; p++)
                     {
-                        CmdFireWeapon(Random.Range(-spreadAngle, spreadAngle), p);
+                        FireWeapon(Random.Range(-spreadAngle, spreadAngle), p);
                     }
                     currentAmmo--;
                     UpdateAmmoUI();
@@ -112,8 +112,7 @@ namespace Weapons
             }
         }
 
-        [Command]
-        protected virtual void CmdFireWeapon(int angle, int shotIndex)
+        protected virtual void FireWeapon(int angle, int shotIndex)
         {
             shootTimer = 0f;
 

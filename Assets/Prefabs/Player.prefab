@@ -96,6 +96,9 @@ GameObject:
   - 108: {fileID: 10882906}
   - 199: {fileID: 19949012}
   - 198: {fileID: 19820344}
+  - 114: {fileID: 11405700}
+  - 114: {fileID: 11434574}
+  - 82: {fileID: 8296728}
   m_Layer: 0
   m_Name: GunTip
   m_TagString: Untagged
@@ -271,8 +274,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 408170}
-  - 114: {fileID: 11421378}
-  - 82: {fileID: 8279512}
   - 114: {fileID: 11495698}
   m_Layer: 0
   m_Name: Weapon
@@ -456,7 +457,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 162382}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 2.46696424, y: 1.19209318e-07, z: 1.5923245}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 467010}
@@ -1035,12 +1036,12 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
---- !u!82 &8279512
+--- !u!82 &8296728
 AudioSource:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 190420}
+  m_GameObject: {fileID: 135634}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
@@ -1153,6 +1154,38 @@ Light:
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
+--- !u!114 &11405700
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 135634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 20
+    i1: 164
+    i2: 172
+    i3: 200
+    i4: 186
+    i5: 186
+    i6: 179
+    i7: 36
+    i8: 185
+    i9: 249
+    i10: 156
+    i11: 19
+    i12: 220
+    i13: 22
+    i14: 36
+    i15: 219
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &11414878
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1167,28 +1200,6 @@ MonoBehaviour:
   level: 1
   experience: 0
   perks: {fileID: 0}
---- !u!114 &11421378
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 190420}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27c63be2a8918c741863160b9d9da122, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damagePerShot: 19
-  timeBetweenBullets: .5
-  range: 100
-  enemiesPierced: 5
-  shotFired: 5
-  spreadAngle: 20
-  maxAmmo: 8
-  currentAmmo: 0
-  reloadSpeed: .5
-  gunLineMaterial: {fileID: 2100000, guid: 007cd3dce0e6539409edcc484011c877, type: 2}
-  playerShooting: {fileID: 11434864}
 --- !u!114 &11423166
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1224,6 +1235,28 @@ MonoBehaviour:
   m_SnapThreshold: 50
   m_InterpolateRotation: 20
   m_InterpolateMovement: 1
+--- !u!114 &11434574
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 135634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27c63be2a8918c741863160b9d9da122, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damagePerShot: 19
+  timeBetweenBullets: .5
+  range: 100
+  enemiesPierced: 5
+  shotFired: 5
+  spreadAngle: 20
+  maxAmmo: 8
+  currentAmmo: 0
+  reloadSpeed: .5
+  gunLineMaterial: {fileID: 2100000, guid: 007cd3dce0e6539409edcc484011c877, type: 2}
+  playerShooting: {fileID: 11434864}
 --- !u!114 &11434864
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1316,7 +1349,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
-  useHistoricalInterpolation: 0
 --- !u!114 &11495698
 MonoBehaviour:
   m_ObjectHideFlags: 1

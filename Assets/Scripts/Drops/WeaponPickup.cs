@@ -27,7 +27,7 @@ public class WeaponPickup : MonoBehaviour
             weapon.transform.localRotation = Quaternion.identity;
 
             //activate players new weapon
-            var weaponShoot = weapon.GetComponent<IShoot>();
+            var weaponShoot = weapon.GetComponentInChildren<IShoot>();
             var playerShooting = player.GetComponent<PlayerShooting>();
             weaponShoot.Enable(playerShooting);
             playerShooting.SetGun(weaponShoot);

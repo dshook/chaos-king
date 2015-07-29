@@ -5,7 +5,7 @@ namespace Weapons
 {
     public class FlameThrowerV2Shooting : RayShooter, IShoot
     {
-        protected override void CmdFireWeapon(int angle, int shotIndex)
+        protected override void FireWeapon(int angle, int shotIndex)
         {
             shootTimer = 0f;
 

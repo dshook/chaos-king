@@ -45,8 +45,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 428364}
-  - 82: {fileID: 8281606}
-  - 114: {fileID: 11410368}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -65,6 +63,9 @@ GameObject:
   - 199: {fileID: 19987980}
   - 198: {fileID: 19880342}
   - 108: {fileID: 10815886}
+  - 114: {fileID: 11407802}
+  - 114: {fileID: 11429834}
+  - 82: {fileID: 8294418}
   m_Layer: 0
   m_Name: GunTip
   m_TagString: Untagged
@@ -392,12 +393,12 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!82 &8281606
+--- !u!82 &8294418
 AudioSource:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 141012}
+  m_GameObject: {fileID: 144984}
   m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
@@ -493,6 +494,38 @@ Light:
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
+--- !u!114 &11407802
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 144984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 130
+    i1: 250
+    i2: 157
+    i3: 162
+    i4: 22
+    i5: 123
+    i6: 85
+    i7: 148
+    i8: 89
+    i9: 105
+    i10: 63
+    i11: 144
+    i12: 104
+    i13: 85
+    i14: 226
+    i15: 41
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &11409774
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -506,12 +539,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 14.5200005
   bounceSpeed: 6
---- !u!114 &11410368
+--- !u!114 &11425960
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 141012}
+  m_GameObject: {fileID: 132224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31994c72c55a2154f8f3c49e4560f9c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  killTime: 10
+--- !u!114 &11429834
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 144984}
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 69199453c061acd4586fde427d5f7a2f, type: 3}
@@ -528,18 +573,6 @@ MonoBehaviour:
   reloadSpeed: .150000006
   gunLineMaterial: {fileID: 0}
   playerShooting: {fileID: 0}
---- !u!114 &11425960
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 132224}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31994c72c55a2154f8f3c49e4560f9c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  killTime: 10
 --- !u!114 &11488874
 MonoBehaviour:
   m_ObjectHideFlags: 1

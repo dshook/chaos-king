@@ -25,7 +25,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 423154}
-  - 114: {fileID: 11455108}
   m_Layer: 0
   m_Name: Mesh
   m_TagString: Untagged
@@ -61,6 +60,9 @@ GameObject:
   - 199: {fileID: 19937226}
   - 198: {fileID: 19828676}
   - 108: {fileID: 10812564}
+  - 114: {fileID: 11413508}
+  - 114: {fileID: 11464382}
+  - 82: {fileID: 8260850}
   m_Layer: 0
   m_Name: GunTip
   m_TagString: Untagged
@@ -110,8 +112,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 441798}
-  - 82: {fileID: 8208310}
-  - 114: {fileID: 11447012}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -759,12 +759,12 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: .379999995, y: .310000002, z: 1.25999999}
   m_Center: {x: -0, y: 0, z: 1}
---- !u!82 &8208310
+--- !u!82 &8260850
 AudioSource:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 166912}
+  m_GameObject: {fileID: 155786}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
@@ -860,6 +860,38 @@ Light:
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
+--- !u!114 &11413508
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 155786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 43
+    i1: 88
+    i2: 61
+    i3: 2
+    i4: 228
+    i5: 128
+    i6: 145
+    i7: 164
+    i8: 186
+    i9: 117
+    i10: 63
+    i11: 90
+    i12: 151
+    i13: 238
+    i14: 109
+    i15: 172
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &11422038
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -872,12 +904,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   killTime: 10
---- !u!114 &11447012
+--- !u!114 &11455874
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 166912}
+  m_GameObject: {fileID: 186040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d4683f0264b0ce4a8870219619b54c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 6
+  bounceSpeed: 6
+--- !u!114 &11464382
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 155786}
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1bc53485b8e32ff46b619104f3329457, type: 3}
@@ -894,30 +939,6 @@ MonoBehaviour:
   reloadSpeed: .800000012
   gunLineMaterial: {fileID: 2100000, guid: 007cd3dce0e6539409edcc484011c877, type: 2}
   playerShooting: {fileID: 0}
---- !u!114 &11455108
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 128890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &11455874
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 186040}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d4683f0264b0ce4a8870219619b54c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotationSpeed: 6
-  bounceSpeed: 6
 --- !u!114 &11498478
 MonoBehaviour:
   m_ObjectHideFlags: 1
