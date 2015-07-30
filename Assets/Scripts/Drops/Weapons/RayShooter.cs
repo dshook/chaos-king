@@ -38,7 +38,7 @@ namespace Weapons
         PlayerLevel playerLevel;
         AudioSource gunAudio;
         Light gunLight;
-        float effectsDisplayTime = 0.4f;
+        float effectsDisplayTime = 2.4f;
 
         GameObject[] gunLines;
 
@@ -96,6 +96,8 @@ namespace Weapons
                         FireWeapon(Random.Range(-spreadAngle, spreadAngle), p);
                     }
                     currentAmmo--;
+
+                    RpcPlayEffects(gunLines);
                 }
                 else
                 {
@@ -103,7 +105,6 @@ namespace Weapons
                 }
             }
         }
-
 
         public void DisableEffects()
         {
@@ -120,17 +121,9 @@ namespace Weapons
         {
             shootTimer = 0f;
 
-            gunAudio.Play();
-
-            gunLight.enabled = true;
-
-            gunParticles.Stop();
-            gunParticles.Play();
-
             var gunLineObject = gunLines[shotIndex];
             var gunLine = gunLineObject.GetComponent<LineRenderer>();
             gunLine.SetPosition(0, transform.position);
-            gunLine.enabled = true;
 
             shootRay.origin = transform.position;
             shootRay.direction = Quaternion.Euler(0, angle, 0) * transform.forward;
@@ -155,6 +148,23 @@ namespace Weapons
             }
         }
 
+        protected void RpcPlayEffects(GameObject[] gunLines)
+        {
+            gunAudio.Play();
+
+            gunLight.enabled = true;
+
+            gunParticles.Stop();
+            gunParticles.Play();
+
+            foreach (var gunLineObject in gunLines)
+            {
+                var gunLine = gunLineObject.GetComponent<LineRenderer>();
+                gunLine.enabled = true;
+            }
+
+        }
+
         GameObject createLine()
         {
             var emptyObject = new GameObject();
@@ -168,6 +178,8 @@ namespace Weapons
             gunLine.reflectionProbeUsage = UnityEngine.Rendering.ReflectionProbeUsage.BlendProbes;
             gunLine.SetWidth(0.05f, 0.05f);
             gunLine.useWorldSpace = true;
+
+            emptyObject.AddComponent<NetworkIdentity>();
 
             return emptyObject;
         }

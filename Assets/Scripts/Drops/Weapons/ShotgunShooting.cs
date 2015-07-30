@@ -15,7 +15,7 @@ namespace Weapons
             shotFired = 5;
             spreadAngle = 20;
             maxAmmo = 8;
-            currentAmmo = 0;
+            currentAmmo = 8;
             reloadSpeed = 0.5f;
         }
     }

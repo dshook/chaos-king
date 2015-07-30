@@ -21,6 +21,9 @@ namespace Player
 
         IShoot gun;
 
+        [SyncVar]
+        private bool isShooting = false;
+
         void Awake()
         {
         }
@@ -33,23 +36,41 @@ namespace Player
             gun.Enable(this);
         }
 
-
         void Update()
         {
-            if (!isLocalPlayer) return;
-
-            if (CrossPlatformInputManager.GetButton("Fire1"))
+            if (isLocalPlayer)
             {
-                if (gun != null)
+                if (CrossPlatformInputManager.GetButton("Fire1"))
                 {
-                    gun.Shoot();
+                    CmdStartShooting();
                 }
+                else
+                {
+                    CmdStopShooting();
+                }
+            }
+
+            if (gun != null && isShooting)
+            {
+                gun.Shoot();
             }
         }
 
         public void SetGun(IShoot gun)
         {
             this.gun = gun;
+        }
+
+        [Command]
+        public void CmdStartShooting()
+        {
+            isShooting = true;
+        }
+
+        [Command]
+        public void CmdStopShooting()
+        {
+            isShooting = false;
         }
     }
 }

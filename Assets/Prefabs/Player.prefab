@@ -173,7 +173,7 @@ GameObject:
   - 114: {fileID: 11460526}
   - 114: {fileID: 11414878}
   - 114: {fileID: 11423166}
-  - 114: {fileID: 11434864}
+  - 114: {fileID: 11402972}
   - 114: {fileID: 11458820}
   - 114: {fileID: 11431794}
   - 114: {fileID: 11455282}
@@ -1154,6 +1154,26 @@ Light:
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
+--- !u!114 &11402972
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81d3ad2a8358419468ea9bb41f8b2176, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageMultiplier: 1
+  attackSpeedMultiplier: 1
+  rangeMultiplier: 1
+  reloadSpeedMultiplier: 1
+  extraEnemiesPierced: 0
+  ammoBoost: 0
+  maxAmmo: 10
+  currentAmmo: 0
+  shootableMask: 0
 --- !u!114 &11405700
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1252,31 +1272,9 @@ MonoBehaviour:
   enemiesPierced: 5
   shotFired: 5
   spreadAngle: 20
-  maxAmmo: 8
-  currentAmmo: 0
   reloadSpeed: .5
   gunLineMaterial: {fileID: 2100000, guid: 007cd3dce0e6539409edcc484011c877, type: 2}
-  playerShooting: {fileID: 11434864}
---- !u!114 &11434864
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 162382}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81d3ad2a8358419468ea9bb41f8b2176, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageMultiplier: 1
-  attackSpeedMultiplier: 1
-  rangeMultiplier: 1
-  reloadSpeedMultiplier: 1
-  extraEnemiesPierced: 0
-  ammoBoost: 0
-  ammoSlider: {fileID: 0}
-  ammoText: {fileID: 0}
-  shootableMask: 0
+  playerShooting: {fileID: 0}
 --- !u!114 &11455282
 MonoBehaviour:
   m_ObjectHideFlags: 1
