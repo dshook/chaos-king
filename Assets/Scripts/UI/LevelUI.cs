@@ -12,7 +12,14 @@ namespace UI
             set
             {
                 _player = value;
-                playerLevel = _player.GetComponent<PlayerLevel>();
+                if (_player != null)
+                {
+                    playerLevel = _player.GetComponent<PlayerLevel>();
+                }
+                else
+                {
+                    playerLevel = null;
+                }
             }
         }
 

@@ -13,7 +13,14 @@ namespace UI
             set
             {
                 _player = value;
-                playerShooting = _player.GetComponent<PlayerShooting>();
+                if (_player != null)
+                {
+                    playerShooting = _player.GetComponent<PlayerShooting>();
+                }
+                else
+                {
+                    playerShooting = null;
+                }
             }
         }
 

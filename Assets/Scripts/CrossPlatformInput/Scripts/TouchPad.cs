@@ -32,7 +32,8 @@ namespace UnityStandardAssets.CrossPlatformInput
 		public float Xsensitivity = 1f;
 		public float Ysensitivity = 1f;
 
-		Vector3 m_StartPos;
+#pragma warning disable 0169
+        Vector3 m_StartPos;
 		Vector2 m_PreviousDelta;
 		Vector3 m_JoytickOutput;
 		bool m_UseX; // Toggle for using the x axis
@@ -43,12 +44,13 @@ namespace UnityStandardAssets.CrossPlatformInput
 		int m_Id = -1;
 		Vector2 m_PreviousTouchPos; // swipe style control touch
 
+#pragma warning restore 0169
 
 #if !UNITY_EDITOR
     private Vector3 m_Center;
     private Image m_Image;
 #else
-		Vector3 m_PreviousMouse;
+        Vector3 m_PreviousMouse;
 #endif
 
 		void OnEnable()

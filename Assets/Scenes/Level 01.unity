@@ -850,6 +850,80 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!1 &101404904
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 101404907}
+  - 114: {fileID: 101404906}
+  - 114: {fileID: 101404905}
+  m_Layer: 0
+  m_Name: GameSetup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &101404905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 101404904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b4a8c03f4d170f4986c47611e2b99b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelUI: {fileID: 1438015830}
+  AmmoUI: {fileID: 183037804}
+--- !u!114 &101404906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 101404904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 0
+    i1: 0
+    i2: 0
+    i3: 0
+    i4: 0
+    i5: 0
+    i6: 0
+    i7: 0
+    i8: 0
+    i9: 0
+    i10: 0
+    i11: 0
+    i12: 0
+    i13: 0
+    i14: 0
+    i15: 0
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
+--- !u!4 &101404907
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 101404904}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
 --- !u!1 &113199646
 GameObject:
   m_ObjectHideFlags: 0
@@ -10389,13 +10463,9 @@ Prefab:
       value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 11429070, guid: 87732e775cc16a8449cdacbf285dbd8b, type: 2}
-      propertyPath: LevelUI
+      propertyPath: gameSetup
       value: 
-      objectReference: {fileID: 1438015830}
-    - target: {fileID: 11429070, guid: 87732e775cc16a8449cdacbf285dbd8b, type: 2}
-      propertyPath: AmmoUI
-      value: 
-      objectReference: {fileID: 183037804}
+      objectReference: {fileID: 101404905}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 87732e775cc16a8449cdacbf285dbd8b, type: 2}
   m_IsPrefabParent: 0

@@ -38,7 +38,7 @@ namespace Weapons
         PlayerLevel playerLevel;
         AudioSource gunAudio;
         Light gunLight;
-        float effectsDisplayTime = 2.4f;
+        float effectsDisplayTime = 10.4f;
 
         GameObject[] gunLines;
 
