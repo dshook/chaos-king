@@ -1,10 +1,31 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 using Player;
 
 namespace Weapons
 {
     public class FlameThrowerV2Shooting : RayShooter, IShoot
     {
+
+        public override void Shoot()
+        {
+            if (shootTimer >= (timeBetweenBullets * playerShooting.attackSpeedMultiplier) && Time.timeScale != 0)
+            {
+                if (currentAmmo > 0)
+                {
+                    for (var p = 0; p < shotFired; p++)
+                    {
+                        FireWeapon(Random.Range(-spreadAngle, spreadAngle), p);
+                    }
+                    currentAmmo--;
+                }
+                else
+                {
+                    reloading = true;
+                }
+            }
+        }
+
         protected override void FireWeapon(int angle, int shotIndex)
         {
             shootTimer = 0f;
@@ -18,10 +39,16 @@ namespace Weapons
 
         void CreateFlame()
         {
-            GameObject projectile = Instantiate(Resources.Load("Projectiles/Flame"), transform.position, GameObject.FindGameObjectWithTag("Player").transform.rotation) as GameObject;
-            projectile.GetComponent<FlameProjectile>().damage = (Mathf.RoundToInt(damagePerShot * playerShooting.damageMultiplier));
-            projectile.GetComponent<FlameProjectile>().range = range * playerShooting.rangeMultiplier;
-            projectile.GetComponent<FlameProjectile>().canPierce = enemiesPierced + playerShooting.extraEnemiesPierced;
+            if (isServer)
+            {
+                GameObject projectile = Instantiate(Resources.Load("Projectiles/Flame"), transform.position, GameObject.FindGameObjectWithTag("Player").transform.rotation) as GameObject;
+                var flame = projectile.GetComponent<FlameProjectile>();
+                flame.damage = (Mathf.RoundToInt(damagePerShot * playerShooting.damageMultiplier));
+                flame.range = range * playerShooting.rangeMultiplier;
+                flame.canPierce = enemiesPierced + playerShooting.extraEnemiesPierced;
+                flame.playerLevel = playerLevel;
+                NetworkServer.Spawn(projectile);
+            }
         }
     }
 }

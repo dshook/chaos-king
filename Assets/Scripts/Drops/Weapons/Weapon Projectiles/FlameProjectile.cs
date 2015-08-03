@@ -1,20 +1,18 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.Networking;
 using Player;
 
-public class FlameProjectile : MonoBehaviour {
+public class FlameProjectile : NetworkBehaviour {
 
     public int damage = 0;
     public float speed = 10f;
     public float range = 1f;
+    public PlayerLevel playerLevel;
+
     float distanceTraveled = 0f;
     public int canPierce = 10;
     int enemiesPierced = 0;
-    GameObject player;
 
-	void Start () {
-        player = GameObject.FindGameObjectWithTag("Player");
-    }
 	
 	void Update () {
         if(enemiesPierced >= canPierce || distanceTraveled >= range)
@@ -36,7 +34,7 @@ public class FlameProjectile : MonoBehaviour {
             EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
             if (enemyHealth != null)
             {
-                enemyHealth.TakeDamage(damage, transform.position, player.GetComponent<PlayerLevel>());
+                enemyHealth.TakeDamage(damage, transform.position, playerLevel);
             }
             enemiesPierced++;
         }

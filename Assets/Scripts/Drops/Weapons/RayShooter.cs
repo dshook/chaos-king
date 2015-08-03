@@ -29,16 +29,16 @@ namespace Weapons
         public Material gunLineMaterial;
         public PlayerShooting playerShooting;
 
-        bool reloading = false;
+        protected bool reloading = false;
 
         protected float shootTimer;
-        Ray shootRay;
-        RaycastHit shootHit;
-        ParticleSystem gunParticles;
-        PlayerLevel playerLevel;
-        AudioSource gunAudio;
-        Light gunLight;
-        float effectsDisplayTime = 10.4f;
+        protected Ray shootRay;
+        protected RaycastHit shootHit;
+        protected ParticleSystem gunParticles;
+        protected PlayerLevel playerLevel;
+        protected AudioSource gunAudio;
+        protected Light gunLight;
+        protected float effectsDisplayTime = 10.4f;
 
         GameObject[] gunLines;
 
@@ -85,7 +85,7 @@ namespace Weapons
             }
         }
 
-        public void Shoot()
+        public virtual void Shoot()
         {
             if (shootTimer >= (timeBetweenBullets * playerShooting.attackSpeedMultiplier) && Time.timeScale != 0)
             {
