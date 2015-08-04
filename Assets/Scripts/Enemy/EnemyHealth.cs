@@ -15,73 +15,73 @@ public class EnemyHealth : NetworkBehaviour
     ParticleSystem hitParticles;
     CapsuleCollider capsuleCollider;
     KillExperience killExperience;
-	DropManager dropManager;
+    DropManager dropManager;
     bool isDead;
     bool isSinking;
 
 
-    void Awake ()
+    void Awake()
     {
-        anim = GetComponent <Animator> ();
-        enemyAudio = GetComponent <AudioSource> ();
-        hitParticles = GetComponentInChildren <ParticleSystem> ();
-        capsuleCollider = GetComponent <CapsuleCollider> ();
-        killExperience = GetComponent <KillExperience> ();
-		dropManager = GameObject.FindObjectOfType<DropManager> ();
+        anim = GetComponent<Animator>();
+        enemyAudio = GetComponent<AudioSource>();
+        hitParticles = GetComponentInChildren<ParticleSystem>();
+        capsuleCollider = GetComponent<CapsuleCollider>();
+        killExperience = GetComponent<KillExperience>();
+        dropManager = FindObjectOfType<DropManager>();
 
         currentHealth = startingHealth;
     }
 
 
-    void Update ()
+    void Update()
     {
-        if(isSinking)
+        if (isSinking)
         {
-            transform.Translate (-Vector3.up * sinkSpeed * Time.deltaTime);
+            transform.Translate(-Vector3.up * sinkSpeed * Time.deltaTime);
         }
     }
 
 
-    public void TakeDamage (int amount, Vector3 hitPoint, PlayerLevel player)
+    public void TakeDamage(int amount, Vector3 hitPoint, PlayerLevel player)
     {
-        if(isDead)
+        if (isDead)
             return;
 
         FloatingTextManager.EnemyDamage(amount, hitPoint);
-        enemyAudio.Play ();
+        enemyAudio.Play();
 
         currentHealth -= amount;
-            
+
         hitParticles.transform.position = hitPoint;
         hitParticles.Play();
 
-        if(currentHealth <= 0)
+        if (currentHealth <= 0)
         {
-            Death (player);
+            Death(player);
         }
     }
 
 
-    void Death (PlayerLevel player)
+    void Death(PlayerLevel player)
     {
         isDead = true;
 
         capsuleCollider.isTrigger = true;
 
-        anim.SetTrigger ("Dead");
+        anim.SetTrigger("Dead");
         enemyAudio.clip = deathClip;
-        enemyAudio.Play ();
+        enemyAudio.Play();
         killExperience.GiveExperience(player);
-		dropManager.SpawnDrop (this.transform);
+        dropManager.SpawnDrop(this.transform);
     }
 
 
-    public void StartSinking ()
+    public void StartSinking()
     {
-        GetComponent <NavMeshAgent> ().enabled = false;
-        GetComponent <Rigidbody> ().isKinematic = true;
+        GetComponent<NavMeshAgent>().enabled = false;
+        GetComponent<Rigidbody>().isKinematic = true;
         isSinking = true;
 
-        Destroy (gameObject, 2f);
+        Destroy(gameObject, 2f);
     }
 }

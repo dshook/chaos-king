@@ -302,6 +302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94f6618a0da65fa45b24d5105d5d8422, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aggroTime: 10
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -355,12 +356,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TransformSyncMode: 3
   m_SendInterval: .100000001
-  m_SyncRotationAxis: 7
-  m_RotationSyncCompression: 0
+  m_SyncRotationAxis: 2
+  m_RotationSyncCompression: 1
   m_SyncSpin: 0
   m_MovementTheshold: .00100000005
-  m_SnapThreshold: 5
-  m_InterpolateRotation: 1
+  m_SnapThreshold: 50
+  m_InterpolateRotation: 15
   m_InterpolateMovement: 1
 --- !u!114 &11463366
 MonoBehaviour:
@@ -463,7 +464,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_Radius: .300000012
-  m_Speed: 3.67000008
+  m_Speed: 1.66999996
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -2672,11 +2673,23 @@ Prefab:
       objectReference: {fileID: 8300000, guid: 62366b8d2c37a49dca550841c741317f, type: 3}
     - target: {fileID: 0}
       propertyPath: m_Speed
-      value: 4.86999989
+      value: 1.66999996
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_TagString
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_InterpolateRotation
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_RotationSyncCompression
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_SnapThreshold
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

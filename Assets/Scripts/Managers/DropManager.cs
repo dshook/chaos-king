@@ -1,15 +1,14 @@
 ﻿using UnityEngine;
-using Player;
+using UnityEngine.Networking;
 
-public class DropManager : MonoBehaviour
+public class DropManager : NetworkBehaviour
 {
-    public PlayerHealth playerHealth;
     public GameObject[] dropList;
     public float dropChance = 0.2f;
 
     public void SpawnDrop(Transform spawnPoint)
     {
-        if (playerHealth.currentHealth <= 0f || dropList.Length == 0)
+        if (dropList.Length == 0)
         {
             return;
         }
@@ -18,7 +17,8 @@ public class DropManager : MonoBehaviour
         {
             int dropIndex = Random.Range(0, dropList.Length);
 
-            Instantiate(dropList[dropIndex], spawnPoint.position, spawnPoint.rotation);
+            var obj = (GameObject)Instantiate(dropList[dropIndex], spawnPoint.position, spawnPoint.rotation);
+            NetworkServer.Spawn(obj);
         }
     }
 }
