@@ -2,13 +2,14 @@
 using System.Reflection;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityStandardAssets.CrossPlatformInput;
 using Assets.Utils;
 
 namespace Player {
-    public class PlayerPerks : MonoBehaviour {
+    public class PlayerPerks : NetworkBehaviour {
         public int availablePerks = 0;
         public int perkChoices = 3;
         public GameObject perkChoiceUI;
@@ -20,6 +21,7 @@ namespace Player {
         PerkChoiceContainer[] perkChoiceArray;
 
         void Start () {
+            HUDTransform = GameObject.Find("HUDCanvas").transform;
             playerObject = transform.gameObject;
             perkChoiceArray = new PerkChoiceContainer[perkChoices];
             for (var c = 0; c < perkChoices; c++) {
@@ -42,15 +44,15 @@ namespace Player {
                 {
                     if (CrossPlatformInputManager.GetButtonDown("Skill1"))
                     {
-                        AssignPerk(0);
+                        CmdAssignPerk(0);
                     }
                     if (CrossPlatformInputManager.GetButtonDown("Skill2"))
                     {
-                        AssignPerk(1);
+                        CmdAssignPerk(1);
                     }
                     if (CrossPlatformInputManager.GetButtonDown("Skill3"))
                     {
-                        AssignPerk(2);
+                        CmdAssignPerk(2);
                     }
                 }
                 else
@@ -113,13 +115,13 @@ namespace Player {
             //super hacky since there doesn't seem to be an easy way to get what button goes with what control
             switch (index) {
                 case 0:
-                    buttonText.text = "Z";
+                    buttonText.text = "1";
                     break;
                 case 1:
-                    buttonText.text = "X";
+                    buttonText.text = "2";
                     break;
                 case 2:
-                    buttonText.text = "C";
+                    buttonText.text = "3";
                     break;
             }
 
@@ -128,7 +130,8 @@ namespace Player {
             return newChoiceUI;
         }
 
-        void AssignPerk(int choice) {
+        [Command]
+        void CmdAssignPerk(int choice) {
             var perkChoice = perkChoiceArray[choice];
 
             perksApplied.Add(perkChoice.Perk.ApplyPerk(NextPerkLevel(perkChoice.Perk)));

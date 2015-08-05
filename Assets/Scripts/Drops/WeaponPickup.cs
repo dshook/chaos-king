@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 using Player;
 
-public class WeaponPickup : MonoBehaviour
+public class WeaponPickup : NetworkBehaviour
 {
     GameObject weapon;
 
@@ -14,10 +15,11 @@ public class WeaponPickup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            var player = other;
+            var player = other.gameObject;
+            Debug.Log("Weapon picked up on player " + player.GetComponent<NetworkIdentity>().netId);
             //store various weapon positions and rotations
             var playerWeapon = player.transform.FindChild("Weapon");
-            var playerWeaponPosition = playerWeapon.transform.position;
+            var playerWeaponPosition = player.transform.position;
 
             //destroy players current weapon and grab pickups weapon
             Destroy(playerWeapon.gameObject);
@@ -40,5 +42,15 @@ public class WeaponPickup : MonoBehaviour
             //destroy pickup
             Destroy(gameObject, 0.1f);
         }
+    }
+
+    [ClientRpc]
+    void RpcClientPickup(GameObject weapon, GameObject player)
+    {
+    }
+
+    [Command]
+    void CmdPickup(GameObject weapon, GameObject player)
+    {
     }
 }

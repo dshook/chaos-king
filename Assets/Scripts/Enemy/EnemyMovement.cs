@@ -29,23 +29,22 @@ public class EnemyMovement : NetworkBehaviour
 
     void Update ()
     {
-        if (isServer)
-        {
-            playerTimer += Time.deltaTime;
-            if (playerTransform == null || playerTimer > aggroTime)
-            {
-                playerTimer = 0;
-                FindClosestPlayer();
-            }
+        if (!isServer) return;
 
-            if (enemyHealth.currentHealth > 0 && playerHealth != null && playerHealth.currentHealth > 0)
-            {
-                nav.SetDestination(playerTransform.position);
-            }
-            else
-            {
-                nav.enabled = false;
-            }
+        playerTimer += Time.deltaTime;
+        if (playerTransform == null || playerTimer > aggroTime)
+        {
+            playerTimer = 0;
+            FindClosestPlayer();
+        }
+
+        if (enemyHealth.currentHealth > 0 && playerHealth != null && playerHealth.currentHealth > 0)
+        {
+            nav.SetDestination(playerTransform.position);
+        }
+        else
+        {
+            nav.enabled = false;
         }
     }
 

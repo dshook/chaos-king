@@ -2,7 +2,8 @@
 using UnityEngine.Networking;
 using Player;
 
-public class FlameProjectile : NetworkBehaviour {
+public class FlameProjectile : NetworkBehaviour
+{
 
     public int damage = 0;
     public float speed = 10f;
@@ -13,9 +14,12 @@ public class FlameProjectile : NetworkBehaviour {
     public int canPierce = 10;
     int enemiesPierced = 0;
 
-	
-	void Update () {
-        if(enemiesPierced >= canPierce || distanceTraveled >= range)
+
+    void Update()
+    {
+        if (!isServer) return;
+
+        if (enemiesPierced >= canPierce || distanceTraveled >= range)
         {
             Destroy(gameObject);
         }

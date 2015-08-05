@@ -1219,7 +1219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 1
   experience: 0
-  perks: {fileID: 0}
+  perks: {fileID: 11423166}
 --- !u!114 &11423166
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2576,6 +2576,10 @@ Prefab:
       propertyPath: m_RotationSyncCompression
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: perks
+      value: 
+      objectReference: {fileID: 11423166}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 162382}
