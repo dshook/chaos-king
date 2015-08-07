@@ -32,7 +32,6 @@ namespace UnityStandardAssets.CrossPlatformInput
 		public float Xsensitivity = 1f;
 		public float Ysensitivity = 1f;
 
-#pragma warning disable 0169
         Vector3 m_StartPos;
 		Vector2 m_PreviousDelta;
 		Vector3 m_JoytickOutput;
@@ -43,8 +42,6 @@ namespace UnityStandardAssets.CrossPlatformInput
 		bool m_Dragging;
 		int m_Id = -1;
 		Vector2 m_PreviousTouchPos; // swipe style control touch
-
-#pragma warning restore 0169
 
 #if !UNITY_EDITOR
     private Vector3 m_Center;

@@ -16,32 +16,34 @@ public class WeaponPickup : NetworkBehaviour
         if (other.CompareTag("Player"))
         {
             var player = other.gameObject;
-            Debug.Log("Weapon picked up on player " + player.GetComponent<NetworkIdentity>().netId);
-            //store various weapon positions and rotations
-            var playerWeapon = player.transform.FindChild("Weapon");
-            var playerWeaponPosition = player.transform.position;
-
-            //destroy players current weapon and grab pickups weapon
-            Destroy(playerWeapon.gameObject);
-            weapon.transform.parent = player.transform;
-
-            weapon.transform.position = playerWeaponPosition;
-            weapon.transform.localRotation = Quaternion.identity;
-
-            //activate players new weapon
-            var weaponShoot = weapon.GetComponentInChildren<IShoot>();
-            var playerShooting = player.GetComponent<PlayerShooting>();
-            weaponShoot.Enable(playerShooting);
-            playerShooting.SetGun(weaponShoot);
-
-            weapon.SetActive(true);
-
-            var killTimer = weapon.GetComponent<KillTimer>();
-            Destroy(killTimer);
-
-            //destroy pickup
-            Destroy(gameObject, 0.1f);
+            PickupWeapon(player);
         }
+    }
+
+    public void PickupWeapon(GameObject player)
+    {
+        Debug.Log("Weapon picked up on player " + player.GetComponent<NetworkIdentity>().netId);
+        //store various weapon positions and rotations
+        var playerWeapon = player.transform.FindChild("Weapon");
+
+        weapon.transform.position = playerWeapon.transform.position;
+
+        //destroy players current weapon and grab pickups weapon
+        weapon.transform.parent = player.transform;
+
+        weapon.transform.localRotation = Quaternion.identity;
+
+        //activate players new weapon
+        var weaponShoot = weapon.GetComponentInChildren<IShoot>();
+        var playerShooting = player.GetComponent<PlayerShooting>();
+        weaponShoot.Enable(playerShooting);
+        playerShooting.SetGun(weaponShoot);
+
+        weapon.SetActive(true);
+
+        //destroy pickup
+        //Destroy(gameObject, 0.1f);
+        Destroy(playerWeapon.gameObject, 0.1f);
     }
 
     [ClientRpc]

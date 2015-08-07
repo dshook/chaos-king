@@ -176,6 +176,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 467252}
+  - 114: {fileID: 11422372}
+  - 114: {fileID: 11443008}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -266,8 +268,6 @@ GameObject:
   - 108: {fileID: 10839500}
   - 198: {fileID: 19868572}
   - 199: {fileID: 19986518}
-  - 114: {fileID: 11401784}
-  - 114: {fileID: 11461688}
   - 82: {fileID: 8291370}
   m_Layer: 0
   m_Name: GunTip
@@ -1044,12 +1044,12 @@ Light:
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
---- !u!114 &11401784
+--- !u!114 &11422372
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 195478}
+  m_GameObject: {fileID: 166936}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
@@ -1087,6 +1087,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1926343d3d27ab4d8df56bb2598ddd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11443008
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 166936}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8c4389fc3e2d9847a9a595397eb4139, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damagePerShot: 1
+  timeBetweenBullets: .5
+  range: 100
+  enemiesPierced: 0
+  shotFired: 1
+  spreadAngle: 0
+  reloadSpeed: 1.5
+  gunLinePrefab: {fileID: 156662, guid: dc98ba281f3e54e488810a444298a3ee, type: 2}
+  gunLineMaterial: {fileID: 2100000, guid: 007cd3dce0e6539409edcc484011c877, type: 2}
+  playerShooting: {fileID: 0}
 --- !u!114 &11446298
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1100,26 +1121,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 14.5200005
   bounceSpeed: 6
---- !u!114 &11461688
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 195478}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8c4389fc3e2d9847a9a595397eb4139, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damagePerShot: 1
-  timeBetweenBullets: .5
-  range: 100
-  enemiesPierced: 0
-  shotFired: 1
-  spreadAngle: 0
-  reloadSpeed: 1.5
-  gunLineMaterial: {fileID: 2100000, guid: 007cd3dce0e6539409edcc484011c877, type: 2}
-  playerShooting: {fileID: 0}
 --- !u!114 &11483398
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1134,22 +1135,22 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 0
-    i1: 0
-    i2: 0
-    i3: 0
-    i4: 0
-    i5: 0
-    i6: 0
-    i7: 0
-    i8: 0
-    i9: 0
-    i10: 0
-    i11: 0
-    i12: 0
-    i13: 0
-    i14: 0
-    i15: 0
+    i0: 224
+    i1: 26
+    i2: 67
+    i3: 192
+    i4: 6
+    i5: 68
+    i6: 89
+    i7: 84
+    i8: 187
+    i9: 137
+    i10: 138
+    i11: 28
+    i12: 151
+    i13: 151
+    i14: 135
+    i15: 235
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
 --- !u!114 &11496614

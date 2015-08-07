@@ -26,6 +26,7 @@ namespace Weapons
             set { playerShooting.currentAmmo = value; }
         }
 
+        public GameObject gunLinePrefab;
         public Material gunLineMaterial;
         public PlayerShooting playerShooting;
 
@@ -38,8 +39,10 @@ namespace Weapons
         protected PlayerLevel playerLevel;
         protected AudioSource gunAudio;
         protected Light gunLight;
-        protected float effectsDisplayTime = 0.4f;
+        protected float effectsDisplayTime = 10.4f;
+        protected Transform gunTip;
 
+        private bool effectsShowing = false;
         GameObject[] gunLines;
 
 
@@ -51,14 +54,19 @@ namespace Weapons
         {
             gunLines = new GameObject[shotFired];
             gunParticles = GetComponentInChildren<ParticleSystem>();
-            gunAudio = GetComponent<AudioSource>();
+            gunAudio = GetComponentInChildren<AudioSource>();
             gunLight = GetComponentInChildren<Light>();
             playerLevel = GetComponentInParent<PlayerLevel>();
-            for (int i = 0; i < shotFired; i++)
-            {
-                gunLines[i] = createLine();
-            }
+            gunTip = transform.FindChild("GunTip").transform;
             currentAmmo = maxAmmo;
+
+            if (isServer)
+            {
+                for (int i = 0; i < shotFired; i++)
+                {
+                    gunLines[i] = createLine();
+                }
+            }
         }
 
         public void Enable(PlayerShooting ps)
@@ -79,9 +87,9 @@ namespace Weapons
                 shootTimer = 0f;
             }
 
-            if (shootTimer >= (timeBetweenBullets * playerShooting.attackSpeedMultiplier) * effectsDisplayTime)
+            if (effectsShowing && shootTimer >= (timeBetweenBullets * playerShooting.attackSpeedMultiplier) * effectsDisplayTime)
             {
-                DisableEffects();
+                RpcDisableEffects();
             }
         }
 
@@ -106,27 +114,16 @@ namespace Weapons
             }
         }
 
-        public void DisableEffects()
-        {
-            gunLight.enabled = false;
-
-            foreach (var line in gunLines)
-            {
-                var lineRenderer = line.GetComponent<LineRenderer>();
-                lineRenderer.enabled = false;
-            }
-        }
-
         protected virtual void FireWeapon(int angle, int shotIndex)
         {
             shootTimer = 0f;
 
             var gunLineObject = gunLines[shotIndex];
             var gunLine = gunLineObject.GetComponent<LineRenderer>();
-            gunLine.SetPosition(0, transform.position);
+            gunLine.SetPosition(0, gunTip.position);
 
-            shootRay.origin = transform.position;
-            shootRay.direction = Quaternion.Euler(0, angle, 0) * transform.forward;
+            shootRay.origin = gunTip.position;
+            shootRay.direction = Quaternion.Euler(0, angle, 0) * gunTip.forward;
 
             for (var p = 0; p <= (enemiesPierced + playerShooting.extraEnemiesPierced); p++)
             {
@@ -148,6 +145,7 @@ namespace Weapons
             }
         }
 
+        [ClientRpc]
         protected void RpcPlayEffects(GameObject[] gunLines)
         {
             gunAudio.Play();
@@ -162,26 +160,33 @@ namespace Weapons
                 var gunLine = gunLineObject.GetComponent<LineRenderer>();
                 gunLine.enabled = true;
             }
-
+            effectsShowing = true;
         }
+
+        [ClientRpc]
+        public void RpcDisableEffects()
+        {
+            gunLight.enabled = false;
+
+            foreach (var line in gunLines)
+            {
+                var lineRenderer = line.GetComponent<LineRenderer>();
+                lineRenderer.enabled = false;
+            }
+            effectsShowing = false;
+        }
+
 
         GameObject createLine()
         {
-            var emptyObject = new GameObject();
-            emptyObject.transform.parent = this.transform;
-            var gunLine = emptyObject.AddComponent<LineRenderer>();
-            gunLine.enabled = true;
-            gunLine.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
-            gunLine.receiveShadows = false;
-            gunLine.material = gunLineMaterial;
-            gunLine.useLightProbes = true;
-            gunLine.reflectionProbeUsage = UnityEngine.Rendering.ReflectionProbeUsage.BlendProbes;
-            gunLine.SetWidth(0.05f, 0.05f);
-            gunLine.useWorldSpace = true;
+            var newGunLine = Instantiate(gunLinePrefab);
+            newGunLine.transform.parent = gunTip.transform;
+            var renderer = newGunLine.GetComponent<LineRenderer>();
+            renderer.material = gunLineMaterial;
+            renderer.enabled = false;
+            NetworkServer.Spawn(newGunLine);
 
-            emptyObject.AddComponent<NetworkIdentity>();
-
-            return emptyObject;
+            return newGunLine;
         }
     }
 }

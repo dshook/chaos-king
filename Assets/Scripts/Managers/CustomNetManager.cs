@@ -13,6 +13,7 @@ public class CustomNetManager : NetworkManager
         GameObject player = (GameObject)Instantiate(base.playerPrefab, spawnPos, Quaternion.identity);
         NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
         gameSetup.RpcSetupUI(player);
+        gameSetup.GiveInitialWeapon(player);
     }
 
     public override void OnServerRemovePlayer(NetworkConnection conn, PlayerController player)

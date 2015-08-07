@@ -33,7 +33,10 @@ namespace Player
             shootableMask = LayerMask.GetMask("Shootable");
             gun = GetComponentInChildren<IShoot>();
 
-            gun.Enable(this);
+            if (gun != null)
+            {
+                gun.Enable(this);
+            }
         }
 
         void Update()
@@ -50,9 +53,12 @@ namespace Player
                 }
             }
 
-            if (gun != null && isShooting)
+            if (isServer)
             {
-                gun.Shoot();
+                if (gun != null && isShooting)
+                {
+                    gun.Shoot();
+                }
             }
         }
 

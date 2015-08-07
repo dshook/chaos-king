@@ -46,6 +46,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 428364}
+  - 114: {fileID: 11464688}
+  - 114: {fileID: 11433266}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -64,8 +66,6 @@ GameObject:
   - 199: {fileID: 19987980}
   - 198: {fileID: 19880342}
   - 108: {fileID: 10815886}
-  - 114: {fileID: 11407802}
-  - 114: {fileID: 11429834}
   - 82: {fileID: 8294418}
   m_Layer: 0
   m_Name: GunTip
@@ -185,7 +185,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 132224}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.150000006, y: .381999999, z: 3.1500001}
+  m_LocalPosition: {x: -6.9000001, y: .381999999, z: 3.1500001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 428364}
@@ -495,12 +495,58 @@ Light:
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
---- !u!114 &11407802
+--- !u!114 &11409774
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 144984}
+  m_GameObject: {fileID: 132224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d4683f0264b0ce4a8870219619b54c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 14.5200005
+  bounceSpeed: 6
+--- !u!114 &11425960
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 132224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31994c72c55a2154f8f3c49e4560f9c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  killTime: 100
+--- !u!114 &11433266
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 141012}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69199453c061acd4586fde427d5f7a2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damagePerShot: 10
+  timeBetweenBullets: .100000001
+  range: 5
+  enemiesPierced: 10
+  shotFired: 1
+  spreadAngle: 5
+  reloadSpeed: .150000006
+  gunLinePrefab: {fileID: 156662, guid: dc98ba281f3e54e488810a444298a3ee, type: 2}
+  gunLineMaterial: {fileID: 0}
+  playerShooting: {fileID: 0}
+--- !u!114 &11464688
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 141012}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
@@ -527,51 +573,6 @@ MonoBehaviour:
     i15: 41
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
---- !u!114 &11409774
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 132224}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d4683f0264b0ce4a8870219619b54c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotationSpeed: 14.5200005
-  bounceSpeed: 6
---- !u!114 &11425960
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 132224}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31994c72c55a2154f8f3c49e4560f9c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  killTime: 10
---- !u!114 &11429834
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 144984}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69199453c061acd4586fde427d5f7a2f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damagePerShot: 10
-  timeBetweenBullets: .100000001
-  range: 5
-  enemiesPierced: 10
-  shotFired: 1
-  spreadAngle: 5
-  reloadSpeed: .150000006
-  gunLineMaterial: {fileID: 0}
-  playerShooting: {fileID: 0}
 --- !u!114 &11488722
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -586,22 +587,22 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 0
-    i1: 0
-    i2: 0
-    i3: 0
-    i4: 0
-    i5: 0
-    i6: 0
-    i7: 0
-    i8: 0
-    i9: 0
-    i10: 0
-    i11: 0
-    i12: 0
-    i13: 0
-    i14: 0
-    i15: 0
+    i0: 130
+    i1: 250
+    i2: 157
+    i3: 162
+    i4: 22
+    i5: 123
+    i6: 85
+    i7: 148
+    i8: 89
+    i9: 105
+    i10: 63
+    i11: 144
+    i12: 104
+    i13: 85
+    i14: 226
+    i15: 41
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
 --- !u!114 &11488874

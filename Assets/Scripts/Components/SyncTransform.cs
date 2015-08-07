@@ -12,7 +12,8 @@ public class SyncTransform : NetworkBehaviour
     private Vector3 syncPos;
 
     [SerializeField]
-    Transform myTransform;
+    public Transform myTransform;
+
     [SerializeField]
     private bool useHistoricalLerping = false;
     [SerializeField]
