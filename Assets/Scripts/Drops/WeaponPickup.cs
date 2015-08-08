@@ -26,6 +26,8 @@ public class WeaponPickup : NetworkBehaviour
         //store various weapon positions and rotations
         var playerWeapon = player.transform.FindChild("Weapon");
 
+        if (!playerWeapon) return;
+
         weapon.transform.position = playerWeapon.transform.position;
 
         //destroy players current weapon and grab pickups weapon

@@ -71,6 +71,7 @@ namespace Weapons
 
         public void Enable(PlayerShooting ps)
         {
+            Debug.Log("Enable Player shooting " + ps.ToString());
             playerShooting = ps;
             currentAmmo = maxAmmo;
             enabled = true;
@@ -78,6 +79,8 @@ namespace Weapons
 
         void Update()
         {
+            if (!isServer) return;
+
             shootTimer += Time.deltaTime;
 
             if (reloading == true && shootTimer >= (reloadSpeed * playerShooting.reloadSpeedMultiplier))
@@ -119,8 +122,8 @@ namespace Weapons
             shootTimer = 0f;
 
             var gunLineObject = gunLines[shotIndex];
-            var gunLine = gunLineObject.GetComponent<LineRenderer>();
-            gunLine.SetPosition(0, gunTip.position);
+            var gunLine = gunLineObject.GetComponent<SyncLinePosition>();
+            gunLine.SetStart(gunTip.position);
 
             shootRay.origin = gunTip.position;
             shootRay.direction = Quaternion.Euler(0, angle, 0) * gunTip.forward;
@@ -134,12 +137,12 @@ namespace Weapons
                     {
                         enemyHealth.TakeDamage(Mathf.RoundToInt(damagePerShot * playerShooting.damageMultiplier), shootHit.point, playerLevel);
                     }
-                    gunLine.SetPosition(1, shootHit.point);
+                    gunLine.SetEnd(shootHit.point);
                     shootRay.origin = shootHit.point;
                 }
                 else
                 {
-                    gunLine.SetPosition(1, shootRay.origin + shootRay.direction * range * playerShooting.rangeMultiplier);
+                    gunLine.SetEnd(shootRay.origin + shootRay.direction * range * playerShooting.rangeMultiplier);
                     break;
                 }
             }
@@ -182,7 +185,6 @@ namespace Weapons
             var newGunLine = Instantiate(gunLinePrefab);
             newGunLine.transform.parent = gunTip.transform;
             var renderer = newGunLine.GetComponent<LineRenderer>();
-            renderer.material = gunLineMaterial;
             renderer.enabled = false;
             NetworkServer.Spawn(newGunLine);
 

@@ -36,23 +36,20 @@ public class GameSetup : NetworkBehaviour
     public void GiveInitialWeapon(GameObject player)
     {
         var startingWeapon = (GameObject)Instantiate(StartingWeaponPrefab, player.transform.position, Quaternion.identity);
-        startingWeapon.GetComponent<BoxCollider>().enabled = false;
-        var actualWeapon = startingWeapon.transform.FindChild("Weapon").gameObject;
-        NetworkServer.Spawn(actualWeapon);
+        NetworkServer.Spawn(startingWeapon);
 
-        RpcPickupInitialWeapon(actualWeapon, player);
-        Destroy(startingWeapon, 2.0f);
+        RpcPickupInitialWeapon(startingWeapon, player);
     }
 
     [ClientRpc]
     void RpcPickupInitialWeapon(GameObject weapon, GameObject player)
     {
+        Debug.Log("Client given initial weapon");
         var playerWeapon = player.transform.FindChild("Weapon");
-        weapon.transform.position = playerWeapon.transform.position;
 
-        //destroy players current weapon and grab pickups weapon
-        weapon.transform.parent = player.transform;
+        weapon.transform.parent = playerWeapon;
 
+        weapon.transform.localPosition = Vector3.zero;
         weapon.transform.localRotation = Quaternion.identity;
 
         //activate players new weapon
@@ -62,8 +59,6 @@ public class GameSetup : NetworkBehaviour
         playerShooting.SetGun(weaponShoot);
 
         weapon.SetActive(true);
-
-        Destroy(playerWeapon.gameObject);
     }
 
 }

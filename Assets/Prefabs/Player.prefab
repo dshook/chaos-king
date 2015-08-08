@@ -51,7 +51,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 408170}
-  - 114: {fileID: 11495698}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -339,38 +338,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
---- !u!114 &11495698
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 190420}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 20
-    i1: 164
-    i2: 172
-    i3: 200
-    i4: 186
-    i5: 186
-    i6: 179
-    i7: 36
-    i8: 185
-    i9: 249
-    i10: 156
-    i11: 19
-    i12: 220
-    i13: 22
-    i14: 36
-    i15: 219
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
 --- !u!136 &13600726
 CapsuleCollider:
   m_ObjectHideFlags: 1
