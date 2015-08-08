@@ -13,14 +13,19 @@ public class WeaponPickup : NetworkBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        if (!isServer) return;
         if (other.CompareTag("Player"))
         {
             var player = other.gameObject;
-            PickupWeapon(player);
+            RpcPickupWeapon(player);
+
+            //destroy pickup
+            Destroy(gameObject, 0.5f);
         }
     }
 
-    public void PickupWeapon(GameObject player)
+    [ClientRpc]
+    public void RpcPickupWeapon(GameObject player)
     {
         Debug.Log("Weapon picked up on player " + player.GetComponent<NetworkIdentity>().netId);
         //store various weapon positions and rotations
@@ -28,11 +33,9 @@ public class WeaponPickup : NetworkBehaviour
 
         if (!playerWeapon) return;
 
-        weapon.transform.position = playerWeapon.transform.position;
+        weapon.transform.parent = playerWeapon;
 
-        //destroy players current weapon and grab pickups weapon
-        weapon.transform.parent = player.transform;
-
+        weapon.transform.localPosition = Vector3.zero;
         weapon.transform.localRotation = Quaternion.identity;
 
         //activate players new weapon
@@ -42,19 +45,5 @@ public class WeaponPickup : NetworkBehaviour
         playerShooting.SetGun(weaponShoot);
 
         weapon.SetActive(true);
-
-        //destroy pickup
-        //Destroy(gameObject, 0.1f);
-        Destroy(playerWeapon.gameObject, 0.1f);
-    }
-
-    [ClientRpc]
-    void RpcClientPickup(GameObject weapon, GameObject player)
-    {
-    }
-
-    [Command]
-    void CmdPickup(GameObject weapon, GameObject player)
-    {
     }
 }

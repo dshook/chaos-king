@@ -8,8 +8,7 @@ public class CustomNetManager : NetworkManager
 
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
     {
-        //Vector3 spawnPos = Vector3.right * conn.connectionId;
-        var spawnPos = Vector3.zero;
+        Vector3 spawnPos = Vector3.right * conn.connectionId;
         GameObject player = (GameObject)Instantiate(base.playerPrefab, spawnPos, Quaternion.identity);
         NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
         gameSetup.RpcSetupUI(player);
