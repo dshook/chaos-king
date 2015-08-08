@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 using UnityEngine.Networking;
 using UI;
 using Util;
@@ -10,7 +11,6 @@ public class GameSetup : NetworkBehaviour
     public GameObject AmmoUI;
 
     public GameObject StartingWeaponPrefab;
-
 
     [ClientRpc]
     public void RpcSetupUI(GameObject player)
@@ -31,10 +31,22 @@ public class GameSetup : NetworkBehaviour
         {
             ammoUIComponent.player = player;
         }
+    }
 
-        var playerId = player.GetComponentInChildren<TextMesh>();
-        var networkId = player.GetComponent<NetworkIdentity>();
-        playerId.text = networkId.netId.ToString();
+    [ClientRpc]
+    public void RpcSetupPlayerIds()
+    {
+        var players = GameObject.FindGameObjectsWithTag("Player");
+        foreach (var player in players)
+        {
+            var playerTextMesh = player.GetComponentInChildren<TextMesh>();
+            var identity = player.GetComponent<NetworkIdentity>();
+            if (playerTextMesh != null && identity != null)
+            {
+                var networkId = identity.netId;
+                playerTextMesh.text = networkId.ToString();
+            }
+        }
     }
 
     public void GiveInitialWeapon(GameObject player)
@@ -48,7 +60,11 @@ public class GameSetup : NetworkBehaviour
     [ClientRpc]
     void RpcPickupInitialWeapon(GameObject weapon, GameObject player)
     {
-        Debug.Log("Client given initial weapon");
+        PickupWeapon(weapon, player);
+    }
+
+    static void PickupWeapon(GameObject weapon, GameObject player)
+    {
         var playerWeapon = player.transform.FindChild("Weapon");
 
         weapon.transform.parent = playerWeapon;
@@ -65,4 +81,41 @@ public class GameSetup : NetworkBehaviour
         weapon.SetActive(true);
     }
 
+    public class WeaponSetupMessage : MessageBase
+    {
+        public GameObject weapon;
+        public GameObject player;
+    }
+
+    /// <summary>
+    /// When a client joins they need to have all the existing players weapons set up so they
+    /// are in the right part of the hierarchy and pointers set up
+    /// </summary>
+    public void SyncPlayerWeapons(NetworkConnection newPlayerConnection, GameObject newPlayer)
+    {
+        var players = GameObject.FindGameObjectsWithTag("Player");
+        var alreadyConnectedPlayers = players.Where(x => x.gameObject != newPlayer);
+
+        foreach (var connectedPlayer in alreadyConnectedPlayers)
+        {
+            var weapon = connectedPlayer.transform.FindChild("Weapon").GetComponentInChildren<NetworkIdentity>().gameObject;
+
+            var weaponNet = weapon.GetComponent<NetworkIdentity>().netId;
+            var playerNet = connectedPlayer.GetComponent<NetworkIdentity>().netId;
+
+            var msg = new WeaponSetupMessage();
+            msg.weapon = weapon;
+            msg.player = connectedPlayer;
+
+            newPlayerConnection.Send(MessageTypes.SetupMessage, msg);
+        }
+    }
+
+
+    public static void OnSetupWeapon(NetworkMessage netMsg)
+    {
+        var msg = netMsg.ReadMessage<WeaponSetupMessage>();
+
+        PickupWeapon(msg.weapon, msg.player);
+    }
 }

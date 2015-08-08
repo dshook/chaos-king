@@ -70,7 +70,6 @@ namespace Weapons
 
         public void Enable(PlayerShooting ps)
         {
-            Debug.Log("Enable Player shooting " + ps.ToString());
             playerShooting = ps;
             currentAmmo = maxAmmo;
             enabled = true;

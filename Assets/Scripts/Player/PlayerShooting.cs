@@ -64,7 +64,6 @@ namespace Player
 
         public void SetGun(IShoot gun)
         {
-            Debug.Log("Set gun " + gun.ToString());
             this.gun = gun;
         }
 
