@@ -91,7 +91,7 @@ namespace Weapons
 
             if (effectsShowing && shootTimer >= (timeBetweenBullets * playerShooting.attackSpeedMultiplier) * effectsDisplayTime)
             {
-                RpcDisableEffects();
+                RpcDisableEffects(gunLines);
             }
         }
 
@@ -166,7 +166,7 @@ namespace Weapons
         }
 
         [ClientRpc]
-        public void RpcDisableEffects()
+        public void RpcDisableEffects(GameObject[] gunLines)
         {
             gunLight.enabled = false;
 

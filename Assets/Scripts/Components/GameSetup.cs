@@ -31,6 +31,10 @@ public class GameSetup : NetworkBehaviour
         {
             ammoUIComponent.player = player;
         }
+
+        var playerId = player.GetComponentInChildren<TextMesh>();
+        var networkId = player.GetComponent<NetworkIdentity>();
+        playerId.text = networkId.netId.ToString();
     }
 
     public void GiveInitialWeapon(GameObject player)

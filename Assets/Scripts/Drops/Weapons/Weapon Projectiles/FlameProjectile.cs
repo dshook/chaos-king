@@ -33,6 +33,8 @@ public class FlameProjectile : NetworkBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        if (!isServer) return;
+
         if (other.gameObject.tag == "Enemy")
         {
             EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();

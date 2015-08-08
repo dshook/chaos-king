@@ -34,21 +34,21 @@ namespace Weapons
             //gunAudio.Play();
             //gunLight.enabled = true;
 
-            CreateFlame();
+            if (isServer)
+            {
+                CreateFlame();
+            }
         }
 
         void CreateFlame()
         {
-            if (isServer)
-            {
-                GameObject projectile = Instantiate(Resources.Load("Projectiles/Flame"), transform.position, GameObject.FindGameObjectWithTag("Player").transform.rotation) as GameObject;
-                var flame = projectile.GetComponent<FlameProjectile>();
-                flame.damage = (Mathf.RoundToInt(damagePerShot * playerShooting.damageMultiplier));
-                flame.range = range * playerShooting.rangeMultiplier;
-                flame.canPierce = enemiesPierced + playerShooting.extraEnemiesPierced;
-                flame.playerLevel = playerLevel;
-                NetworkServer.Spawn(projectile);
-            }
+            GameObject projectile = Instantiate(Resources.Load("Projectiles/Flame"), transform.position, transform.rotation) as GameObject;
+            var flame = projectile.GetComponent<FlameProjectile>();
+            flame.damage = (Mathf.RoundToInt(damagePerShot * playerShooting.damageMultiplier));
+            flame.range = range * playerShooting.rangeMultiplier;
+            flame.canPierce = enemiesPierced + playerShooting.extraEnemiesPierced;
+            flame.playerLevel = playerLevel;
+            NetworkServer.Spawn(projectile);
         }
     }
 }
