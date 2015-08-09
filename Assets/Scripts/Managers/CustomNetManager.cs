@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Player;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -28,6 +29,7 @@ public class CustomNetManager : NetworkManager
         base.OnClientConnect(conn);
         client.RegisterHandler(MessageTypes.SetupWeapons, GameSetup.OnSetupWeapon);
         client.RegisterHandler(MessageTypes.SetupGameOver, GameSetup.OnSetupGameOver);
+        client.RegisterHandler(MessageTypes.GrantExperience, PlayerLevel.OnPlayerExperience);
     }
 
     public override void OnServerDisconnect(NetworkConnection conn)
