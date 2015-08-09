@@ -16,7 +16,7 @@ public class CustomNetManager : NetworkManager
         GameObject player = (GameObject)Instantiate(base.playerPrefab, spawnPoint.position, Quaternion.identity);
         NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
 
-        gameSetup.RpcSetupUI(player);
+        gameSetup.SendSetupUi(player);
         gameSetup.GiveInitialWeapon(player);
         gameSetup.SyncPlayerWeapons(conn, player);
         gameSetup.RpcSetupPlayerIds();
@@ -27,6 +27,7 @@ public class CustomNetManager : NetworkManager
     public override void OnClientConnect(NetworkConnection conn)
     {
         base.OnClientConnect(conn);
+        client.RegisterHandler(MessageTypes.SetupUi, GameSetup.OnSetupUi);
         client.RegisterHandler(MessageTypes.SetupWeapons, GameSetup.OnSetupWeapon);
         client.RegisterHandler(MessageTypes.SetupGameOver, GameSetup.OnSetupGameOver);
         client.RegisterHandler(MessageTypes.GrantExperience, PlayerLevel.OnPlayerExperience);
@@ -43,7 +44,6 @@ public class CustomNetManager : NetworkManager
     {
         base.OnServerRemovePlayer(conn, player);
 
-        gameSetup.RpcSetupUI(null);
     }
 
     public void StartGame()

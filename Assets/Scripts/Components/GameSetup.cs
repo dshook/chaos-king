@@ -12,8 +12,7 @@ public class GameSetup : NetworkBehaviour
 
     public GameObject StartingWeaponPrefab;
 
-    [ClientRpc]
-    public void RpcSetupUI(GameObject player)
+    public void SetupUI(GameObject player)
     {
         if (LevelUI == null)
         {
@@ -32,6 +31,25 @@ public class GameSetup : NetworkBehaviour
             ammoUIComponent.player = player;
         }
     }
+
+    public void SendSetupUi(GameObject player)
+    {
+        var msg = new PlayerMessage()
+        {
+            player = player
+        };
+        var connectionId = player.GetComponent<NetworkIdentity>().connectionToClient.connectionId;
+
+        NetworkServer.SendToClient(connectionId, MessageTypes.SetupUi, msg);
+    }
+
+    public static void OnSetupUi(NetworkMessage netMsg)
+    {
+        var msg = netMsg.ReadMessage<PlayerMessage>();
+        var gameSetup = GameObject.Find("GameSetup").GetComponent<GameSetup>();
+        gameSetup.SetupUI(msg.player);
+    }
+
 
     [ClientRpc]
     public void RpcSetupPlayerIds()
@@ -115,7 +133,7 @@ public class GameSetup : NetworkBehaviour
         var gameOver = newPlayer.GetComponent<GameOverManager>();
         gameOver.netManager = netManager;
 
-        var msg = new GameOverSetupMessage();
+        var msg = new PlayerMessage();
         msg.player = newPlayer;
 
         newConn.Send(MessageTypes.SetupGameOver, msg);
@@ -123,7 +141,7 @@ public class GameSetup : NetworkBehaviour
 
     public static void OnSetupGameOver(NetworkMessage netMsg)
     {
-        var msg = netMsg.ReadMessage<GameOverSetupMessage>();
+        var msg = netMsg.ReadMessage<PlayerMessage>();
 
         var gameOver = msg.player.GetComponent<GameOverManager>();
         gameOver.anim = GameObject.Find("HUDCanvas").GetComponent<Animator>();
@@ -135,7 +153,7 @@ public class GameSetup : NetworkBehaviour
         public GameObject player;
     }
 
-    public class GameOverSetupMessage : MessageBase
+    public class PlayerMessage : MessageBase
     {
         public GameObject player;
     }
