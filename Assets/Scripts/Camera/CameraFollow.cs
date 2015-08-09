@@ -5,14 +5,12 @@ public class CameraFollow : NetworkBehaviour
 {
     public float smoothing = 5f;
 
-    Vector3 offset;
     Transform cameraTransform;
-    Vector3 cameraOffset = new Vector3(1, 15, -22);
+    Vector3 offset = new Vector3(1, 15, -22);
 
     void Start()
     {
         cameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform;
-        offset = cameraOffset - transform.position;
     }
 
     void Update()

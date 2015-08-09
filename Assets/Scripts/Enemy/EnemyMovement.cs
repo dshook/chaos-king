@@ -42,10 +42,6 @@ public class EnemyMovement : NetworkBehaviour
         {
             nav.SetDestination(playerTransform.position);
         }
-        else
-        {
-            nav.enabled = false;
-        }
     }
 
     void FindClosestPlayer() {

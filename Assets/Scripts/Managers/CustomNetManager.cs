@@ -7,18 +7,20 @@ using Util;
 public class CustomNetManager : NetworkManager
 {
     public GameSetup gameSetup;
-
+    public Transform[] spawnPoints;
 
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
     {
-        Vector3 spawnPos = Vector3.right * conn.connectionId;
-        GameObject player = (GameObject)Instantiate(base.playerPrefab, spawnPos, Quaternion.identity);
+        var spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+        GameObject player = (GameObject)Instantiate(base.playerPrefab, spawnPoint.position, Quaternion.identity);
         NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
 
         gameSetup.RpcSetupUI(player);
         gameSetup.GiveInitialWeapon(player);
         gameSetup.SyncPlayerWeapons(conn, player);
         gameSetup.RpcSetupPlayerIds();
+        gameSetup.SetupGameOver(this, player);
+
     }
 
     public override void OnClientConnect(NetworkConnection conn)

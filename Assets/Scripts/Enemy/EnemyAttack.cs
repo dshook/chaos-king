@@ -14,6 +14,7 @@ public class EnemyAttack : NetworkBehaviour
     bool playerInRange;
     float timer;
 
+    bool playerDead = false;
 
     void Awake ()
     {
@@ -56,6 +57,13 @@ public class EnemyAttack : NetworkBehaviour
         if(playerHealth != null && playerHealth.currentHealth <= 0)
         {
             anim.SetTrigger ("PlayerDead");
+            playerDead = true;
+        }
+
+        if (playerDead && playerHealth == null)
+        {
+            playerDead = false;
+            anim.SetTrigger("PlayerLives");
         }
     }
 

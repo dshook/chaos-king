@@ -25,37 +25,37 @@ namespace Player
         bool damaged;
 
 
-        void Awake ()
+        void Awake()
         {
-            anim = GetComponent <Animator> ();
-            playerAudio = GetComponent <AudioSource> ();
-            playerMovement = GetComponent <PlayerMovement> ();
+            anim = GetComponent<Animator>();
+            playerAudio = GetComponent<AudioSource>();
+            playerMovement = GetComponent<PlayerMovement>();
             playerWeapon = transform.FindChild("Weapon").gameObject;
             currentHealth = maxHealth;
 
             var healthUI = GameObject.Find("HealthUI");
             healthSlider = healthUI.GetComponentInChildren<Slider>();
             damageImage = GameObject.Find("DamageImage").GetComponent<Image>();
-            
+
             UpdateHealthSlider();
         }
 
 
-        void Update ()
+        void Update()
         {
-            if(damaged)
+            if (damaged)
             {
                 damageImage.color = flashColour;
             }
             else
             {
-                damageImage.color = Color.Lerp (damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
+                damageImage.color = Color.Lerp(damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
             }
             damaged = false;
         }
 
 
-        public void TakeDamage (int amount)
+        public void TakeDamage(int amount)
         {
             if (!isServer) return;
 
@@ -67,11 +67,11 @@ namespace Player
 
             FloatingTextManager.PlayerDamage(amount, transform.position);
 
-            playerAudio.Play ();
+            playerAudio.Play();
 
-            if(currentHealth <= 0 && !isDead)
+            if (currentHealth <= 0 && !isDead)
             {
-                Death ();
+                Death();
             }
         }
 
@@ -89,26 +89,34 @@ namespace Player
         }
 
 
-        void Death ()
+        void Death()
         {
             isDead = true;
 
             //playerShooting.DisableEffects ();
 
-            anim.SetTrigger ("Die");
+            anim.SetTrigger("Die");
 
             playerAudio.clip = deathClip;
-            playerAudio.Play ();
+            playerAudio.Play();
 
-			playerMovement.enabled = false;
-			playerWeapon = transform.FindChild("Weapon").gameObject;
-			playerWeapon.SetActive (false);
+            playerMovement.enabled = false;
+            playerWeapon = transform.FindChild("Weapon").gameObject;
+            playerWeapon.SetActive(false);
         }
 
-
-        public void RestartLevel ()
+        //opposite of death of course
+        public void Live()
         {
-            Application.LoadLevel (Application.loadedLevel);
+            anim.SetTrigger("Live");
+
+            currentHealth = maxHealth;
+            playerMovement.enabled = true;
+            playerWeapon = transform.FindChild("Weapon").gameObject;
+            playerWeapon.SetActive(true);
+            
+            isDead = false;
+
         }
     }
 }

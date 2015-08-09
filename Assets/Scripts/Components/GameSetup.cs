@@ -100,9 +100,6 @@ public class GameSetup : NetworkBehaviour
         {
             var weapon = connectedPlayer.transform.FindChild("Weapon").GetComponentInChildren<NetworkIdentity>().gameObject;
 
-            var weaponNet = weapon.GetComponent<NetworkIdentity>().netId;
-            var playerNet = connectedPlayer.GetComponent<NetworkIdentity>().netId;
-
             var msg = new WeaponSetupMessage();
             msg.weapon = weapon;
             msg.player = connectedPlayer;
@@ -117,5 +114,19 @@ public class GameSetup : NetworkBehaviour
         var msg = netMsg.ReadMessage<WeaponSetupMessage>();
 
         PickupWeapon(msg.weapon, msg.player);
+    }
+
+    public void SetupGameOver(CustomNetManager netManager, GameObject newPlayer)
+    {
+        var gameOver = newPlayer.GetComponent<GameOverManager>();
+        gameOver.netManager = netManager;
+        RpcSetGameOverAnimator(newPlayer);
+    }
+
+    [ClientRpc]
+    public void RpcSetGameOverAnimator(GameObject newPlayer)
+    {
+        var gameOver = newPlayer.GetComponent<GameOverManager>();
+        gameOver.anim = GameObject.Find("HUDCanvas").GetComponent<Animator>();
     }
 }

@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: f1d84cc28597f5641a3d9cbc4df7e306
 ModelImporter:
-  serializedVersion: 16
+  serializedVersion: 18
   fileIDToRecycleName:
     100000: Ctrl_Grp
     100002: Gun
@@ -164,6 +164,10 @@ ModelImporter:
     bakeSimulation: 0
     optimizeGameObjects: 1
     motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
     animationCompression: 1
     animationRotationError: .5
     animationPositionError: .5
@@ -534,14 +538,7 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events:
-      - time: .997762918
-        functionName: RestartLevel
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
+      events: []
       transformMask:
       - path: 
         weight: 1
@@ -700,11 +697,13 @@ ModelImporter:
     generateSecondaryUV: 0
     useFileUnits: 1
     optimizeMeshForGPU: 1
+    keepQuads: 0
     weldVertices: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
+    useFileScale: 0
   tangentSpace:
     normalSmoothAngle: 180
     splitTangentsAcrossUV: 1
@@ -727,3 +726,5 @@ ModelImporter:
   animationType: 2
   additionalBone: 0
   userData: 
+  assetBundleName: 
+  assetBundleVariant: 

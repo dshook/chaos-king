@@ -8890,7 +8890,6 @@ GameObject:
   - 114: {fileID: 1261003182}
   - 225: {fileID: 1261003186}
   - 95: {fileID: 1261003187}
-  - 114: {fileID: 1261003188}
   m_Layer: 5
   m_Name: HUDCanvas
   m_TagString: UI
@@ -9004,19 +9003,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &1261003188
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1261003181}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9c9e0011c2ed97428a4efc03b455359, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerHealth: {fileID: 0}
-  restartDelay: 5
 --- !u!1 &1287868651
 GameObject:
   m_ObjectHideFlags: 0
@@ -10490,10 +10476,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 11429070, guid: 87732e775cc16a8449cdacbf285dbd8b, type: 2}
-      propertyPath: m_SpawnPrefabs.Array.size
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 472408, guid: 87732e775cc16a8449cdacbf285dbd8b, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -10530,34 +10512,14 @@ Prefab:
       propertyPath: gameSetup
       value: 
       objectReference: {fileID: 101404905}
-    - target: {fileID: 11429070, guid: 87732e775cc16a8449cdacbf285dbd8b, type: 2}
-      propertyPath: m_SpawnPrefabs.Array.data[3]
-      value: 
-      objectReference: {fileID: 184446, guid: 14c6678648debfe4e96c1def5b02749e, type: 2}
-    - target: {fileID: 11429070, guid: 87732e775cc16a8449cdacbf285dbd8b, type: 2}
-      propertyPath: m_SpawnPrefabs.Array.data[4]
-      value: 
-      objectReference: {fileID: 127036, guid: 54594f5b413d1c243a1857d5c00deb10, type: 2}
-    - target: {fileID: 11429070, guid: 87732e775cc16a8449cdacbf285dbd8b, type: 2}
-      propertyPath: m_SpawnPrefabs.Array.data[5]
-      value: 
-      objectReference: {fileID: 186040, guid: 2b583d02e48091a4ba753f5a97ee6dac, type: 2}
-    - target: {fileID: 11429070, guid: 87732e775cc16a8449cdacbf285dbd8b, type: 2}
-      propertyPath: m_SpawnPrefabs.Array.data[6]
-      value: 
-      objectReference: {fileID: 132224, guid: 82fa9da2167b559459693f906855e229, type: 2}
-    - target: {fileID: 11429070, guid: 87732e775cc16a8449cdacbf285dbd8b, type: 2}
-      propertyPath: m_SpawnPrefabs.Array.data[7]
-      value: 
-      objectReference: {fileID: 187888, guid: e01a43c006445954bb898a1c979787eb, type: 2}
-    - target: {fileID: 11429070, guid: 87732e775cc16a8449cdacbf285dbd8b, type: 2}
-      propertyPath: m_SpawnPrefabs.Array.data[8]
-      value: 
-      objectReference: {fileID: 156662, guid: dc98ba281f3e54e488810a444298a3ee, type: 2}
-    - target: {fileID: 11429070, guid: 87732e775cc16a8449cdacbf285dbd8b, type: 2}
-      propertyPath: m_SpawnPrefabs.Array.data[9]
-      value: 
-      objectReference: {fileID: 196766, guid: 6c811dc912af09f42bbbff8467836b84, type: 2}
+    - target: {fileID: 443452, guid: 87732e775cc16a8449cdacbf285dbd8b, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -.469999999
+      objectReference: {fileID: 0}
+    - target: {fileID: 443452, guid: 87732e775cc16a8449cdacbf285dbd8b, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -9.60999966
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 87732e775cc16a8449cdacbf285dbd8b, type: 2}
   m_IsPrefabParent: 0
@@ -13741,7 +13703,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2089165592
 MonoBehaviour:
   m_ObjectHideFlags: 0
