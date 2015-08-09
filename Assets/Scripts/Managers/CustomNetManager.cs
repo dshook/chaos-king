@@ -30,6 +30,8 @@ public class CustomNetManager : NetworkManager
         client.RegisterHandler(MessageTypes.SetupWeapons, GameSetup.OnSetupWeapon);
         client.RegisterHandler(MessageTypes.SetupGameOver, GameSetup.OnSetupGameOver);
         client.RegisterHandler(MessageTypes.GrantExperience, PlayerLevel.OnPlayerExperience);
+        client.RegisterHandler(MessageTypes.GrantPerk, PlayerPerks.OnShowUi);
+        client.RegisterHandler(MessageTypes.PerkDone, PlayerPerks.OnHideUi);
     }
 
     public override void OnServerDisconnect(NetworkConnection conn)

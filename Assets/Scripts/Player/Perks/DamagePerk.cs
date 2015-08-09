@@ -3,8 +3,10 @@ using System;
 
 namespace Player
 {
+    [Id(3)]
     public class DamagePerk : IPerk
     {
+        public int id { get { return 3; } }
         PlayerShooting shooting;
 
         public int level { get; set; }

@@ -27,7 +27,8 @@ namespace Player
                 amount = amount,
                 position = transform.position
             };
-            base.connectionToClient.Send(MessageTypes.GrantExperience, xpMsg);
+
+            NetworkServer.SendToClient(connectionToClient.connectionId, MessageTypes.GrantExperience, xpMsg);
 
             FloatingTextManager.PlayerXp(amount, transform.position);
             if (experience >= level)

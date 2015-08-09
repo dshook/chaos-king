@@ -3,6 +3,7 @@ using System;
 
 namespace Player
 {
+    [Id(4)]
     public class AttackSpeedPerk : IPerk
     {
         PlayerShooting shooting;

@@ -3,6 +3,7 @@ using System;
 
 namespace Player
 {
+    [Id(6)]
     public class RangePerk : IPerk
     {
         PlayerShooting shooting;

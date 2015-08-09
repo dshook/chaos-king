@@ -3,6 +3,7 @@ using System;
 
 namespace Player
 {
+    [Id(5)]
     public class MoveSpeedPerk : IPerk
     {
         PlayerMovement movement;

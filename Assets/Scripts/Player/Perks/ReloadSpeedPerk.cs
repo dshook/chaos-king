@@ -3,6 +3,7 @@ using System;
 
 namespace Player
 {
+    [Id(8)]
     public class ReloadSpeedPerk : IPerk
     {
         PlayerShooting shooting;

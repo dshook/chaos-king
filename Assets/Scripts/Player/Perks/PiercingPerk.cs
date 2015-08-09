@@ -3,6 +3,7 @@ using System;
 
 namespace Player
 {
+    [Id(9)]
     public class PiercingPerk : IPerk
     {
         PlayerShooting shooting;

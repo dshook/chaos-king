@@ -7,10 +7,14 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityStandardAssets.CrossPlatformInput;
 using Assets.Utils;
+using Util;
 
 namespace Player {
     public class PlayerPerks : NetworkBehaviour {
+        [SyncVar]
         public int availablePerks = 0;
+
+        //more work required to change this
         public int perkChoices = 3;
         public GameObject perkChoiceUI;
         public Transform HUDTransform;
@@ -57,12 +61,16 @@ namespace Player {
                 }
                 else
                 {
-                    CreateAvailablePerks();
+                    if (isServer)
+                    {
+                        CreateAvailablePerks();
+                    }
                 }
             }
 
         }
 
+        [Server]
         public void GrantPerk() {
             availablePerks++;
         }
@@ -76,15 +84,33 @@ namespace Player {
             return 1;
         }
 
+        int GetTypeId(Type t)
+        {
+            var attr = t.GetCustomAttributes(typeof(Id), true);
+            return ((Id)attr.First()).id;
+        }
+
         void CreateAvailablePerks()
         {
-            var shuffledPerks = allPerks.Shuffle().Take(perkChoices).ToArray();
+            var shuffledPerks = allPerks.Shuffle().Take(perkChoices).OrderBy(x => x.GUID).ToArray();
+            var perkIds = shuffledPerks.Take(perkChoices).Select(x => GetTypeId(x)).ToArray();
+            SetupPerkChoices(perkIds);
 
-            for (int i = 0; i < perkChoices; i++)
+            var showUiMsg = new GrantPerkMessage()
             {
-                var randomPerk = shuffledPerks[i];
-                //Create new perk to save in the collection of perks later on
-                var newPerk = (IPerk)Activator.CreateInstance(randomPerk, new object[] { playerObject });
+                player = this.gameObject,
+                perkChoiceIds = perkIds
+            };
+            NetworkServer.SendToClient(connectionToClient.connectionId, MessageTypes.GrantPerk, showUiMsg);
+        }
+
+        public void OnShowPerkUi(int[] perkChoiceIds)
+        {
+            SetupPerkChoices(perkChoiceIds);
+
+            for (int i = 0; i < perkChoiceIds.Length; i++)
+            {
+                var newPerk = perkChoiceArray[i].Perk;
                 var choiceUI = perkChoiceArray[i].choiceUI;
 
                 var image = choiceUI.transform.Find("Icon").GetComponent<Image>();
@@ -95,8 +121,20 @@ namespace Player {
                 var descripText = choiceUI.transform.Find("DescriptionText").GetComponent<Text>();
                 descripText.text = newPerk.GetDescription(NextPerkLevel(newPerk));
 
-                perkChoiceArray[i].Perk = newPerk;
                 choiceUI.SetActive(true);
+            }
+        }
+
+        void SetupPerkChoices(int[] perkIds)
+        {
+            for (int i = 0; i < perkIds.Length; i++)
+            {
+                var perkChoice = allPerks.Where(x => GetTypeId(x) == perkIds[i]).FirstOrDefault();
+
+                //Create new perk to save in the collection of perks later on
+                var newPerk = (IPerk)Activator.CreateInstance(perkChoice, new object[] { playerObject });
+
+                perkChoiceArray[i].Perk = newPerk;
             }
         }
 
@@ -136,19 +174,51 @@ namespace Player {
 
             perksApplied.Add(perkChoice.Perk.ApplyPerk(NextPerkLevel(perkChoice.Perk)));
 
+            availablePerks--;
+
+            var showUiMsg = new GrantPerkMessage()
+            {
+                player = this.gameObject,
+                perkChoiceIds = null
+            };
+            NetworkServer.SendToClient(connectionToClient.connectionId, MessageTypes.PerkDone, showUiMsg);
+        }
+
+        public void OnHidePerkUi()
+        {
             //disable ui and cleanup
             foreach (var perkContainer in perkChoiceArray)
             {
                 perkContainer.choiceUI.SetActive(false);
                 perkContainer.Perk = null;
             }
+        }
 
-            availablePerks--;
+        public static void OnShowUi(NetworkMessage netMsg)
+        {
+            var msg = netMsg.ReadMessage<GrantPerkMessage>();
+            var playerPerks = msg.player.GetComponent<PlayerPerks>();
+
+            playerPerks.OnShowPerkUi(msg.perkChoiceIds);
+        }
+
+        public static void OnHideUi(NetworkMessage netMsg)
+        {
+            var msg = netMsg.ReadMessage<GrantPerkMessage>();
+            var playerPerks = msg.player.GetComponent<PlayerPerks>();
+
+            playerPerks.OnHidePerkUi();
         }
 
         private class PerkChoiceContainer {
             public IPerk Perk { get; set; }
             public GameObject choiceUI { get; set; }
+        }
+
+        class GrantPerkMessage : MessageBase
+        {
+            public GameObject player;
+            public int[] perkChoiceIds;
         }
     }
 }

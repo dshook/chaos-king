@@ -3,6 +3,7 @@ using System;
 
 namespace Player
 {
+    [Id(1)]
     public class HpPerk : IPerk
     {
         PlayerHealth health;
