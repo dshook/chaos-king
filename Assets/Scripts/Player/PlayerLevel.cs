@@ -7,7 +7,9 @@ namespace Player
     public class PlayerLevel : NetworkBehaviour
     {
 
+        [SyncVar]
         public int level = 1;
+        [SyncVar]
         public int experience = 0;
 
         public PlayerPerks perks;
@@ -30,7 +32,6 @@ namespace Player
 
             NetworkServer.SendToClient(connectionToClient.connectionId, MessageTypes.GrantExperience, xpMsg);
 
-            FloatingTextManager.PlayerXp(amount, transform.position);
             if (experience >= level)
             {
                 LevelUp();

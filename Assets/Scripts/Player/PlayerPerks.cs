@@ -23,6 +23,7 @@ namespace Player {
         List<IPerk> perksApplied;
         List<Type> allPerks;
         PerkChoiceContainer[] perkChoiceArray;
+        bool perksCreated = false;
 
         void Start () {
             HUDTransform = GameObject.Find("HUDCanvas").transform;
@@ -61,7 +62,7 @@ namespace Player {
                 }
                 else
                 {
-                    if (isServer)
+                    if (isServer && !perksCreated)
                     {
                         CreateAvailablePerks();
                     }
@@ -102,6 +103,7 @@ namespace Player {
                 perkChoiceIds = perkIds
             };
             NetworkServer.SendToClient(connectionToClient.connectionId, MessageTypes.GrantPerk, showUiMsg);
+            perksCreated = true;
         }
 
         public void OnShowPerkUi(int[] perkChoiceIds)
@@ -175,6 +177,7 @@ namespace Player {
             perksApplied.Add(perkChoice.Perk.ApplyPerk(NextPerkLevel(perkChoice.Perk)));
 
             availablePerks--;
+            perksCreated = false;
 
             var showUiMsg = new GrantPerkMessage()
             {
@@ -182,6 +185,7 @@ namespace Player {
                 perkChoiceIds = null
             };
             NetworkServer.SendToClient(connectionToClient.connectionId, MessageTypes.PerkDone, showUiMsg);
+            OnHidePerkUi();
         }
 
         public void OnHidePerkUi()

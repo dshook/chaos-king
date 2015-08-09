@@ -27,7 +27,6 @@ public class WeaponPickup : NetworkBehaviour
     [ClientRpc]
     public void RpcPickupWeapon(GameObject player)
     {
-        Debug.Log("Weapon picked up on player " + player.GetComponent<NetworkIdentity>().netId);
         //store various weapon positions and rotations
         var playerWeapon = player.transform.FindChild("Weapon");
 
