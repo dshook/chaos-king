@@ -54,25 +54,29 @@ namespace Player
             damaged = false;
         }
 
-
         public void TakeDamage(int amount)
         {
             if (!isServer) return;
 
-            damaged = true;
 
             currentHealth -= amount;
 
-            UpdateHealthSlider();
-
-            FloatingTextManager.PlayerDamage(amount, transform.position);
-
-            playerAudio.Play();
+            RpcTakeDamage(amount);
 
             if (currentHealth <= 0 && !isDead)
             {
                 Death();
             }
+        }
+
+        [ClientRpc]
+        private void RpcTakeDamage(int amount)
+        {
+            damaged = true;
+            UpdateHealthSlider();
+            FloatingTextManager.PlayerDamage(amount, transform.position);
+
+            playerAudio.Play();
         }
 
         public void IncreaseHealth(int amount)
@@ -93,8 +97,16 @@ namespace Player
         {
             isDead = true;
 
-            //playerShooting.DisableEffects ();
+            RpcDeath();
 
+            playerMovement.enabled = false;
+            playerWeapon = transform.FindChild("Weapon").gameObject;
+            playerWeapon.SetActive(false);
+        }
+
+        [ClientRpc]
+        void RpcDeath()
+        {
             anim.SetTrigger("Die");
 
             playerAudio.clip = deathClip;
@@ -109,14 +121,17 @@ namespace Player
         public void Live()
         {
             anim.SetTrigger("Live");
-
             currentHealth = maxHealth;
             playerMovement.enabled = true;
             playerWeapon = transform.FindChild("Weapon").gameObject;
             playerWeapon.SetActive(true);
             
             isDead = false;
+        }
 
+        [ClientRpc]
+        void RpcLive()
+        {
         }
     }
 }

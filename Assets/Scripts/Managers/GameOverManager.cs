@@ -60,7 +60,6 @@ public class GameOverManager : NetworkBehaviour
     [ClientRpc]
     void RpcRespawn(Vector3 newPosition)
     {
-        SetPlayerPosition(newPosition);
         playerHealth.Live();
         if (anim != null)
         {
