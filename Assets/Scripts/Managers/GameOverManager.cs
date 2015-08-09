@@ -49,7 +49,12 @@ public class GameOverManager : NetworkBehaviour
     [ClientRpc]
     void RpcAnimate()
     {
-        anim.SetTrigger("GameOver");
+        //for now anim will be null on clients who don't control this player
+        //so they should not see the game over fade in text
+        if (anim != null)
+        {
+            anim.SetTrigger("GameOver");
+        }
     }
 
     [ClientRpc]
@@ -57,7 +62,10 @@ public class GameOverManager : NetworkBehaviour
     {
         SetPlayerPosition(newPosition);
         playerHealth.Live();
-        anim.SetTrigger("Respawn");
+        if (anim != null)
+        {
+            anim.SetTrigger("Respawn");
+        }
     }
 
     void SetPlayerPosition(Vector3 newPosition)

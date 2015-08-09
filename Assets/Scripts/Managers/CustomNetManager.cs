@@ -19,14 +19,15 @@ public class CustomNetManager : NetworkManager
         gameSetup.GiveInitialWeapon(player);
         gameSetup.SyncPlayerWeapons(conn, player);
         gameSetup.RpcSetupPlayerIds();
-        gameSetup.SetupGameOver(this, player);
+        gameSetup.SetupGameOver(conn, this, player);
 
     }
 
     public override void OnClientConnect(NetworkConnection conn)
     {
         base.OnClientConnect(conn);
-        client.RegisterHandler(MessageTypes.SetupMessage, GameSetup.OnSetupWeapon);
+        client.RegisterHandler(MessageTypes.SetupWeapons, GameSetup.OnSetupWeapon);
+        client.RegisterHandler(MessageTypes.SetupGameOver, GameSetup.OnSetupGameOver);
     }
 
     public override void OnServerDisconnect(NetworkConnection conn)

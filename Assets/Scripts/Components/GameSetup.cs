@@ -81,17 +81,11 @@ public class GameSetup : NetworkBehaviour
         weapon.SetActive(true);
     }
 
-    public class WeaponSetupMessage : MessageBase
-    {
-        public GameObject weapon;
-        public GameObject player;
-    }
-
     /// <summary>
     /// When a client joins they need to have all the existing players weapons set up so they
     /// are in the right part of the hierarchy and pointers set up
     /// </summary>
-    public void SyncPlayerWeapons(NetworkConnection newPlayerConnection, GameObject newPlayer)
+    public void SyncPlayerWeapons(NetworkConnection newConn, GameObject newPlayer)
     {
         var players = GameObject.FindGameObjectsWithTag("Player");
         var alreadyConnectedPlayers = players.Where(x => x.gameObject != newPlayer);
@@ -104,7 +98,7 @@ public class GameSetup : NetworkBehaviour
             msg.weapon = weapon;
             msg.player = connectedPlayer;
 
-            newPlayerConnection.Send(MessageTypes.SetupMessage, msg);
+            newConn.Send(MessageTypes.SetupWeapons, msg);
         }
     }
 
@@ -116,17 +110,33 @@ public class GameSetup : NetworkBehaviour
         PickupWeapon(msg.weapon, msg.player);
     }
 
-    public void SetupGameOver(CustomNetManager netManager, GameObject newPlayer)
+    public void SetupGameOver(NetworkConnection newConn, CustomNetManager netManager, GameObject newPlayer)
     {
         var gameOver = newPlayer.GetComponent<GameOverManager>();
         gameOver.netManager = netManager;
-        RpcSetGameOverAnimator(newPlayer);
+
+        var msg = new GameOverSetupMessage();
+        msg.player = newPlayer;
+
+        newConn.Send(MessageTypes.SetupGameOver, msg);
     }
 
-    [ClientRpc]
-    public void RpcSetGameOverAnimator(GameObject newPlayer)
+    public static void OnSetupGameOver(NetworkMessage netMsg)
     {
-        var gameOver = newPlayer.GetComponent<GameOverManager>();
+        var msg = netMsg.ReadMessage<GameOverSetupMessage>();
+
+        var gameOver = msg.player.GetComponent<GameOverManager>();
         gameOver.anim = GameObject.Find("HUDCanvas").GetComponent<Animator>();
+    }
+
+    public class WeaponSetupMessage : MessageBase
+    {
+        public GameObject weapon;
+        public GameObject player;
+    }
+
+    public class GameOverSetupMessage : MessageBase
+    {
+        public GameObject player;
     }
 }
