@@ -47,13 +47,9 @@ public class EnemyHealth : NetworkBehaviour
         if (isDead)
             return;
 
-        FloatingTextManager.EnemyDamage(amount, hitPoint);
-        enemyAudio.Play();
-
         currentHealth -= amount;
 
-        hitParticles.transform.position = hitPoint;
-        hitParticles.Play();
+        RpcTakeDamage(amount, hitPoint);
 
         if (currentHealth <= 0)
         {
@@ -61,18 +57,34 @@ public class EnemyHealth : NetworkBehaviour
         }
     }
 
+    [ClientRpc]
+    private void RpcTakeDamage(int amount, Vector3 point)
+    {
+        FloatingTextManager.EnemyDamage(amount, point);
+        enemyAudio.Play();
+
+        hitParticles.transform.position = point;
+        hitParticles.Play();
+    }
+
 
     void Death(PlayerLevel player)
     {
         isDead = true;
 
+        RpcDeath();
         capsuleCollider.isTrigger = true;
 
+        killExperience.GiveExperience(player);
+        dropManager.SpawnDrop(this.transform);
+    }
+
+    [ClientRpc]
+    void RpcDeath()
+    {
         anim.SetTrigger("Dead");
         enemyAudio.clip = deathClip;
         enemyAudio.Play();
-        killExperience.GiveExperience(player);
-        dropManager.SpawnDrop(this.transform);
     }
 
 
