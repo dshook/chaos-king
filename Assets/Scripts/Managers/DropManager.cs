@@ -17,6 +17,8 @@ public class DropManager : NetworkBehaviour
         {
             int dropIndex = Random.Range(0, dropList.Length);
 
+            //issue with drops caused by spawning the outer object, then when it gets picked up the nested object
+            //is not considered spawned by the server and therefore doesn't get updated so the shoot timer is always 0
             var obj = (GameObject)Instantiate(dropList[dropIndex], spawnPoint.position, spawnPoint.rotation);
             NetworkServer.Spawn(obj);
         }

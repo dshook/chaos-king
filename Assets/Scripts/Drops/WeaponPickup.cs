@@ -30,7 +30,11 @@ public class WeaponPickup : NetworkBehaviour
         //store various weapon positions and rotations
         var playerWeapon = player.transform.FindChild("Weapon");
 
-        if (!playerWeapon) return;
+        if (!playerWeapon)
+        {
+            Debug.Log("No weapon to pick up");
+            return;
+        }
 
         var currentWeapon = (Component)playerWeapon.GetComponentInChildren<IShoot>();
 
