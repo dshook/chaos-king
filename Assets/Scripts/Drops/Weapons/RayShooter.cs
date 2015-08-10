@@ -16,15 +16,8 @@ namespace Weapons
         public int shotFired = 1;
         public int spreadAngle = 0;
         public float reloadSpeed = 1.5f;
-
-        public int maxAmmo {
-            get { return playerShooting.maxAmmo;  }
-            set { playerShooting.maxAmmo = value; }
-        }
-        public int currentAmmo {
-            get { return playerShooting.currentAmmo;  }
-            set { playerShooting.currentAmmo = value; }
-        }
+        [SyncVar] public int maxAmmo = 10;
+        [SyncVar] public int currentAmmo = 10;
 
         public GameObject gunLinePrefab;
         public PlayerShooting playerShooting;
@@ -187,6 +180,16 @@ namespace Weapons
             NetworkServer.Spawn(newGunLine);
 
             return newGunLine;
+        }
+
+        public int GetCurrentAmmo()
+        {
+            return currentAmmo;
+        }
+
+        public int GetMaxAmmo()
+        {
+            return maxAmmo;
         }
     }
 }

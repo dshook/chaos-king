@@ -14,8 +14,29 @@ namespace Player
         [SyncVar] public int extraEnemiesPierced = 0;
         [SyncVar] public int ammoBoost = 0;
 
-        [SyncVar] public int maxAmmo = 10;
-        [SyncVar] public int currentAmmo = 0;
+        public int currentAmmo
+        {
+            get
+            {
+                if (gun != null)
+                {
+                    return gun.GetCurrentAmmo();
+                }
+                return 0;
+            }
+        }
+
+        public int maxAmmo
+        {
+            get
+            {
+                if (gun != null)
+                {
+                    return gun.GetMaxAmmo();
+                }
+                return 0;
+            }
+        }
 
         public int shootableMask;
 
