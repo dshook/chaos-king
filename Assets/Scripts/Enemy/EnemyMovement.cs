@@ -14,16 +14,18 @@ public class EnemyMovement : NetworkBehaviour
     GameObject[] players;
     float playerTimer = 0f;
 
-    void OnPlayerConnected(NetworkPlayer player) {
-        players = GameObject.FindGameObjectsWithTag("Player");
+    void OnUpdatePlayer() {
+        Debug.Log("Update players");
         FindClosestPlayer();
     }
 
     void Awake ()
     {
-        players = GameObject.FindGameObjectsWithTag("Player");
         enemyHealth = GetComponent<EnemyHealth>();
         nav = GetComponent<NavMeshAgent>();
+
+        CustomNetManager.OnPlayerJoined += OnUpdatePlayer;
+        CustomNetManager.OnPlayerJoined += OnUpdatePlayer;
     }
 
 
@@ -45,6 +47,8 @@ public class EnemyMovement : NetworkBehaviour
     }
 
     void FindClosestPlayer() {
+        players = GameObject.FindGameObjectsWithTag("Player");
+
         float minRange = float.MaxValue;
         foreach (var p in players)
         {

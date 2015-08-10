@@ -10,6 +10,11 @@ public class CustomNetManager : NetworkManager
     public GameSetup gameSetup;
     public Transform[] spawnPoints;
 
+    public delegate void PlayerJoined();
+    public static event PlayerJoined OnPlayerJoined;
+    public delegate void PlayerLeft();
+    public static event PlayerLeft OnPlayerLeft;
+
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
     {
         var spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
@@ -23,6 +28,10 @@ public class CustomNetManager : NetworkManager
         gameSetup.RpcSetupPlayerIds();
         gameSetup.SetupGameOver(conn, this, player);
 
+        if (OnPlayerJoined != null)
+        {
+            OnPlayerJoined();
+        }
     }
 
     public override void OnClientConnect(NetworkConnection conn)
@@ -34,6 +43,7 @@ public class CustomNetManager : NetworkManager
         client.RegisterHandler(MessageTypes.GrantExperience, PlayerLevel.OnPlayerExperience);
         client.RegisterHandler(MessageTypes.GrantPerk, PlayerPerks.OnShowUi);
         client.RegisterHandler(MessageTypes.PerkDone, PlayerPerks.OnHideUi);
+
     }
 
     public override void OnServerDisconnect(NetworkConnection conn)
@@ -45,6 +55,10 @@ public class CustomNetManager : NetworkManager
     {
         base.OnServerRemovePlayer(conn, player);
 
+        if (OnPlayerLeft != null)
+        {
+            OnPlayerLeft();
+        }
     }
 
     public void StartGame()
