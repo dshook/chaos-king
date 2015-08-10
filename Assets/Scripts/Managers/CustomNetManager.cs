@@ -14,11 +14,12 @@ public class CustomNetManager : NetworkManager
     {
         var spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
         GameObject player = (GameObject)Instantiate(base.playerPrefab, spawnPoint.position, Quaternion.identity);
+        player.name = "Player " + conn.connectionId;
         NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
 
         gameSetup.SendSetupUi(player);
         gameSetup.GiveInitialWeapon(player);
-        gameSetup.SyncPlayerWeapons(conn, player);
+        gameSetup.SyncPlayerWeapons(player);
         gameSetup.RpcSetupPlayerIds();
         gameSetup.SetupGameOver(conn, this, player);
 

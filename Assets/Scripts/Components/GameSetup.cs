@@ -103,20 +103,22 @@ public class GameSetup : NetworkBehaviour
     /// When a client joins they need to have all the existing players weapons set up so they
     /// are in the right part of the hierarchy and pointers set up
     /// </summary>
-    public void SyncPlayerWeapons(NetworkConnection newConn, GameObject newPlayer)
+    public void SyncPlayerWeapons(GameObject newPlayer)
     {
         var players = GameObject.FindGameObjectsWithTag("Player");
         var alreadyConnectedPlayers = players.Where(x => x.gameObject != newPlayer);
+        var connectionId = newPlayer.GetComponent<NetworkIdentity>().connectionToClient.connectionId;
 
         foreach (var connectedPlayer in alreadyConnectedPlayers)
         {
             var weapon = connectedPlayer.transform.FindChild("Weapon").GetComponentInChildren<NetworkIdentity>().gameObject;
 
-            var msg = new WeaponSetupMessage();
-            msg.weapon = weapon;
-            msg.player = connectedPlayer;
+            var msg = new WeaponSetupMessage() {
+                weapon = weapon,
+                player = connectedPlayer
+            };
 
-            newConn.Send(MessageTypes.SetupWeapons, msg);
+            NetworkServer.SendToClient(connectionId, MessageTypes.SetupWeapons, msg);
         }
     }
 

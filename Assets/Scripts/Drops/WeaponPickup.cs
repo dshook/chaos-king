@@ -32,6 +32,8 @@ public class WeaponPickup : NetworkBehaviour
 
         if (!playerWeapon) return;
 
+        var currentWeapon = (Component)playerWeapon.GetComponentInChildren<IShoot>();
+
         weapon.transform.parent = playerWeapon;
 
         weapon.transform.localPosition = Vector3.zero;
@@ -44,5 +46,7 @@ public class WeaponPickup : NetworkBehaviour
         playerShooting.SetGun(weaponShoot);
 
         weapon.SetActive(true);
+
+        Destroy(currentWeapon.gameObject);
     }
 }
