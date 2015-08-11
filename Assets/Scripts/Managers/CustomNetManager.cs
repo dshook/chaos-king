@@ -24,7 +24,7 @@ public class CustomNetManager : NetworkManager
 
         gameSetup.SendSetupUi(player);
         gameSetup.GiveInitialWeapon(player);
-        gameSetup.SyncPlayerWeapons(player);
+        //gameSetup.SyncPlayerWeapons(player);
         gameSetup.RpcSetupPlayerIds();
         gameSetup.SetupGameOver(conn, this, player);
 

@@ -8,7 +8,7 @@ public class WeaponPickup : NetworkBehaviour
 
     void Awake()
     {
-        weapon = transform.FindChild("Weapon").gameObject;
+        weapon = transform.gameObject;
     }
 
     void OnTriggerEnter(Collider other)
@@ -18,23 +18,19 @@ public class WeaponPickup : NetworkBehaviour
         {
             var player = other.gameObject;
             RpcPickupWeapon(player);
-
-            //destroy pickup
-            Destroy(gameObject, 0.5f);
         }
     }
 
     [ClientRpc]
     public void RpcPickupWeapon(GameObject player)
     {
+        PickupWeapon(player);
+    }
+
+    public void PickupWeapon(GameObject player)
+    {
         //store various weapon positions and rotations
         var playerWeapon = player.transform.FindChild("Weapon");
-
-        if (!playerWeapon)
-        {
-            Debug.Log("No weapon to pick up");
-            return;
-        }
 
         var currentWeapon = (Component)playerWeapon.GetComponentInChildren<IShoot>();
 
@@ -43,14 +39,23 @@ public class WeaponPickup : NetworkBehaviour
         weapon.transform.localPosition = Vector3.zero;
         weapon.transform.localRotation = Quaternion.identity;
 
+        //disable unneeded components 
+        weapon.GetComponent<BoxCollider>().enabled = false;
+        weapon.GetComponent<WeaponMovement>().enabled = false;
+        weapon.GetComponent<WeaponPickup>().enabled = false;
+        weapon.GetComponent<KillTimer>().enabled = false;
+
         //activate players new weapon
-        var weaponShoot = weapon.GetComponentInChildren<IShoot>();
+        var weaponShoot = weapon.GetComponent<IShoot>();
         var playerShooting = player.GetComponent<PlayerShooting>();
         weaponShoot.Enable(playerShooting);
         playerShooting.SetGun(weaponShoot);
 
         weapon.SetActive(true);
 
-        Destroy(currentWeapon.gameObject);
+        if (currentWeapon != null)
+        {
+            Destroy(currentWeapon.gameObject);
+        }
     }
 }

@@ -69,34 +69,11 @@ public class GameSetup : NetworkBehaviour
 
     public void GiveInitialWeapon(GameObject player)
     {
-        var startingWeapon = (GameObject)Instantiate(StartingWeaponPrefab, player.transform.position, Quaternion.identity);
+        Vector3 offMap = new Vector3(0, -100, 0);
+        var startingWeapon = (GameObject)Instantiate(StartingWeaponPrefab, offMap, Quaternion.identity);
         NetworkServer.Spawn(startingWeapon);
-
-        RpcPickupInitialWeapon(startingWeapon, player);
-    }
-
-    [ClientRpc]
-    void RpcPickupInitialWeapon(GameObject weapon, GameObject player)
-    {
-        PickupWeapon(weapon, player);
-    }
-
-    static void PickupWeapon(GameObject weapon, GameObject player)
-    {
-        var playerWeapon = player.transform.FindChild("Weapon");
-
-        weapon.transform.parent = playerWeapon;
-
-        weapon.transform.localPosition = Vector3.zero;
-        weapon.transform.localRotation = Quaternion.identity;
-
-        //activate players new weapon
-        var weaponShoot = weapon.GetComponentInChildren<IShoot>();
-        var playerShooting = player.GetComponent<PlayerShooting>();
-        weaponShoot.Enable(playerShooting);
-        playerShooting.SetGun(weaponShoot);
-
-        weapon.SetActive(true);
+        var weaponPickup = startingWeapon.GetComponent<WeaponPickup>();
+        weaponPickup.RpcPickupWeapon(player);
     }
 
     /// <summary>
@@ -127,7 +104,8 @@ public class GameSetup : NetworkBehaviour
     {
         var msg = netMsg.ReadMessage<WeaponSetupMessage>();
 
-        PickupWeapon(msg.weapon, msg.player);
+        var weaponPickup = msg.weapon.GetComponent<WeaponPickup>();
+        weaponPickup.PickupWeapon(msg.player);
     }
 
     public void SetupGameOver(NetworkConnection newConn, CustomNetManager netManager, GameObject newPlayer)
