@@ -34,9 +34,20 @@ public class CustomNetManager : NetworkManager
         }
     }
 
+    public override void OnServerConnect(NetworkConnection conn)
+    {
+        base.OnServerConnect(conn);
+    }
+
+    public override void OnServerReady(NetworkConnection conn)
+    {
+        base.OnServerReady(conn);
+    }
+
     public override void OnClientConnect(NetworkConnection conn)
     {
         base.OnClientConnect(conn);
+        ClientScene.AddPlayer(0);
         client.RegisterHandler(MessageTypes.SetupUi, GameSetup.OnSetupUi);
         client.RegisterHandler(MessageTypes.SetupWeapons, GameSetup.OnSetupWeapon);
         client.RegisterHandler(MessageTypes.SetupGameOver, GameSetup.OnSetupGameOver);
