@@ -15,7 +15,6 @@ public class EnemyMovement : NetworkBehaviour
     float playerTimer = 0f;
 
     void OnUpdatePlayer() {
-        Debug.Log("Update players");
         FindClosestPlayer();
     }
 

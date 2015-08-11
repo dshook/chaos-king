@@ -112,7 +112,6 @@ GameObject:
   - 4: {fileID: 405436}
   - 65: {fileID: 6548748}
   - 114: {fileID: 11453528}
-  - 54: {fileID: 5418656}
   - 114: {fileID: 11453390}
   - 114: {fileID: 11496376}
   - 114: {fileID: 11430622}
@@ -887,21 +886,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 110614}
   m_Mesh: {fileID: 4300012, guid: e7da0a6b88725fd49be111412a5416be, type: 3}
---- !u!54 &5418656
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 129652}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: Infinity
-  m_AngularDrag: Infinity
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 84
-  m_CollisionDetection: 0
 --- !u!65 &6548748
 BoxCollider:
   m_ObjectHideFlags: 1
