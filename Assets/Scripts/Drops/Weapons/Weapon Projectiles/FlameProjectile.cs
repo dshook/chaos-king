@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 using Player;
+using System.Collections;
 
 public class FlameProjectile : NetworkBehaviour
 {
@@ -14,20 +15,64 @@ public class FlameProjectile : NetworkBehaviour
     public int canPierce = 10;
     int enemiesPierced = 0;
 
+    [SyncVar(hook ="OnEnableChanged")]
+    bool isEnabled = false;
 
     void Update()
     {
         if (!isServer) return;
 
-        if (enemiesPierced >= canPierce || distanceTraveled >= range)
+        if (enemiesPierced >= canPierce || distanceTraveled >= range && isEnabled)
         {
-            Destroy(gameObject);
+            Disable();
         }
         else
         {
             Vector3 oldPosition = transform.position;
             transform.position += transform.forward * (speed * Time.deltaTime);
             distanceTraveled += Vector3.Distance(oldPosition, transform.position);
+        }
+    }
+
+    public void Disable()
+    {
+        enabled = false;
+        isEnabled = false;
+        GetComponent<BoxCollider>().enabled = false;
+        GetComponent<Light>().enabled = false;
+        GetComponent<ParticleSystem>().Stop();
+        GetComponent<ParticleSystem>().Clear();
+
+    }
+
+    public void Enable()
+    {
+        enabled = true;
+        isEnabled = true;
+        distanceTraveled = 0;
+        enemiesPierced = 0;
+        StartCoroutine(DelayedPlay());
+    }
+
+    IEnumerator DelayedPlay()
+    {
+        yield return new WaitForFixedUpdate();
+
+        GetComponent<BoxCollider>().enabled = true;
+        GetComponent<Light>().enabled = true;
+        GetComponent<ParticleSystem>().Play();
+    }
+
+    [Client]
+    void OnEnableChanged(bool newEnabled)
+    {
+        if (newEnabled)
+        {
+            Enable();
+        }
+        else
+        {
+            Disable();
         }
     }
 

@@ -32,7 +32,7 @@ public class WeaponPickup : NetworkBehaviour
         //store various weapon positions and rotations
         var playerWeapon = player.transform.FindChild("Weapon");
 
-        var currentWeapon = (Component)playerWeapon.GetComponentInChildren<IShoot>();
+        var currentWeapon = playerWeapon.GetComponentInChildren<IShoot>();
 
         weapon.transform.parent = playerWeapon;
 
@@ -55,7 +55,8 @@ public class WeaponPickup : NetworkBehaviour
 
         if (currentWeapon != null)
         {
-            Destroy(currentWeapon.gameObject);
+            currentWeapon.Disable();
+            Destroy(((Component)currentWeapon).gameObject);
         }
     }
 }

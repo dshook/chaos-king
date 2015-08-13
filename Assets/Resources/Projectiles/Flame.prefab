@@ -13,8 +13,8 @@ GameObject:
   - 199: {fileID: 19917216}
   - 198: {fileID: 19806590}
   - 114: {fileID: 11432492}
-  - 114: {fileID: 11455996}
   - 114: {fileID: 11487154}
+  - 114: {fileID: 11463158}
   m_Layer: 0
   m_Name: Flame
   m_TagString: Untagged
@@ -110,7 +110,7 @@ MonoBehaviour:
     i15: 158
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
---- !u!114 &11455996
+--- !u!114 &11463158
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -118,12 +118,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 184446}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa27784a28bd06b45b586b74882094c5, type: 3}
+  m_Script: {fileID: 11500000, guid: 4f4850c5086f5364ea35707d53c22eb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myTransform: {fileID: 434832}
-  useHistoricalLerping: 1
-  syncRotation: 1
+  disableBigJumpLerp: 1
 --- !u!114 &11487154
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -527,7 +525,7 @@ ParticleSystem:
           rgba: 15103
         key4:
           serializedVersion: 2
-          rgba: 13528396
+          rgba: 15103
         key5:
           serializedVersion: 2
           rgba: 0
@@ -537,11 +535,11 @@ ParticleSystem:
         key7:
           serializedVersion: 2
           rgba: 0
-        ctime0: 10409
-        ctime1: 28142
-        ctime2: 40670
-        ctime3: 65535
-        ctime4: 65535
+        ctime0: 5975
+        ctime1: 19853
+        ctime2: 27949
+        ctime3: 42983
+        ctime4: 42983
         ctime5: 0
         ctime6: 0
         ctime7: 0
@@ -1341,6 +1339,54 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: syncRotation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ColorModule.gradient.maxGradient.ctime3
+      value: 42983
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ColorModule.gradient.maxGradient.ctime2
+      value: 27949
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: prewarm
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ColorModule.gradient.maxGradient.ctime1
+      value: 19853
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ColorModule.gradient.maxGradient.ctime0
+      value: 5975
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ColorModule.gradient.maxGradient.key3.rgba
+      value: 15103
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ColorModule.gradient.maxGradient.key4.rgba
+      value: 15103
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ColorModule.gradient.maxGradient.ctime4
+      value: 42983
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ColorModule.gradient.maxGradient.m_NumColorKeys
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ColorModule.gradient.maxGradient.key2.rgba
+      value: 637951
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: startDelay
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: disableBigJumpLerp
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -4227,7 +4227,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &588677614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4798,7 +4798,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &670115110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10409,6 +10409,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11429070, guid: 87732e775cc16a8449cdacbf285dbd8b, type: 2}
+      propertyPath: m_Channels.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 472408, guid: 87732e775cc16a8449cdacbf285dbd8b, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -10471,6 +10475,14 @@ Prefab:
       objectReference: {fileID: 180050, guid: 54594f5b413d1c243a1857d5c00deb10, type: 2}
     - target: {fileID: 11429070, guid: 87732e775cc16a8449cdacbf285dbd8b, type: 2}
       propertyPath: m_AutoCreatePlayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11429070, guid: 87732e775cc16a8449cdacbf285dbd8b, type: 2}
+      propertyPath: m_Channels.Array.data[0]
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11429070, guid: 87732e775cc16a8449cdacbf285dbd8b, type: 2}
+      propertyPath: m_CustomConfig
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

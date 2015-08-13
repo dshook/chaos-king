@@ -11,6 +11,8 @@ namespace Player
 
         void Enable(PlayerShooting ps);
 
+        void Disable();
+
         int GetCurrentAmmo();
         int GetMaxAmmo();
     }

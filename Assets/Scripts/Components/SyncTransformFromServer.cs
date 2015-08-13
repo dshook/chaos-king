@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 
+[NetworkSettings(channel = 1, sendInterval = 0.2f)]
 public class SyncTransformFromServer : NetworkBehaviour
 {
+
+    public bool disableBigJumpLerp = false;
 
     [SyncVar]
     private Vector3 syncPos;
@@ -14,6 +17,7 @@ public class SyncTransformFromServer : NetworkBehaviour
     private Transform myTransform;
     private float lerpRate = 10;
     private float posThreshold = 0.5f;
+    private float bigThreshold = 5.0f;
     private float rotThreshold = 5;
 
     // Use this for initialization
@@ -53,7 +57,14 @@ public class SyncTransformFromServer : NetworkBehaviour
             return;
         }
 
-        myTransform.position = Vector3.Lerp(myTransform.position, syncPos, Time.deltaTime * lerpRate);
+        if (disableBigJumpLerp && Vector3.Distance(myTransform.position, syncPos) > bigThreshold)
+        {
+            myTransform.position = syncPos;
+        }
+        else
+        {
+            myTransform.position = Vector3.Lerp(myTransform.position, syncPos, Time.deltaTime * lerpRate);
+        }
 
         Vector3 newRot = new Vector3(0, syncYRot, 0);
         myTransform.rotation = Quaternion.Lerp(myTransform.rotation, Quaternion.Euler(newRot), Time.deltaTime * lerpRate);

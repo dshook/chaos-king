@@ -61,11 +61,16 @@ namespace Weapons
             }
         }
 
-        public void Enable(PlayerShooting ps)
+        public virtual void Enable(PlayerShooting ps)
         {
             playerShooting = ps;
             currentAmmo = maxAmmo;
             enabled = true;
+        }
+
+        public virtual void Disable()
+        {
+
         }
 
         void Update()

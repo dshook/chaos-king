@@ -6,6 +6,46 @@ namespace Weapons
 {
     public class FlameThrowerV2Shooting : RayShooter, IShoot
     {
+        private int maxFlames = 10;
+        private GameObject[] flameArray;
+        private Object flamePrefab = null;
+
+        private int flameRotator = 0;
+
+        public void Awake() {
+            flamePrefab = Resources.Load("Projectiles/Flame");
+        }
+
+        public override void Enable(PlayerShooting ps)
+        {
+            base.Enable(ps);
+            flameArray = new GameObject[maxFlames];
+
+            if (isServer)
+            {
+                var hiddenSpawn = new Vector3(0, -100, 0);
+                for (int i = 0; i < maxFlames; i++)
+                {
+                    var flame = Instantiate(flamePrefab, hiddenSpawn, Quaternion.identity) as GameObject;
+                    flame.GetComponent<FlameProjectile>().enabled = false;
+                    flameArray[i] = flame;
+                    NetworkServer.Spawn(flame);
+                }
+            }
+        }
+
+        public override void Disable()
+        {
+            base.Disable();
+            if (isServer)
+            {
+                foreach (var flame in flameArray)
+                {
+                    Destroy(flame);
+                }
+            }
+            flameArray = null;
+        }
 
         public override void Shoot()
         {
@@ -42,13 +82,19 @@ namespace Weapons
 
         void CreateFlame()
         {
-            GameObject projectile = Instantiate(Resources.Load("Projectiles/Flame"), transform.position, transform.rotation) as GameObject;
+            var projectile = flameArray[flameRotator];
+
+            projectile.transform.position = transform.position;
+            projectile.transform.rotation = transform.rotation;
             var flame = projectile.GetComponent<FlameProjectile>();
             flame.damage = (Mathf.RoundToInt(damagePerShot * playerShooting.damageMultiplier));
             flame.range = range * playerShooting.rangeMultiplier;
             flame.canPierce = enemiesPierced + playerShooting.extraEnemiesPierced;
             flame.playerLevel = playerLevel;
-            NetworkServer.Spawn(projectile);
+            flame.Enable();
+
+            flameRotator++;
+            if (flameRotator >= maxFlames) flameRotator = 0;
         }
     }
 }
