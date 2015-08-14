@@ -63,7 +63,7 @@ public class FlameProjectile : NetworkBehaviour
         GetComponent<ParticleSystem>().Play();
     }
 
-    [Client]
+    [ClientCallback]
     void OnEnableChanged(bool newEnabled)
     {
         if (newEnabled)

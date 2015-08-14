@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections.Generic;
+using Util;
 
 [NetworkSettings(channel = 0, sendInterval = 0.1f)]
 public class SyncTransform : NetworkBehaviour
@@ -26,7 +27,6 @@ public class SyncTransform : NetworkBehaviour
     private Vector3 lastPos;
     private float lastRot;
     private float threshold = 0.5f;
-    private float rotationThreshold = 0.001f;
 
     private List<Vector3> syncPosList = new List<Vector3>();
     private List<float> syncPlayerRotList = new List<float>();
@@ -172,23 +172,11 @@ public class SyncTransform : NetworkBehaviour
     {
         if (isClient)
         {
-            if (CheckIfBeyondThreshold(myTransform.localEulerAngles.y, lastRot))
+            if (FloatUtils.CloseEnough(myTransform.localEulerAngles.y, lastRot))
             {
                 lastRot = myTransform.localEulerAngles.y;
                 CmdProvideRotationToServer(lastRot);
             }
-        }
-    }
-
-    bool CheckIfBeyondThreshold(float rot1, float rot2)
-    {
-        if (Mathf.Abs(rot1 - rot2) > rotationThreshold)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
         }
     }
 

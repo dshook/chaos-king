@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 using UnityStandardAssets.CrossPlatformInput;
+using Util;
 
 namespace Player
 {
@@ -17,6 +18,11 @@ namespace Player
         Quaternion oldRotation = Quaternion.identity;
         int floorMask;
         float camRayLength = 100f;
+
+        float h = 0f;
+        float v = 0f;
+        float lastH = 0f;
+        float lastV = 0f;
 
         void Awake()
         {
@@ -36,29 +42,52 @@ namespace Player
 
             if (h != 0f || v != 0f)
             {
-                CmdMove(h, v);
+                if (!FloatUtils.CloseEnough(lastH, h) || !FloatUtils.CloseEnough(lastV, v))
+                {
+                    CmdMove(h, v);
+                }
             }
             else
             {
-                CmdStopMoving();
+                if (!FloatUtils.CloseEnough(lastH, h) || !FloatUtils.CloseEnough(lastV, v))
+                {
+                    CmdStopMoving();
+                }
             }
+            lastH = h;
+            lastV = v;
+
             Turning ();
+        }
+
+        void FixedUpdate()
+        {
+            if (!isServer) return;
+
+            if (isMoving)
+            {
+                movement.Set(h, 0f, v);
+                movement = movement.normalized * speed * Time.deltaTime;
+                playerRigidbody.MovePosition(transform.position + movement);
+            }
         }
 
         [Command]
         void CmdStopMoving()
         {
             isMoving = false;
+            h = 0;
+            v = 0;
         }
 
         [Command]
         void CmdMove(float h, float v)
         {
-            movement.Set (h, 0f, v);
-            movement = movement.normalized * speed * Time.deltaTime;
+            Debug.Log("Player Moving " + h + " v " + v);
             isMoving = true;
+            this.h = h;
+            this.v = v;
 
-            playerRigidbody.MovePosition (transform.position + movement);
         }
 
         void Turning()

@@ -882,7 +882,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
 --- !u!1 &113199646
 GameObject:
   m_ObjectHideFlags: 0
@@ -3657,7 +3657,7 @@ Transform:
   - {fileID: 1744564633}
   - {fileID: 1549346168}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
 --- !u!1 &525875588
 GameObject:
   m_ObjectHideFlags: 0
@@ -9646,48 +9646,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 20, y: 3, z: 1}
   m_Center: {x: 14, y: -13.5, z: -.600000024}
---- !u!1001 &1395693088
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 456978, guid: 82fa9da2167b559459693f906855e229, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -6.9000001
-      objectReference: {fileID: 0}
-    - target: {fileID: 456978, guid: 82fa9da2167b559459693f906855e229, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: .381999999
-      objectReference: {fileID: 0}
-    - target: {fileID: 456978, guid: 82fa9da2167b559459693f906855e229, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 3.1500001
-      objectReference: {fileID: 0}
-    - target: {fileID: 456978, guid: 82fa9da2167b559459693f906855e229, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 456978, guid: 82fa9da2167b559459693f906855e229, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 456978, guid: 82fa9da2167b559459693f906855e229, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 456978, guid: 82fa9da2167b559459693f906855e229, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 456978, guid: 82fa9da2167b559459693f906855e229, type: 2}
-      propertyPath: m_RootOrder
-      value: 9
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 82fa9da2167b559459693f906855e229, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &1397629896
 GameObject:
   m_ObjectHideFlags: 0
