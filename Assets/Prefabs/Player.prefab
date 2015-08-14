@@ -264,8 +264,6 @@ MonoBehaviour:
   reloadSpeedMultiplier: 1
   extraEnemiesPierced: 0
   ammoBoost: 0
-  maxAmmo: 10
-  currentAmmo: 0
   shootableMask: 0
 --- !u!114 &11414878
 MonoBehaviour:

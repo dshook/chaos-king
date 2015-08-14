@@ -83,7 +83,6 @@ namespace Player
         [Command]
         void CmdMove(float h, float v)
         {
-            Debug.Log("Player Moving " + h + " v " + v);
             isMoving = true;
             this.h = h;
             this.v = v;
