@@ -23,10 +23,9 @@ namespace Weapons
 
             if (isServer)
             {
-                var hiddenSpawn = new Vector3(0, -100, 0);
                 for (int i = 0; i < maxFlames; i++)
                 {
-                    var flame = Instantiate(flamePrefab, hiddenSpawn, Quaternion.identity) as GameObject;
+                    var flame = Instantiate(flamePrefab, Util.Vector.hiddenSpawn, Quaternion.identity) as GameObject;
                     flame.GetComponent<FlameProjectile>().enabled = false;
                     flameArray[i] = flame;
                     NetworkServer.Spawn(flame);

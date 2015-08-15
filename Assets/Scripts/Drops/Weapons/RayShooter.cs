@@ -58,6 +58,7 @@ namespace Weapons
                 {
                     gunLines[i] = createLine();
                 }
+                RpcDisableEffects(gunLines);
             }
         }
 
@@ -165,7 +166,10 @@ namespace Weapons
         [ClientRpc]
         public void RpcDisableEffects(GameObject[] gunLines)
         {
-            gunLight.enabled = false;
+            if (gunLight != null)
+            {
+                gunLight.enabled = false;
+            }
 
             foreach (var line in gunLines)
             {
@@ -178,7 +182,7 @@ namespace Weapons
 
         GameObject createLine()
         {
-            var newGunLine = Instantiate(gunLinePrefab);
+            var newGunLine = (GameObject)Instantiate(gunLinePrefab, Util.Vector.hiddenSpawn, Quaternion.identity);
             newGunLine.transform.parent = gunTip.transform;
             var renderer = newGunLine.GetComponent<LineRenderer>();
             renderer.enabled = false;

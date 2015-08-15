@@ -308,7 +308,7 @@ MonoBehaviour:
   m_TransformSyncMode: 3
   m_SendInterval: .0833333358
   m_SyncRotationAxis: 2
-  m_RotationSyncCompression: 1
+  m_RotationSyncCompression: 0
   m_SyncSpin: 0
   m_MovementTheshold: 9.99999975e-05
   m_SnapThreshold: 50
@@ -544,7 +544,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_RotationSyncCompression
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: perks
