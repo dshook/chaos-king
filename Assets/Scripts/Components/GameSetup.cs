@@ -110,7 +110,7 @@ public class GameSetup : NetworkBehaviour
 
     public void SetupGameOver(NetworkConnection newConn, CustomNetManager netManager, GameObject newPlayer)
     {
-        var gameOver = newPlayer.GetComponent<GameOverManager>();
+        var gameOver = newPlayer.GetComponent<PlayerRespawn>();
         gameOver.netManager = netManager;
 
         var msg = new PlayerMessage();
@@ -123,7 +123,7 @@ public class GameSetup : NetworkBehaviour
     {
         var msg = netMsg.ReadMessage<PlayerMessage>();
 
-        var gameOver = msg.player.GetComponent<GameOverManager>();
+        var gameOver = msg.player.GetComponent<PlayerRespawn>();
         gameOver.anim = GameObject.Find("HUDCanvas").GetComponent<Animator>();
     }
 

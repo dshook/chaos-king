@@ -383,6 +383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 544f2064df03e95419b4a5147c506b08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingHealth: 30
   maxHealth: 30
   currentHealth: 0
   deathClip: {fileID: 8300000, guid: d36a393bca4582043982db9089e1694f, type: 3}
@@ -399,6 +400,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ec45203ae7a1a54c9d02c355f983833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingSpeed: 6
   speed: 6
 --- !u!136 &13600726
 CapsuleCollider:
@@ -550,6 +552,10 @@ Prefab:
       propertyPath: perks
       value: 
       objectReference: {fileID: 11423166}
+    - target: {fileID: 0}
+      propertyPath: startingHealth
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 162382}

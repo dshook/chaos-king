@@ -6,6 +6,7 @@ namespace Player
 {
     public class PlayerHealth : NetworkBehaviour
     {
+        public int startingHealth = 10;
         public int maxHealth = 10;
 
         [SyncVar]
@@ -20,6 +21,7 @@ namespace Player
         Animator anim;
         AudioSource playerAudio;
         PlayerMovement playerMovement;
+        PlayerShooting playerShooting;
         GameObject playerWeapon;
         bool isDead;
         bool damaged;
@@ -30,14 +32,14 @@ namespace Player
             anim = GetComponent<Animator>();
             playerAudio = GetComponent<AudioSource>();
             playerMovement = GetComponent<PlayerMovement>();
+            playerShooting = GetComponent<PlayerShooting>();
             playerWeapon = transform.FindChild("Weapon").gameObject;
-            currentHealth = maxHealth;
 
             var healthUI = GameObject.Find("HealthUI");
             healthSlider = healthUI.GetComponentInChildren<Slider>();
             damageImage = GameObject.Find("DamageImage").GetComponent<Image>();
 
-            UpdateHealthSlider();
+            ResetHealth();
         }
 
 
@@ -57,7 +59,6 @@ namespace Player
         public void TakeDamage(int amount)
         {
             if (!isServer) return;
-
 
             currentHealth -= amount;
 
@@ -86,6 +87,13 @@ namespace Player
             UpdateHealthSlider();
         }
 
+        public void ResetHealth()
+        {
+            maxHealth = startingHealth;
+            currentHealth = maxHealth;
+            UpdateHealthSlider();
+        }
+
         void UpdateHealthSlider()
         {
             healthSlider.maxValue = maxHealth;
@@ -100,8 +108,7 @@ namespace Player
             RpcDeath();
 
             playerMovement.enabled = false;
-            playerWeapon = transform.FindChild("Weapon").gameObject;
-            playerWeapon.SetActive(false);
+            playerShooting.Disable();
         }
 
         [ClientRpc]
@@ -113,25 +120,19 @@ namespace Player
             playerAudio.Play();
 
             playerMovement.enabled = false;
-            playerWeapon = transform.FindChild("Weapon").gameObject;
-            playerWeapon.SetActive(false);
+            playerShooting.Disable();
         }
 
         //opposite of death of course
         public void Live()
         {
             anim.SetTrigger("Live");
-            currentHealth = maxHealth;
+            ResetHealth();
+
             playerMovement.enabled = true;
-            playerWeapon = transform.FindChild("Weapon").gameObject;
-            playerWeapon.SetActive(true);
+            playerShooting.Enable();
             
             isDead = false;
-        }
-
-        [ClientRpc]
-        void RpcLive()
-        {
         }
     }
 }

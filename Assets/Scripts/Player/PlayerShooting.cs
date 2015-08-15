@@ -14,6 +14,16 @@ namespace Player
         [SyncVar] public int extraEnemiesPierced = 0;
         [SyncVar] public int ammoBoost = 0;
 
+        public void ResetMultipliers()
+        {
+            damageMultiplier = 1;
+            attackSpeedMultiplier = 1;
+            rangeMultiplier = 1;
+            reloadSpeedMultiplier = 1;
+            extraEnemiesPierced = 0;
+            ammoBoost = 0;
+        }
+
         public int currentAmmo
         {
             get
@@ -37,6 +47,7 @@ namespace Player
                 return 0;
             }
         }
+
 
         public int shootableMask;
 
@@ -98,6 +109,16 @@ namespace Player
         public void CmdStopShooting()
         {
             isShooting = false;
+        }
+
+        public void Enable()
+        {
+            enabled = true;
+        }
+
+        public void Disable()
+        {
+            enabled = false;
         }
     }
 }

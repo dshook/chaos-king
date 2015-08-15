@@ -75,6 +75,13 @@ namespace Player {
             availablePerks++;
         }
 
+        [Server]
+        public void ResetPerks()
+        {
+            availablePerks = 0;
+            perksApplied.Clear();
+        }
+
         int NextPerkLevel(IPerk perk) {
             var thisKindOfPerk = perksApplied.Where(x => x.GetType() == perk.GetType());
             if (thisKindOfPerk.Any())

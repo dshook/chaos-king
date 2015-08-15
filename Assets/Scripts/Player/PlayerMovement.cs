@@ -7,6 +7,7 @@ namespace Player
 {
     public class PlayerMovement : NetworkBehaviour
     {
+        public float startingSpeed = 6f;
         public float speed = 6f;
 
         [SyncVar]
@@ -115,6 +116,11 @@ namespace Player
 
         void Animating(){
             anim.SetBool ("IsWalking", isMoving);
+        }
+
+        public void ResetSpeed()
+        {
+            speed = startingSpeed;
         }
     }
 }

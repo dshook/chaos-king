@@ -38,6 +38,13 @@ namespace Player
             }
         }
 
+        public void Respawn()
+        {
+            if (!isServer) return;
+            experience = 0;
+            level = 1;
+        }
+
         void LevelUp()
         {
             while (experience >= level)

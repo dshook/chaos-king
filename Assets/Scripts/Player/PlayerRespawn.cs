@@ -2,7 +2,7 @@
 using UnityEngine.Networking;
 using Player;
 
-public class GameOverManager : NetworkBehaviour
+public class PlayerRespawn : NetworkBehaviour
 {
     //both of these set via script when the player spawns
     public Animator anim;
@@ -11,6 +11,10 @@ public class GameOverManager : NetworkBehaviour
     public float restartDelay = 5f;
 
     PlayerHealth playerHealth;
+    PlayerLevel playerLevel;
+    PlayerPerks playerPerks;
+    PlayerShooting playerShooting;
+    PlayerMovement playerMovement;
     float restartTimer;
     bool dead = false;
 
@@ -18,6 +22,10 @@ public class GameOverManager : NetworkBehaviour
     void Awake()
     {
         playerHealth = GetComponent<PlayerHealth>();
+        playerLevel = GetComponent<PlayerLevel>();
+        playerPerks = GetComponent<PlayerPerks>();
+        playerShooting = GetComponent<PlayerShooting>();
+        playerMovement = GetComponent<PlayerMovement>();
     }
 
 
@@ -37,6 +45,10 @@ public class GameOverManager : NetworkBehaviour
 
             if (restartTimer >= restartDelay)
             {
+                playerLevel.Respawn();
+                playerPerks.ResetPerks();
+                playerShooting.ResetMultipliers();
+                playerMovement.ResetSpeed();
                 playerHealth.Live();
                 dead = false;
                 var spawnPoint = netManager.spawnPoints[Random.Range(0, netManager.spawnPoints.Length)];
