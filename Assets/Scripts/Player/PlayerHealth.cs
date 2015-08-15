@@ -22,7 +22,6 @@ namespace Player
         AudioSource playerAudio;
         PlayerMovement playerMovement;
         PlayerShooting playerShooting;
-        GameObject playerWeapon;
         bool isDead;
         bool damaged;
 
@@ -33,7 +32,6 @@ namespace Player
             playerAudio = GetComponent<AudioSource>();
             playerMovement = GetComponent<PlayerMovement>();
             playerShooting = GetComponent<PlayerShooting>();
-            playerWeapon = transform.FindChild("Weapon").gameObject;
 
             var healthUI = GameObject.Find("HealthUI");
             healthSlider = healthUI.GetComponentInChildren<Slider>();
