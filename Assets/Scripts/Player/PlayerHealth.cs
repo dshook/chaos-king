@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
+using Util;
 
 namespace Player
 {
@@ -60,7 +61,12 @@ namespace Player
 
             currentHealth -= amount;
 
-            RpcTakeDamage(amount);
+            var playerDmgMsg = new PlayerDamageMessage()
+            {
+                player = this.gameObject,
+                amount = amount
+            };
+            NetworkServer.SendToClient(connectionToClient.connectionId, MessageTypes.PlayerDamage, playerDmgMsg);
 
             if (currentHealth <= 0 && !isDead)
             {
@@ -68,8 +74,22 @@ namespace Player
             }
         }
 
-        [ClientRpc]
-        private void RpcTakeDamage(int amount)
+        public static void OnTakeDamage(NetworkMessage netMsg)
+        {
+
+            var msg = netMsg.ReadMessage<PlayerDamageMessage>();
+            var playerHealth = msg.player.GetComponent<PlayerHealth>();
+
+            playerHealth.ClientTakeDamage(msg.amount);
+        }
+
+        class PlayerDamageMessage : MessageBase
+        {
+            public GameObject player;
+            public int amount;
+        }
+
+        public void ClientTakeDamage(int amount)
         {
             damaged = true;
             UpdateHealthSlider();

@@ -10,5 +10,7 @@
 
         public static short GrantPerk = 1005;
         public static short PerkDone = 1006;
+
+        public static short PlayerDamage = 1007;
     }
 }

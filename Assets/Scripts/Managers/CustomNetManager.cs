@@ -54,6 +54,7 @@ public class CustomNetManager : NetworkManager
         client.RegisterHandler(MessageTypes.GrantExperience, PlayerLevel.OnPlayerExperience);
         client.RegisterHandler(MessageTypes.GrantPerk, PlayerPerks.OnShowUi);
         client.RegisterHandler(MessageTypes.PerkDone, PlayerPerks.OnHideUi);
+        client.RegisterHandler(MessageTypes.PlayerDamage, PlayerHealth.OnTakeDamage);
 
     }
 
