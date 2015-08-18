@@ -13,18 +13,13 @@ namespace Player
         [SyncVar]
         public int currentHealth;
         public AudioClip deathClip;
-        public float flashSpeed = 5f;
-        public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
 
-
-        Slider healthSlider;
-        Image damageImage;
         Animator anim;
         AudioSource playerAudio;
         PlayerMovement playerMovement;
         PlayerShooting playerShooting;
         bool isDead;
-        bool damaged;
+        public bool damaged;
 
 
         void Awake()
@@ -34,24 +29,14 @@ namespace Player
             playerMovement = GetComponent<PlayerMovement>();
             playerShooting = GetComponent<PlayerShooting>();
 
-            var healthUI = GameObject.Find("HealthUI");
-            healthSlider = healthUI.GetComponentInChildren<Slider>();
-            damageImage = GameObject.Find("DamageImage").GetComponent<Image>();
-
             ResetHealth();
         }
 
 
         void Update()
         {
-            if (damaged)
-            {
-                damageImage.color = flashColour;
-            }
-            else
-            {
-                damageImage.color = Color.Lerp(damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
-            }
+            //reset damaged to be false, note any scripts relying on this need to execute first
+            //changing to a damage event is probably a good idea
             damaged = false;
         }
 
@@ -92,7 +77,6 @@ namespace Player
         public void ClientTakeDamage(int amount)
         {
             damaged = true;
-            UpdateHealthSlider();
             FloatingTextManager.PlayerDamage(amount, transform.position);
 
             playerAudio.Play();
@@ -102,20 +86,12 @@ namespace Player
         {
             maxHealth += amount;
             currentHealth += amount;
-            UpdateHealthSlider();
         }
 
         public void ResetHealth()
         {
             maxHealth = startingHealth;
             currentHealth = maxHealth;
-            UpdateHealthSlider();
-        }
-
-        void UpdateHealthSlider()
-        {
-            healthSlider.maxValue = maxHealth;
-            healthSlider.value = currentHealth;
         }
 
 

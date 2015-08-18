@@ -9,6 +9,7 @@ public class GameSetup : NetworkBehaviour
 {
     public GameObject LevelUI;
     public GameObject AmmoUI;
+    public GameObject HealthUI;
 
     public GameObject StartingWeaponPrefab;
 
@@ -34,6 +35,12 @@ public class GameSetup : NetworkBehaviour
         if (ammoUIComponent.player == null)
         {
             ammoUIComponent.player = player;
+        }
+
+        var healthUIComponent = HealthUI.GetComponent<HealthUI>();
+        if (healthUIComponent.player == null)
+        {
+            healthUIComponent.player = player;
         }
     }
 
