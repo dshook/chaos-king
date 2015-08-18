@@ -12,6 +12,11 @@ public class GameSetup : NetworkBehaviour
 
     public GameObject StartingWeaponPrefab;
 
+    public void Awake()
+    {
+        DontDestroyOnLoad(transform.gameObject);
+    }
+
     public void SetupUI(GameObject player)
     {
         if (LevelUI == null)
