@@ -43,7 +43,8 @@ public class WeaponPickup : NetworkBehaviour
         weapon.GetComponent<BoxCollider>().enabled = false;
         weapon.GetComponent<WeaponMovement>().enabled = false;
         weapon.GetComponent<WeaponPickup>().enabled = false;
-        weapon.GetComponent<KillTimer>().enabled = false;
+
+        Destroy(weapon.GetComponent<KillTimer>());
 
         //activate players new weapon
         var weaponShoot = weapon.GetComponent<IShoot>();

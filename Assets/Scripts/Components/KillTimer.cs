@@ -5,10 +5,15 @@ using Player;
 public class KillTimer : MonoBehaviour
 {
     public float killTime = 10f;
+    float timer = 0;
 
-    // Use this for initialization
-    void Start()
+    void Update()
     {
-        Destroy(gameObject, killTime);
+        timer += Time.deltaTime;
+
+        if (timer > killTime)
+        {
+            Destroy(gameObject);
+        }
     }
 }
