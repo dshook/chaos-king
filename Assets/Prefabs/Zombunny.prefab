@@ -250,6 +250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f4850c5086f5364ea35707d53c22eb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  disableBigJumpLerp: 0
 --- !u!114 &11487408
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -304,7 +305,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: .800000012
+  m_Radius: .850000024
   m_Center: {x: 0, y: .800000012, z: 0}
 --- !u!136 &13611082
 CapsuleCollider:

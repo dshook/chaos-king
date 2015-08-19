@@ -51,6 +51,9 @@ public class EnemyMovement : NetworkBehaviour
         float minRange = float.MaxValue;
         foreach (var p in players)
         {
+            var tmpPlayerHealth = p.GetComponent<PlayerHealth>();
+            if (tmpPlayerHealth.currentHealth <= 0) continue;
+
             var dist = Vector3.Distance(p.transform.position, transform.position);
             if (dist < minRange)
             {
