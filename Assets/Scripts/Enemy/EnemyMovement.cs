@@ -4,11 +4,12 @@ using Player;
 
 public class EnemyMovement : NetworkBehaviour
 {
-    public float aggroTime = 10f;
+    public float aggroTime = 3f;
 
     Transform playerTransform;
     PlayerHealth playerHealth;
     EnemyHealth enemyHealth;
+    Animator anim;
     NavMeshAgent nav;
 
     GameObject[] players;
@@ -22,6 +23,7 @@ public class EnemyMovement : NetworkBehaviour
     {
         enemyHealth = GetComponent<EnemyHealth>();
         nav = GetComponent<NavMeshAgent>();
+        anim = GetComponent<Animator>();
 
         CustomNetManager.OnPlayerJoined += OnUpdatePlayer;
         CustomNetManager.OnPlayerLeft += OnUpdatePlayer;
@@ -62,6 +64,14 @@ public class EnemyMovement : NetworkBehaviour
                 playerTransform = p.transform;
             }
         }
-        playerHealth = playerTransform.GetComponent<PlayerHealth>();
+        if (playerTransform != null)
+        {
+            playerHealth = playerTransform.GetComponent<PlayerHealth>();
+            anim.SetBool("IsMoving", true);
+        }
+        else
+        {
+            anim.SetBool("IsMoving", false);
+        }
     }
 }
