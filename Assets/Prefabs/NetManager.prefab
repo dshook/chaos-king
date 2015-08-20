@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &102388
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 406604}
+  m_Layer: 0
+  m_Name: Spawn5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &116202
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 483080}
+  m_Layer: 0
+  m_Name: Spawn3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &133980
 GameObject:
   m_ObjectHideFlags: 0
@@ -9,7 +39,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 431088}
   m_Layer: 0
-  m_Name: Spawn2
+  m_Name: Spawn6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,6 +77,72 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &176078
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 410514}
+  m_Layer: 0
+  m_Name: Spawn2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &190820
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 430842}
+  m_Layer: 0
+  m_Name: Spawn4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &406604
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 102388}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.29999995, y: 0, z: -73.5999985}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 472408}
+  m_RootOrder: 4
+--- !u!4 &410514
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 176078}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.51000023, y: 0, z: 3.92000008}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 472408}
+  m_RootOrder: 1
+--- !u!4 &430842
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 190820}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 26.5, y: 0, z: -62.0999985}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 472408}
+  m_RootOrder: 3
 --- !u!4 &431088
 Transform:
   m_ObjectHideFlags: 1
@@ -54,11 +150,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 133980}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.51000023, y: 0, z: 0}
+  m_LocalPosition: {x: -40.2999992, y: 0, z: -41.9000015}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 472408}
-  m_RootOrder: 1
+  m_RootOrder: 5
 --- !u!4 &443452
 Transform:
   m_ObjectHideFlags: 1
@@ -66,7 +162,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 173018}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.430000007, y: 0, z: -9.60000038}
+  m_LocalPosition: {x: -24.0900002, y: 0, z: -9.60999966}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 472408}
@@ -82,9 +178,25 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 443452}
+  - {fileID: 410514}
+  - {fileID: 483080}
+  - {fileID: 430842}
+  - {fileID: 406604}
   - {fileID: 431088}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!4 &483080
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 116202}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 35.0699997, y: 0, z: -26.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 472408}
+  m_RootOrder: 2
 --- !u!114 &11429070
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -104,7 +216,7 @@ MonoBehaviour:
   m_MaxDelay: .00999999978
   m_LogLevel: 2
   m_PlayerPrefab: {fileID: 162382, guid: 14a4acc8babab324b9f99c13dc1624db, type: 2}
-  m_AutoCreatePlayer: 1
+  m_AutoCreatePlayer: 0
   m_PlayerSpawnMethod: 0
   m_OfflineScene: Level 01
   m_OnlineScene: Level 01
@@ -113,12 +225,12 @@ MonoBehaviour:
   - {fileID: 133982, guid: c12fe44159aa09b449f183ec1e6cde1a, type: 2}
   - {fileID: 104722, guid: 2f8e5dcb17eda3542bf9cd4ef63425e3, type: 2}
   - {fileID: 184446, guid: 14c6678648debfe4e96c1def5b02749e, type: 2}
-  - {fileID: 127036, guid: 54594f5b413d1c243a1857d5c00deb10, type: 2}
-  - {fileID: 186040, guid: 2b583d02e48091a4ba753f5a97ee6dac, type: 2}
-  - {fileID: 132224, guid: 82fa9da2167b559459693f906855e229, type: 2}
-  - {fileID: 187888, guid: e01a43c006445954bb898a1c979787eb, type: 2}
+  - {fileID: 129652, guid: e01a43c006445954bb898a1c979787eb, type: 2}
+  - {fileID: 149704, guid: 82fa9da2167b559459693f906855e229, type: 2}
+  - {fileID: 138904, guid: 2b583d02e48091a4ba753f5a97ee6dac, type: 2}
+  - {fileID: 180050, guid: 54594f5b413d1c243a1857d5c00deb10, type: 2}
   - {fileID: 156662, guid: dc98ba281f3e54e488810a444298a3ee, type: 2}
-  - {fileID: 196766, guid: 6c811dc912af09f42bbbff8467836b84, type: 2}
+  - {fileID: 0}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
@@ -140,7 +252,7 @@ MonoBehaviour:
     m_MaxSentMessageQueueSize: 128
     m_IsAcksLong: 0
     m_Channels: []
-  m_Channels: 
+  m_Channels: 0500000000000000
   m_UseSimulator: 0
   m_SimulatedLatency: 1
   m_PacketLossPercentage: 0
@@ -153,6 +265,10 @@ MonoBehaviour:
   gameSetup: {fileID: 0}
   spawnPoints:
   - {fileID: 443452}
+  - {fileID: 410514}
+  - {fileID: 483080}
+  - {fileID: 430842}
+  - {fileID: 406604}
   - {fileID: 431088}
 --- !u!114 &11441390
 MonoBehaviour:
