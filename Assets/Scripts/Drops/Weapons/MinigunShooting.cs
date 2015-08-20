@@ -8,15 +8,15 @@ namespace Weapons
         {
             base.Start();
 
-            damagePerShot = 5;
+            damagePerShot = 8;
             timeBetweenBullets = 0.05f;
-            range = 100f;
-            enemiesPierced = 1;
+            range = 60f;
+            enemiesPierced = 2;
             shotFired = 1;
             spreadAngle = 0;
             maxAmmo = 100;
             currentAmmo = 0;
-            reloadSpeed = 5f;
+            reloadSpeed = 3f;
 
             currentAmmo = maxAmmo;
         }

@@ -9,8 +9,8 @@ namespace Weapons
             base.Start();
 
             damagePerShot = 20;
-            timeBetweenBullets = 0.15f;
-            range = 100f;
+            timeBetweenBullets = 0.35f;
+            range = 10f;
             enemiesPierced = 5;
             shotFired = 5;
             spreadAngle = 20;

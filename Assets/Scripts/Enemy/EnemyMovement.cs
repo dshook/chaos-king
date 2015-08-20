@@ -24,7 +24,7 @@ public class EnemyMovement : NetworkBehaviour
         nav = GetComponent<NavMeshAgent>();
 
         CustomNetManager.OnPlayerJoined += OnUpdatePlayer;
-        CustomNetManager.OnPlayerJoined += OnUpdatePlayer;
+        CustomNetManager.OnPlayerLeft += OnUpdatePlayer;
     }
 
 
@@ -45,6 +45,7 @@ public class EnemyMovement : NetworkBehaviour
         }
     }
 
+    [Server]
     void FindClosestPlayer() {
         players = GameObject.FindGameObjectsWithTag("Player");
 

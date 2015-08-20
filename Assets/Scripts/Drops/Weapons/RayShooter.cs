@@ -31,7 +31,7 @@ namespace Weapons
         protected PlayerLevel playerLevel;
         protected AudioSource gunAudio;
         protected Light gunLight;
-        protected float effectsDisplayTime = 0.4f;
+        protected float effectsDisplayTime = 0.2f;
         protected Transform gunTip;
 
         private bool effectsShowing = false;
@@ -123,23 +123,26 @@ namespace Weapons
             gunLine.SetStart(gunTip.position);
 
             shootRay.origin = gunTip.position;
-            shootRay.direction = Quaternion.Euler(0, angle, 0) * gunTip.forward;
+            shootRay.direction = (Quaternion.Euler(0, angle, 0) * gunTip.forward).normalized;
+            var remainingRange = range * playerShooting.rangeMultiplier;
 
             for (var p = 0; p <= (enemiesPierced + playerShooting.extraEnemiesPierced); p++)
             {
-                if (Physics.Raycast(shootRay, out shootHit, range * playerShooting.rangeMultiplier, playerShooting.shootableMask))
+                if (Physics.Raycast(shootRay, out shootHit, remainingRange, playerShooting.shootableMask))
                 {
                     EnemyHealth enemyHealth = shootHit.collider.GetComponent<EnemyHealth>();
                     if (enemyHealth != null)
                     {
                         enemyHealth.TakeDamage(Mathf.RoundToInt(damagePerShot * playerShooting.damageMultiplier), shootHit.point, playerLevel);
                     }
+                    remainingRange -= Vector3.Distance(shootRay.origin, shootHit.point);
+
                     gunLine.SetEnd(shootHit.point);
                     shootRay.origin = shootHit.point;
                 }
                 else
                 {
-                    gunLine.SetEnd(shootRay.origin + shootRay.direction * range * playerShooting.rangeMultiplier);
+                    gunLine.SetEnd(shootRay.origin + (shootRay.direction * remainingRange));
                     break;
                 }
             }

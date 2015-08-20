@@ -10,7 +10,7 @@ namespace Weapons
 
             damagePerShot = 10;
             timeBetweenBullets = 0.15f;
-            range = 100f;
+            range = 80f;
             enemiesPierced = 0;
             shotFired = 1;
             spreadAngle = 2;

@@ -22,3 +22,5 @@ test_Data/
 test.exe
 player_win_development_x86.pdb
 .gitconfig
+test.app/
+.DS_Store
