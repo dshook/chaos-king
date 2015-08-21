@@ -22,16 +22,23 @@ public class CustomNetManager : NetworkManager
         player.name = "Player " + conn.connectionId;
         NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
 
-        gameSetup.SendSetupUi(player);
-        gameSetup.GiveInitialWeapon(player);
-        gameSetup.SyncPlayerWeapons(player);
-        gameSetup.RpcSetupPlayerIds();
-        gameSetup.SetupGameOver(conn, this, player);
+        var b = GameObject.FindObjectOfType<GameSetup>();
+
+        //gameSetup.SendSetupUi(player);
+        //gameSetup.GiveInitialWeapon(player);
+        //gameSetup.SyncPlayerWeapons(player);
+        //gameSetup.RpcSetupPlayerIds();
+        //gameSetup.SetupGameOver(conn, this, player);
 
         if (OnPlayerJoined != null)
         {
             OnPlayerJoined();
         }
+    }
+
+    public override void OnStartServer()
+    {
+        base.OnStartServer();
     }
 
     public override void OnServerConnect(NetworkConnection conn)
@@ -47,7 +54,8 @@ public class CustomNetManager : NetworkManager
     public override void OnClientConnect(NetworkConnection conn)
     {
         base.OnClientConnect(conn);
-        ClientScene.AddPlayer(0);
+
+        ClientScene.AddPlayer(conn, 0);
         client.RegisterHandler(MessageTypes.SetupUi, GameSetup.OnSetupUi);
         client.RegisterHandler(MessageTypes.SetupWeapons, GameSetup.OnSetupWeapon);
         client.RegisterHandler(MessageTypes.SetupGameOver, GameSetup.OnSetupGameOver);
@@ -55,7 +63,6 @@ public class CustomNetManager : NetworkManager
         client.RegisterHandler(MessageTypes.GrantPerk, PlayerPerks.OnShowUi);
         client.RegisterHandler(MessageTypes.PerkDone, PlayerPerks.OnHideUi);
         client.RegisterHandler(MessageTypes.PlayerDamage, PlayerHealth.OnTakeDamage);
-
     }
 
     public override void OnServerDisconnect(NetworkConnection conn)
@@ -73,13 +80,19 @@ public class CustomNetManager : NetworkManager
         }
     }
 
+    public int port = 7777;
+
     public void StartGame()
     {
+        NetworkManager.singleton.networkPort = port;
         NetworkManager.singleton.StartHost();
     }
 
-    public void JoinGame()
+    public void JoinGame(string serverIp)
     {
+        NetworkManager.singleton.networkAddress = serverIp;
+        NetworkManager.singleton.networkPort = port;
+
         NetworkManager.singleton.StartClient();
     }
 }

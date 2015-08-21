@@ -51,6 +51,11 @@ public class EnemyMovement : NetworkBehaviour
     void FindClosestPlayer() {
         players = GameObject.FindGameObjectsWithTag("Player");
 
+        if (transform == null)
+        {
+            return;
+        }
+
         float minRange = float.MaxValue;
         foreach (var p in players)
         {

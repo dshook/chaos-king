@@ -15,7 +15,7 @@ public class GameSetup : NetworkBehaviour
 
     public void Awake()
     {
-        DontDestroyOnLoad(transform.gameObject);
+        //DontDestroyOnLoad(transform.gameObject);
     }
 
     public void SetupUI(GameObject player)
