@@ -15,51 +15,14 @@ public class CustomNetManager : NetworkManager
     public delegate void PlayerLeft();
     public static event PlayerLeft OnPlayerLeft;
 
-    void Awake()
-    {
-        DontDestroyOnLoad(this);
-        NetworkManager.singleton = this;
-    }
-
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
     {
         var spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
         GameObject player = (GameObject)Instantiate(base.playerPrefab, spawnPoint.position, Quaternion.identity);
         player.name = "Player " + conn.connectionId;
+        Debug.Log(player.name + " joined");
         NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
 
-        //gameSetup.SendSetupUi(player);
-        //gameSetup.GiveInitialWeapon(player);
-        //gameSetup.SyncPlayerWeapons(player);
-        //gameSetup.RpcSetupPlayerIds();
-        //gameSetup.SetupGameOver(conn, this, player);
-
-        if (OnPlayerJoined != null)
-        {
-            OnPlayerJoined(player);
-        }
-    }
-
-    public override void OnStartServer()
-    {
-        base.OnStartServer();
-    }
-
-    public override void OnServerConnect(NetworkConnection conn)
-    {
-        base.OnServerConnect(conn);
-    }
-
-    public override void OnServerReady(NetworkConnection conn)
-    {
-        base.OnServerReady(conn);
-    }
-
-    public override void OnClientConnect(NetworkConnection conn)
-    {
-        //base.OnClientConnect(conn);
-
-        ClientScene.AddPlayer(conn, 0);
         client.RegisterHandler(MessageTypes.SetupUi, GameSetup.OnSetupUi);
         client.RegisterHandler(MessageTypes.SetupWeapons, GameSetup.OnSetupWeapon);
         client.RegisterHandler(MessageTypes.SetupGameOver, GameSetup.OnSetupGameOver);
@@ -67,11 +30,11 @@ public class CustomNetManager : NetworkManager
         client.RegisterHandler(MessageTypes.GrantPerk, PlayerPerks.OnShowUi);
         client.RegisterHandler(MessageTypes.PerkDone, PlayerPerks.OnHideUi);
         client.RegisterHandler(MessageTypes.PlayerDamage, PlayerHealth.OnTakeDamage);
-    }
 
-    public override void OnServerDisconnect(NetworkConnection conn)
-    {
-        base.OnServerDisconnect(conn);
+        if (OnPlayerJoined != null)
+        {
+            OnPlayerJoined(player);
+        }
     }
 
     public override void OnServerRemovePlayer(NetworkConnection conn, PlayerController player)

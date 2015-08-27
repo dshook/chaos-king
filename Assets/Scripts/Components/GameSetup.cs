@@ -16,18 +16,17 @@ public class GameSetup : NetworkBehaviour
 
     public void Awake()
     {
-        //DontDestroyOnLoad(transform.gameObject);
-        CustomNetManager.OnPlayerJoined += SpawnPlayer;
+        CustomNetManager.OnPlayerJoined += SetupPlayer;
     }
 
     [Server]
-    void SpawnPlayer(GameObject player)
+    void SetupPlayer(GameObject player)
     {
         SendSetupUi(player);
         GiveInitialWeapon(player);
         SyncPlayerWeapons(player);
         RpcSetupPlayerIds();
-        //SetupGameOver(
+        SetupGameOver(player);
     }
 
     public void SetupUI(GameObject player)
@@ -132,15 +131,19 @@ public class GameSetup : NetworkBehaviour
         weaponPickup.PickupWeapon(msg.player);
     }
 
-    public void SetupGameOver(NetworkConnection newConn, CustomNetManager netManager, GameObject newPlayer)
+    public void SetupGameOver(GameObject player)
     {
-        var gameOver = newPlayer.GetComponent<PlayerRespawn>();
+        CustomNetManager netManager = GameObject.FindObjectOfType<CustomNetManager>();
+
+        var gameOver = player.GetComponent<PlayerRespawn>();
         gameOver.netManager = netManager;
 
         var msg = new PlayerMessage();
-        msg.player = newPlayer;
+        msg.player = player;
 
-        newConn.Send(MessageTypes.SetupGameOver, msg);
+        var connectionId = player.GetComponent<NetworkIdentity>().connectionToClient.connectionId;
+
+        NetworkServer.SendToClient(connectionId, MessageTypes.SetupGameOver, msg);
     }
 
     public static void OnSetupGameOver(NetworkMessage netMsg)
