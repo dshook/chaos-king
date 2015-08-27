@@ -20,9 +20,14 @@ public class GameSetup : NetworkBehaviour
         CustomNetManager.OnPlayerJoined += SpawnPlayer;
     }
 
-    void SpawnPlayer()
+    [Server]
+    void SpawnPlayer(GameObject player)
     {
-
+        SendSetupUi(player);
+        GiveInitialWeapon(player);
+        SyncPlayerWeapons(player);
+        RpcSetupPlayerIds();
+        //SetupGameOver(
     }
 
     public void SetupUI(GameObject player)

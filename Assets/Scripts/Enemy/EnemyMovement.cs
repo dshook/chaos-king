@@ -15,6 +15,10 @@ public class EnemyMovement : NetworkBehaviour
     GameObject[] players;
     float playerTimer = 0f;
 
+    void OnPlayerJoined(GameObject player)
+    {
+        OnUpdatePlayer();
+    }
     void OnUpdatePlayer() {
         FindClosestPlayer();
     }
@@ -25,7 +29,7 @@ public class EnemyMovement : NetworkBehaviour
         nav = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
 
-        CustomNetManager.OnPlayerJoined += OnUpdatePlayer;
+        CustomNetManager.OnPlayerJoined += OnPlayerJoined;
         CustomNetManager.OnPlayerLeft += OnUpdatePlayer;
     }
 

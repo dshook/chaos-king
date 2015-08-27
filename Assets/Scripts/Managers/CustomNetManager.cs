@@ -10,10 +10,16 @@ public class CustomNetManager : NetworkManager
     public GameSetup gameSetup;
     public Transform[] spawnPoints;
 
-    public delegate void PlayerJoined();
+    public delegate void PlayerJoined(GameObject player);
     public static event PlayerJoined OnPlayerJoined;
     public delegate void PlayerLeft();
     public static event PlayerLeft OnPlayerLeft;
+
+    void Awake()
+    {
+        DontDestroyOnLoad(this);
+        NetworkManager.singleton = this;
+    }
 
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
     {
@@ -21,8 +27,6 @@ public class CustomNetManager : NetworkManager
         GameObject player = (GameObject)Instantiate(base.playerPrefab, spawnPoint.position, Quaternion.identity);
         player.name = "Player " + conn.connectionId;
         NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
-
-        var b = GameObject.FindObjectOfType<GameSetup>();
 
         //gameSetup.SendSetupUi(player);
         //gameSetup.GiveInitialWeapon(player);
@@ -32,7 +36,7 @@ public class CustomNetManager : NetworkManager
 
         if (OnPlayerJoined != null)
         {
-            OnPlayerJoined();
+            OnPlayerJoined(player);
         }
     }
 
@@ -53,7 +57,7 @@ public class CustomNetManager : NetworkManager
 
     public override void OnClientConnect(NetworkConnection conn)
     {
-        base.OnClientConnect(conn);
+        //base.OnClientConnect(conn);
 
         ClientScene.AddPlayer(conn, 0);
         client.RegisterHandler(MessageTypes.SetupUi, GameSetup.OnSetupUi);
@@ -84,6 +88,8 @@ public class CustomNetManager : NetworkManager
 
     public void StartGame()
     {
+        networkPort = port;
+        //StartHost();
         NetworkManager.singleton.networkPort = port;
         NetworkManager.singleton.StartHost();
     }
