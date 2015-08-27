@@ -12,10 +12,17 @@ public class GameSetup : NetworkBehaviour
     public GameObject HealthUI;
 
     public GameObject StartingWeaponPrefab;
+    public Transform[] spawnPoints;
 
     public void Awake()
     {
         //DontDestroyOnLoad(transform.gameObject);
+        CustomNetManager.OnPlayerJoined += SpawnPlayer;
+    }
+
+    void SpawnPlayer()
+    {
+
     }
 
     public void SetupUI(GameObject player)
