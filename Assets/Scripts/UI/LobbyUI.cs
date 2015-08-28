@@ -19,11 +19,20 @@ public class LobbyUI : MonoBehaviour
 
     }
 
+    public void HostGame()
+    {
+        netManager.StartGame();
+    }
+
     public void JoinGame()
     {
-        if (!string.IsNullOrEmpty(serverIp.text))
+        string ipAddress = serverIp.text;
+        if (string.IsNullOrEmpty(ipAddress)){
+            ipAddress = serverIp.placeholder.GetComponent<Text>().text;
+        }
+        if (!string.IsNullOrEmpty(ipAddress))
         {
-            netManager.JoinGame(serverIp.text);
+            netManager.JoinGame(ipAddress);
         }
     }
 }

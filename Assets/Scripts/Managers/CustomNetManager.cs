@@ -1,7 +1,6 @@
 ﻿using Player;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Networking;
 using Util;
 
@@ -55,9 +54,9 @@ public class CustomNetManager : NetworkManager
         NetworkManager.singleton.StartHost();
     }
 
-    public void JoinGame(string serverIp)
+    public void JoinGame(string ipAddress)
     {
-        NetworkManager.singleton.networkAddress = serverIp;
+        NetworkManager.singleton.networkAddress = ipAddress;
         NetworkManager.singleton.networkPort = port;
 
         NetworkManager.singleton.StartClient();

@@ -335,7 +335,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2015279341}
+      - m_Target: {fileID: 288346380}
         m_MethodName: JoinGame
         m_Mode: 1
         m_Arguments:
@@ -766,8 +766,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2015279341}
-        m_MethodName: StartGame
+      - m_Target: {fileID: 288346380}
+        m_MethodName: HostGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
