@@ -6,7 +6,7 @@ public class PlayerRespawn : NetworkBehaviour
 {
     //both of these set via script when the player spawns
     public Animator anim;
-    public CustomNetManager netManager;
+    public GameSetup gameSetup;
 
     public float restartDelay = 5f;
 
@@ -51,9 +51,9 @@ public class PlayerRespawn : NetworkBehaviour
                 playerMovement.ResetSpeed();
                 playerHealth.Live();
                 dead = false;
-                var spawnPoint = netManager.spawnPoints[Random.Range(0, netManager.spawnPoints.Length)];
-                SetPlayerPosition(spawnPoint.position);
-                RpcRespawn(spawnPoint.position);
+                var spawnPoint = gameSetup.GetNextSpawnpoint();
+                SetPlayerPosition(spawnPoint);
+                RpcRespawn(spawnPoint);
             }
         }
     }

@@ -22,6 +22,8 @@ public class GameSetup : NetworkBehaviour
     [Server]
     void SetupPlayer(GameObject player)
     {
+        player.transform.position = GetNextSpawnpoint();
+
         SendSetupUi(player);
         GiveInitialWeapon(player);
         SyncPlayerWeapons(player);
@@ -133,10 +135,8 @@ public class GameSetup : NetworkBehaviour
 
     public void SetupGameOver(GameObject player)
     {
-        CustomNetManager netManager = GameObject.FindObjectOfType<CustomNetManager>();
-
         var gameOver = player.GetComponent<PlayerRespawn>();
-        gameOver.netManager = netManager;
+        gameOver.gameSetup = this;
 
         var msg = new PlayerMessage();
         msg.player = player;
@@ -152,6 +152,12 @@ public class GameSetup : NetworkBehaviour
 
         var gameOver = msg.player.GetComponent<PlayerRespawn>();
         gameOver.anim = GameObject.Find("HUDCanvas").GetComponent<Animator>();
+    }
+
+    public Vector3 GetNextSpawnpoint()
+    {
+        var spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+        return spawnPoint.position;
     }
 
     public class WeaponSetupMessage : MessageBase

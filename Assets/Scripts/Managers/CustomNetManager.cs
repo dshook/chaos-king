@@ -8,7 +8,6 @@ using Util;
 public class CustomNetManager : NetworkManager
 {
     public GameSetup gameSetup;
-    public Transform[] spawnPoints;
 
     public delegate void PlayerJoined(GameObject player);
     public static event PlayerJoined OnPlayerJoined;
@@ -17,8 +16,7 @@ public class CustomNetManager : NetworkManager
 
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
     {
-        var spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
-        GameObject player = (GameObject)Instantiate(base.playerPrefab, spawnPoint.position, Quaternion.identity);
+        GameObject player = (GameObject)Instantiate(base.playerPrefab, Vector3.zero, Quaternion.identity);
         player.name = "Player " + conn.connectionId;
         Debug.Log(player.name + " joined");
         NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
