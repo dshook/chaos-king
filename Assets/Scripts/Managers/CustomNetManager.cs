@@ -20,13 +20,6 @@ public class CustomNetManager : NetworkManager
         Debug.Log(player.name + " joined");
         NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
 
-        client.RegisterHandler(MessageTypes.SetupUi, GameSetup.OnSetupUi);
-        client.RegisterHandler(MessageTypes.SetupWeapons, GameSetup.OnSetupWeapon);
-        client.RegisterHandler(MessageTypes.SetupGameOver, GameSetup.OnSetupGameOver);
-        client.RegisterHandler(MessageTypes.GrantExperience, PlayerLevel.OnPlayerExperience);
-        client.RegisterHandler(MessageTypes.GrantPerk, PlayerPerks.OnShowUi);
-        client.RegisterHandler(MessageTypes.PerkDone, PlayerPerks.OnHideUi);
-        client.RegisterHandler(MessageTypes.PlayerDamage, PlayerHealth.OnTakeDamage);
 
         if (OnPlayerJoined != null)
         {
@@ -37,6 +30,29 @@ public class CustomNetManager : NetworkManager
     public override void OnServerRemovePlayer(NetworkConnection conn, PlayerController player)
     {
         base.OnServerRemovePlayer(conn, player);
+
+        if (OnPlayerLeft != null)
+        {
+            OnPlayerLeft();
+        }
+    }
+
+    public override void OnClientConnect(NetworkConnection conn)
+    {
+        base.OnClientConnect(conn);
+
+        client.RegisterHandler(MessageTypes.SetupUi, GameSetup.OnSetupUi);
+        client.RegisterHandler(MessageTypes.SetupWeapons, GameSetup.OnSetupWeapon);
+        client.RegisterHandler(MessageTypes.SetupGameOver, GameSetup.OnSetupGameOver);
+        client.RegisterHandler(MessageTypes.GrantExperience, PlayerLevel.OnPlayerExperience);
+        client.RegisterHandler(MessageTypes.GrantPerk, PlayerPerks.OnShowUi);
+        client.RegisterHandler(MessageTypes.PerkDone, PlayerPerks.OnHideUi);
+        client.RegisterHandler(MessageTypes.PlayerDamage, PlayerHealth.OnTakeDamage);
+    }
+
+    public override void OnServerDisconnect(NetworkConnection conn)
+    {
+        base.OnServerDisconnect(conn);
 
         if (OnPlayerLeft != null)
         {
