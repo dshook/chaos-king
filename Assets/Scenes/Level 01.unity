@@ -6686,6 +6686,7 @@ Camera:
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
+  m_TargetEye: 3
   m_HDR: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -8791,6 +8792,25 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 87732e775cc16a8449cdacbf285dbd8b, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1247362034 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 162714, guid: 87732e775cc16a8449cdacbf285dbd8b, type: 2}
+  m_PrefabInternal: {fileID: 1247362033}
+--- !u!114 &1247362035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1247362034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 227461547, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manager: {fileID: 0}
+  showGUI: 1
+  offsetX: 0
+  offsetY: 0
 --- !u!1 &1260002298
 GameObject:
   m_ObjectHideFlags: 0

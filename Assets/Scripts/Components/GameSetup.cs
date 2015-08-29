@@ -156,6 +156,10 @@ public class GameSetup : NetworkBehaviour
 
     public Vector3 GetNextSpawnpoint()
     {
+        if (spawnPoints.Length == 0)
+        {
+            return Vector3.zero;
+        }
         var spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
         return spawnPoint.position;
     }

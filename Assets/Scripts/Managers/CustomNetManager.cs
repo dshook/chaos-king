@@ -1,6 +1,5 @@
 ﻿using Player;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Networking;
 using Util;
 
@@ -19,7 +18,6 @@ public class CustomNetManager : NetworkManager
         player.name = "Player " + conn.connectionId;
         Debug.Log(player.name + " joined");
         NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
-
 
         if (OnPlayerJoined != null)
         {
@@ -65,7 +63,6 @@ public class CustomNetManager : NetworkManager
     public void StartGame()
     {
         networkPort = port;
-        //StartHost();
         NetworkManager.singleton.networkPort = port;
         NetworkManager.singleton.StartHost();
     }
