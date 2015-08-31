@@ -115,7 +115,7 @@ Transform:
   - {fileID: 1034329891}
   m_Father: {fileID: 0}
   m_RootOrder: 3
---- !u!1001 &293989887
+--- !u!1001 &832194587
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -194,57 +194,21 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 22495012, guid: 4108e6264df376e489de99f7be374b69, type: 2}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 22495012, guid: 4108e6264df376e489de99f7be374b69, type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 22405968, guid: 4108e6264df376e489de99f7be374b69, type: 2}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 22405968, guid: 4108e6264df376e489de99f7be374b69, type: 2}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 22405968, guid: 4108e6264df376e489de99f7be374b69, type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 22443188, guid: 4108e6264df376e489de99f7be374b69, type: 2}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 22443188, guid: 4108e6264df376e489de99f7be374b69, type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 22495546, guid: 4108e6264df376e489de99f7be374b69, type: 2}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 22495546, guid: 4108e6264df376e489de99f7be374b69, type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4108e6264df376e489de99f7be374b69, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &293989888 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 121962, guid: 4108e6264df376e489de99f7be374b69, type: 2}
-  m_PrefabInternal: {fileID: 293989887}
---- !u!1 &293989889 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 192298, guid: 4108e6264df376e489de99f7be374b69, type: 2}
-  m_PrefabInternal: {fileID: 293989887}
---- !u!1 &293989890 stripped
+--- !u!1 &832194588 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 189552, guid: 4108e6264df376e489de99f7be374b69, type: 2}
-  m_PrefabInternal: {fileID: 293989887}
+  m_PrefabInternal: {fileID: 832194587}
+--- !u!1 &832194589 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 192298, guid: 4108e6264df376e489de99f7be374b69, type: 2}
+  m_PrefabInternal: {fileID: 832194587}
+--- !u!1 &832194590 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 121962, guid: 4108e6264df376e489de99f7be374b69, type: 2}
+  m_PrefabInternal: {fileID: 832194587}
 --- !u!1 &1034329887
 GameObject:
   m_ObjectHideFlags: 0
@@ -540,9 +504,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b4a8c03f4d170f4986c47611e2b99b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelUI: {fileID: 293989888}
-  AmmoUI: {fileID: 293989890}
-  HealthUI: {fileID: 293989889}
+  LevelUI: {fileID: 832194590}
+  AmmoUI: {fileID: 832194588}
+  HealthUI: {fileID: 832194589}
   StartingWeaponPrefab: {fileID: 129652, guid: e01a43c006445954bb898a1c979787eb, type: 2}
   spawnPoints: []
 --- !u!114 &2013861506

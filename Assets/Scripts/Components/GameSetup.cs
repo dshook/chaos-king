@@ -19,7 +19,6 @@ public class GameSetup : NetworkBehaviour
         CustomNetManager.OnPlayerJoined += SetupPlayer;
     }
 
-    [Server]
     void SetupPlayer(GameObject player)
     {
         player.transform.position = GetNextSpawnpoint();
@@ -27,7 +26,7 @@ public class GameSetup : NetworkBehaviour
         SendSetupUi(player);
         GiveInitialWeapon(player);
         SyncPlayerWeapons(player);
-        RpcSetupPlayerIds();
+        //RpcSetupPlayerIds();
         SetupGameOver(player);
     }
 
@@ -76,21 +75,21 @@ public class GameSetup : NetworkBehaviour
     }
 
 
-    [ClientRpc]
-    public void RpcSetupPlayerIds()
-    {
-        var players = GameObject.FindGameObjectsWithTag("Player");
-        foreach (var player in players)
-        {
-            var playerTextMesh = player.GetComponentInChildren<TextMesh>();
-            var identity = player.GetComponent<NetworkIdentity>();
-            if (playerTextMesh != null && identity != null)
-            {
-                var networkId = identity.netId;
-                playerTextMesh.text = networkId.ToString();
-            }
-        }
-    }
+    //[ClientRpc]
+    //public void RpcSetupPlayerIds()
+    //{
+    //    var players = GameObject.FindGameObjectsWithTag("Player");
+    //    foreach (var player in players)
+    //    {
+    //        var playerTextMesh = player.GetComponentInChildren<TextMesh>();
+    //        var identity = player.GetComponent<NetworkIdentity>();
+    //        if (playerTextMesh != null && identity != null)
+    //        {
+    //            var networkId = identity.netId;
+    //            playerTextMesh.text = networkId.ToString();
+    //        }
+    //    }
+    //}
 
     public void GiveInitialWeapon(GameObject player)
     {
@@ -115,7 +114,8 @@ public class GameSetup : NetworkBehaviour
         {
             var weapon = connectedPlayer.transform.FindChild("Weapon").GetComponentInChildren<NetworkIdentity>().gameObject;
 
-            var msg = new WeaponSetupMessage() {
+            var msg = new WeaponSetupMessage()
+            {
                 weapon = weapon,
                 player = connectedPlayer
             };
