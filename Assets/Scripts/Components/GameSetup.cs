@@ -27,8 +27,9 @@ public class GameSetup : NetworkBehaviour
         SendSetupUi(player);
         GiveInitialWeapon(player);
         SyncPlayerWeapons(player);
-        RpcSetupPlayerIds();
         SetupGameOver(player);
+
+        //RpcSetupPlayerIds();
     }
 
     public void SetupUI(GameObject player)
@@ -76,22 +77,23 @@ public class GameSetup : NetworkBehaviour
     }
 
 
-    [ClientCallback]
-    [ClientRpc]
-    public void RpcSetupPlayerIds()
-    {
-        var players = GameObject.FindGameObjectsWithTag("Player");
-        foreach (var player in players)
-        {
-            var playerTextMesh = player.GetComponentInChildren<TextMesh>();
-            var identity = player.GetComponent<NetworkIdentity>();
-            if (playerTextMesh != null && identity != null)
-            {
-                var networkId = identity.netId;
-                playerTextMesh.text = networkId.ToString();
-            }
-        }
-    }
+    //[ClientCallback]
+    //[ClientRpc]
+    //public void RpcSetupPlayerIds()
+    //{
+    //    var players = GameObject.FindGameObjectsWithTag("Player");
+    //    Debug.Log("Test players " + players.Count());
+    //    foreach (var player in players)
+    //    {
+    //        var playerTextMesh = player.GetComponentInChildren<TextMesh>();
+    //        var identity = player.GetComponent<NetworkIdentity>();
+    //        if (playerTextMesh != null && identity != null)
+    //        {
+    //            var networkId = identity.netId;
+    //            playerTextMesh.text = networkId.ToString();
+    //        }
+    //    }
+    //}
 
     public void GiveInitialWeapon(GameObject player)
     {
