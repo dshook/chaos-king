@@ -30,7 +30,8 @@ namespace Player
                 position = transform.position
             };
 
-            NetworkServer.SendToClient(connectionToClient.connectionId, MessageTypes.GrantExperience, xpMsg);
+            var connectionId = GetComponent<NetworkIdentity>().connectionToClient.connectionId;
+            NetworkServer.SendToClient(connectionId, MessageTypes.GrantExperience, xpMsg);
 
             if (experience >= level)
             {

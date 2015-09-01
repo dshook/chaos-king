@@ -17,7 +17,6 @@ public class EnemyManager : NetworkBehaviour
         InvokeRepeating ("Spawn", spawnTime, spawnTime);
     }
 
-
     void Spawn ()
     {
         spawnedEnemies = spawnedEnemies.Where(x => x != null).ToList();
