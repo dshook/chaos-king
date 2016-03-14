@@ -1,4 +1,4 @@
-# Chaos King
+# Chaos King (dead)
 (working title)
 
 Run around, kill stuff, level up quick, pick from some awesome perks and weapons, and try to kill the king.  The king is the person who you hate the most, or whoever happens to be the highest level. 
